@@ -1,4 +1,5 @@
 # ゴロゴロ円周率
+![logo](https://user-images.githubusercontent.com/46347198/148153312-fdd79820-28bf-4ade-b873-55269c544839.png)
 
 ## 概要
 
