@@ -1,0 +1,16 @@
+inherit_gem:
+  rubocop-fjord:
+    - config/rubocop.yml
+    - config/rails.yml
+
+AllCops:
+  Exclude:
+    - '**/templates/**/*'
+    - '**/vendor/**/*'
+    - app/views/**/*
+    - config/**/*
+    - config.ru
+    - node_modules/**/*
+    - storage/**/*
+    - tmp/**/*
+    - bin/**/*

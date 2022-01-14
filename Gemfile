@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -15,14 +17,14 @@ gem 'webpacker', '~> 5.0'
 gem 'slim-rails'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
-  gem 'web-console', '>= 4.1.0'
-  gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
+  gem 'rack-mini-profiler', '~> 2.0'
   gem 'spring'
+  gem 'web-console', '>= 4.1.0'
 
   # not default
   gem 'rubocop-fjord', '~> 0.2.0', require: false
@@ -32,4 +34,4 @@ group :development do
   gem 'slim_lint'
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
