@@ -1,6 +1,10 @@
 {
   "name": "goro-goro",
   "private": true,
+  "scripts": {
+    "lint": "run-p lint:*",
+    "lint:eslint": "eslint 'app/javascript/**/*.{js,vue}' --max-warnings=0"
+  },
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
     "@rails/ujs": "^6.0.0",
@@ -17,6 +21,7 @@
     "eslint": "^8.7.0",
     "eslint-plugin-vue": "^8.3.0",
     "eslint-webpack-plugin": "^3.1.1",
+    "npm-run-all": "^4.1.5",
     "webpack-dev-server": "^3"
   }
 }
