@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from './hello.vue'
+import App from './helloTest.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
     const selector = '#js-hello-vue';
