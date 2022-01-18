@@ -5,6 +5,7 @@
 
 import Rails from '@rails/ujs'
 import Turbolinks from 'turbolinks'
+import '../stage_panel_tile.js'
 import '../stage_select.js'
 
 Rails.start()

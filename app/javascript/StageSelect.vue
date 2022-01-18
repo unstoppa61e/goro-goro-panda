@@ -3,8 +3,9 @@
     <li class="panel panel-1">
       <ul class="tiles-container">
         <li v-for="number in numbers" :key="number" class="tile">
-          <img src="~wordplays/14.png" class="wordplay-img" alt="wordplay" />
-          <div class="number">{{ number }}</div>
+<!--          <img src="~wordplays/14.png" class="wordplay-img" alt="wordplay" />-->
+<!--          <div class="number">{{ number }}</div>-->
+          <stage-panel-tile :number="number"></stage-panel-tile>
         </li>
       </ul>
     </li>
@@ -12,10 +13,15 @@
 </template>
 
 <script>
+import StagePanelTile from './StagePanelTile.vue'
 export default {
+  components: {
+    'stage-panel-tile': StagePanelTile
+  },
   data() {
     return {
-      numbers: [14, 15, 92, 65, 35]
+      // numbers: ['14', '15', '92', '65', '35']
+      numbers: ['14', '14', '14', '14', '14']
     }
   },
   methods: {}
@@ -38,14 +44,14 @@ ul {
   list-style-type: none;
   text-align: center;
 }
-.wordplay-img {
-  max-width: 100%;
-  max-height: 100%;
-}
-.number {
-  color: #ffffff;
-  font-size: 30px;
-}
+/*.wordplay-img {*/
+/*  max-width: 100%;*/
+/*  max-height: 100%;*/
+/*}*/
+/*.number {*/
+/*  color: #ffffff;*/
+/*  font-size: 30px;*/
+/*}*/
 .panels-container {
   display: flex;
   justify-content: center;
