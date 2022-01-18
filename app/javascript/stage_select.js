@@ -1,9 +1,9 @@
 import { createApp } from 'vue'
-import App from './helloTest.vue'
+import StageSelect from './StageSelect.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const selector = '#js-hello-vue'
+  const selector = '#js-stage-select'
   if (document.querySelector(selector)) {
-    createApp(App).mount(selector)
+    createApp(StageSelect).mount(selector)
   }
 })
