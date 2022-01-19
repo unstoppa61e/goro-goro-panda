@@ -3,8 +3,6 @@
     <li class="panel panel-1">
       <ul class="tiles-container">
         <li v-for="number in numbers" :key="number" class="tile">
-<!--          <img src="~wordplays/14.png" class="wordplay-img" alt="wordplay" />-->
-<!--          <div class="number">{{ number }}</div>-->
           <stage-panel-tile :number="number"></stage-panel-tile>
         </li>
       </ul>
@@ -20,8 +18,7 @@ export default {
   },
   data() {
     return {
-      // numbers: ['14', '15', '92', '65', '35']
-      numbers: ['14', '14', '14', '14', '14']
+      numbers: ['14', '15', '92', '65', '35']
     }
   },
   methods: {}
