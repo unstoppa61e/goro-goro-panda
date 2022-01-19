@@ -27,8 +27,8 @@ export default {
 
 <style scoped>
 .wordplay-img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 50px;
+  height: 50px;
 }
 .number {
   color: #ffffff;
