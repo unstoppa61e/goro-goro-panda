@@ -1,6 +1,8 @@
 <template>
-  <img :src="imgSrc" class="wordplay-img" alt="wordplay" />
-  <div class="number">{{ number }}</div>
+  <div class="tile">
+    <img :src="imgSrc" class="wordplay-img" alt="wordplay" />
+    <div class="number">{{ number }}</div>
+  </div>
 </template>
 
 <script>
@@ -18,7 +20,7 @@ export default {
       } else {
         return require('../assets/images/mark_question.png') // eslint-disable-line no-undef
       }
-    },
+    }
   }
 }
 </script>
