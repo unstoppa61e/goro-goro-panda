@@ -11,14 +11,18 @@ export default {
     number: {
       type: String,
       default: null
+    },
+    locked: {
+      type: Boolean,
+      default: null
     }
   },
   computed: {
     imgSrc() {
-      if (this.number) {
-        return require(`../assets/images/wordplays/${this.number}.png`) // eslint-disable-line no-undef
-      } else {
+      if (this.locked) {
         return require('../assets/images/mark_question.png') // eslint-disable-line no-undef
+      } else {
+        return require(`../assets/images/wordplays/${this.number}.png`) // eslint-disable-line no-undef
       }
     }
   }

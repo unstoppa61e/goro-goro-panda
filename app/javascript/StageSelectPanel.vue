@@ -1,9 +1,9 @@
 <template>
-  <div class="panel panel-1">
+  <div class="panel" :class="{unlocked:isOne(panelNumber)}">
     <div class="panel-number">{{ panelNumber }}</div>
     <ul class="tiles-container">
       <li v-for="tileIndex in 5" :key="tileIndex">
-        <stage-panel-tile :number="tileNumber(tileIndex)"></stage-panel-tile>
+        <stage-panel-tile :number="tileNumber(tileIndex)" :locked="!isOne(panelNumber)"></stage-panel-tile>
       </li>
     </ul>
   </div>
@@ -28,6 +28,9 @@ export default {
   methods: {
     tileNumber(tileIndex) {
       return this.piDigits.substr((tileIndex - 1) * 2, 2)
+    },
+    isOne(panelNumber) {
+      return (panelNumber === 1)
     }
   }
 }
@@ -43,10 +46,11 @@ li {
   padding-top: 10px;
   padding-right: 20px;
   margin-bottom: 20px;
-}
-.panel-1 {
-  background-color: #ff88bb;
   border-radius: 5px;
+  background-color: #b7d6e8;
+}
+.unlocked {
+  background-color: #ff88bb;
 }
 .panel-number {
   color: #ffffff;
