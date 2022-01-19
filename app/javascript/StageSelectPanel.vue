@@ -2,8 +2,10 @@
   <div class="panel panel-1">
     {{ panelNumber }}
     <ul class="tiles-container">
-      <li v-for="number in numbers" :key="number">
-        <stage-panel-tile :number="number"></stage-panel-tile>
+      <li v-for="tileIndex in 5" :key="tileIndex">
+        <stage-panel-tile :number="tileNumber(tileIndex)"></stage-panel-tile>
+<!--        TODO 表示が上手くいったら消す-->
+        <!--        <stage-panel-tile :number="numbers[tileIndex - 1]"></stage-panel-tile>-->
       </li>
     </ul>
   </div>
@@ -19,11 +21,21 @@ export default {
     panelNumber: {
       type: Number,
       default: null
+    },
+    piDigits: {
+      type: String,
+      default: null
     }
   },
+  // TODO 表示が上手くいったら消す
   data() {
     return {
       numbers: ['14', '15', '92', '65', '35']
+    }
+  },
+  methods: {
+    tileNumber(tileIndex) {
+      return this.piDigits.substr((tileIndex - 1) * 2, 2)
     }
   }
 }
