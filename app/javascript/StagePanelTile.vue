@@ -13,8 +13,12 @@ export default {
   },
   computed: {
     imgSrc() {
-      return require(`../assets/images/wordplays/${this.number}.png`) // eslint-disable-line no-undef
-    }
+      if (this.number) {
+        return require(`../assets/images/wordplays/${this.number}.png`) // eslint-disable-line no-undef
+      } else {
+        return require('../assets/images/mark_question.png') // eslint-disable-line no-undef
+      }
+    },
   }
 }
 </script>
