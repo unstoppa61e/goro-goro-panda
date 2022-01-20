@@ -1,15 +1,17 @@
 <template>
-  <div class="panel" :class="{ unlocked: isOne(panelNumber) }">
-    <div class="panel-number">{{ panelNumber }}</div>
-    <ul class="tiles-container">
-      <li v-for="tileIndex in 5" :key="tileIndex">
-        <stage-panel-tile
-          :number="tileNumber(tileIndex)"
-          :locked="!isOne(panelNumber)"
-        ></stage-panel-tile>
-      </li>
-    </ul>
-  </div>
+  <a :href="stageUrl(panelNumber)">
+    <div class="panel" :class="{ unlocked: isOne(panelNumber) }">
+      <div class="panel-number">{{ panelNumber }}</div>
+      <ul class="tiles-container">
+        <li v-for="tileIndex in 5" :key="tileIndex">
+          <stage-panel-tile
+            :number="tileNumber(tileIndex)"
+            :locked="!isOne(panelNumber)"
+          ></stage-panel-tile>
+        </li>
+      </ul>
+    </div>
+  </a>
 </template>
 
 <script>
@@ -34,6 +36,9 @@ export default {
     },
     isOne(panelNumber) {
       return panelNumber === 1
+    },
+    stageUrl(panelNumber) {
+      return `${location.href}stages/${panelNumber}`
     }
   }
 }
