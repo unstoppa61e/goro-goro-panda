@@ -1,5 +1,5 @@
 <template>
-  <a :href="stageUrl(panelNumber)">
+  <a :href="isOne(panelNumber) ? stageUrl(panelNumber) : null">
     <div class="panel" :class="{ unlocked: isOne(panelNumber) }">
       <div class="panel-number">{{ panelNumber }}</div>
       <ul class="tiles-container">
