@@ -3,7 +3,6 @@ import StageSelect from './StageSelect.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
   const selector = '#js-stage-select'
-  if (document.querySelector(selector)) {
-    createApp(StageSelect).mount(selector)
-  }
+  if (!document.querySelector(selector)) return
+  createApp(StageSelect).mount(selector)
 })
