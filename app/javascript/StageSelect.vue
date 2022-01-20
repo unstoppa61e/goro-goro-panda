@@ -4,8 +4,8 @@
     <ul class="panels-container">
       <li v-for="panelIndex in 10" :key="panelIndex">
         <stage-select-panel
-            :panel-number="panelIndex"
-            :pi-digits="panelPiDigits(panelIndex)"
+          :panel-number="panelIndex"
+          :pi-digits="panelPiDigits(panelIndex)"
         ></stage-select-panel>
       </li>
     </ul>
@@ -14,7 +14,7 @@
 
 <script>
 import StageSelectPanel from './StageSelectPanel'
-import StageSelectHeader from "./StageSelectHeader";
+import StageSelectHeader from './StageSelectHeader'
 export default {
   components: {
     'stage-select-header': StageSelectHeader,
