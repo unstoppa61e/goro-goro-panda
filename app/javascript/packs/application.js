@@ -5,6 +5,7 @@
 
 import Rails from '@rails/ujs'
 import Turbolinks from 'turbolinks'
+import '../stage_play.js'
 import '../stage_select.js'
 import '../stylesheets/reset.scss'
 
