@@ -3,7 +3,6 @@ import StagePanelTile from './StagePanelTile.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
   const selector = '#js-stage-panel-tile'
-  if (document.querySelector(selector)) {
-    createApp(StagePanelTile).mount(selector)
-  }
+  if (!document.querySelector(selector)) return
+  createApp(StagePanelTile).mount(selector)
 })
