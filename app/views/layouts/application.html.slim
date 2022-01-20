@@ -1,8 +1,8 @@
 doctype html
 html
   head
-    title = content_for?(:title) ? content_for(:title) : 'ゴロゴロ円周率'
-    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    title ゴロゴロ円周率
+    = display_meta_tags default_meta_tags
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
