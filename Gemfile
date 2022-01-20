@@ -14,6 +14,7 @@ gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
 
 # not default
+gem 'meta-tags'
 gem 'slim-rails'
 
 group :development, :test do
@@ -27,7 +28,6 @@ group :development do
   gem 'web-console', '>= 4.1.0'
 
   # not default
-  gem 'meta-tags'
   gem 'rubocop-fjord', '~> 0.2.0', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
