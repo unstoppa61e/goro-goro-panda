@@ -7,8 +7,8 @@ module MetaTagsHelper
       site: 'ゴロゴロ円周率',
       reverse: true,
       charset: 'utf-8',
-      description: 'ゴロ合わせとイラストで楽しく円周率を覚えられるゲームサイト',
-      keywords: '円周率, ゲーム, 語呂, ゴロ, 暗記, 覚える',
+      description: 'ゴロ合わせのゲームで円周率を覚えよう！',
+      keywords: '円周率, ゲーム, ゴロ, 語呂, 暗記, 覚える',
       viewport: 'width=device-width, initial-scale=1.0',
       og: {
         title: :title,
