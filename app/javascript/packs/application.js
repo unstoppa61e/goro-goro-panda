@@ -6,6 +6,7 @@
 import Rails from '@rails/ujs'
 import Turbolinks from 'turbolinks'
 import '../stage_select.js'
+import '../stylesheets/reset.scss'
 
 Rails.start()
 Turbolinks.start()

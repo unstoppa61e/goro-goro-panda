@@ -1,18 +1,23 @@
 <template>
-  <ul class="panels-container">
-    <li v-for="panelIndex in 10" :key="panelIndex">
-      <stage-select-panel
-        :panel-number="panelIndex"
-        :pi-digits="panelPiDigits(panelIndex)"
-      ></stage-select-panel>
-    </li>
-  </ul>
+  <div class="container">
+    <stage-select-header></stage-select-header>
+    <ul class="panels-container">
+      <li v-for="panelIndex in 10" :key="panelIndex">
+        <stage-select-panel
+            :panel-number="panelIndex"
+            :pi-digits="panelPiDigits(panelIndex)"
+        ></stage-select-panel>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 import StageSelectPanel from './StageSelectPanel'
+import StageSelectHeader from "./StageSelectHeader";
 export default {
   components: {
+    'stage-select-header': StageSelectHeader,
     'stage-select-panel': StageSelectPanel
   },
   computed: {
@@ -29,6 +34,12 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  background-color: #3bcaff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 ul {
   padding-inline-start: 0;
 }
@@ -37,6 +48,7 @@ li {
   text-align: center;
 }
 .panels-container {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
