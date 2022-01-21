@@ -3,6 +3,14 @@ inherit_gem:
     - config/rubocop.yml
     - config/rails.yml
 
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
+Metrics/ClassLength:
+  Exclude:
+    - spec/**/*
+
 AllCops:
   Exclude:
     - '**/templates/**/*'
