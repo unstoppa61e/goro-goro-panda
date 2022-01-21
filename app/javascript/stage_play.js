@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import StagePlay from './StagePlay.vue'
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbolinks:load', () => {
   const selector = '#js-stage-play'
   const stage = document.querySelector(selector)
   if (!stage) return

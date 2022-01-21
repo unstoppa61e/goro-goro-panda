@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import StageSelect from './StageSelect.vue'
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbolinks:load', () => {
   const selector = '#js-stage-select'
   if (!document.querySelector(selector)) return
   createApp(StageSelect).mount(selector)
