@@ -1,5 +1,5 @@
 {
-  "name": "goro-goro",
+  "name": "goro-goro-panda",
   "private": true,
   "scripts": {
     "lint": "run-p lint:*",
