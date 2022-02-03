@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import StageSelectHeader from "../components/StageSelectHeader";
 
 const Home: NextPage = () => {
   return (
@@ -10,11 +11,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className="flex flex-col items-center">
+        <StageSelectHeader />
       </main>
-
-      <footer>
-      </footer>
     </div>
   )
 }
