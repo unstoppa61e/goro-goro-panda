@@ -3,13 +3,15 @@ import StageSelectTile from "./StageSelectTile";
 type Props = {
   panelNumber: string;
   stage: number;
+  isLocked: boolean;
 };
-const StageSelectPanel = ({ panelNumber, stage }: Props) => {
+const StageSelectPanel = ({ panelNumber, stage, isLocked }: Props) => {
   const tileNumbers = [];
   for (let i = 0; i < panelNumber.length; i += 2) {
     tileNumbers.push(panelNumber.slice(i, i + 2));
   }
   const backGroundColor = (stage: number): string => {
+    if (isLocked) return "bg-locked";
     // Tailwindはクライアントサイドでのランタイムを考慮しないため、クラス名は静的である必要がある。
     const colors: string[] = [
       "bg-stage-1",
@@ -36,7 +38,7 @@ const StageSelectPanel = ({ panelNumber, stage }: Props) => {
       <ul className="flex">
         {tileNumbers.map((tileNumber: string, index: number) => (
           <li key={index}>
-            <StageSelectTile tileNumber={tileNumber} />
+            <StageSelectTile tileNumber={tileNumber} isLocked={isLocked} />
           </li>
         ))}
       </ul>
