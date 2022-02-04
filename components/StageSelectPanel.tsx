@@ -30,13 +30,20 @@ function StageSelectPanel({ panelNumber, stage, isLocked }: Props) {
 
     return colors[stage - 1];
   };
+  const stagePath = (isLocked: boolean, stage: number): string => {
+    if (isLocked) return "";
+    return `/stages/${stage}`;
+  };
+  const cursorAppearance = (isLocked: boolean): string => {
+    return isLocked ? "cursor-not-allowed" : "";
+  };
 
   return (
-    <Link href={`/stages/${stage}`}>
+    <Link href={stagePath(isLocked, stage)}>
       <a
         className={`flex py-2.5 mb-5 border-5 rounded-md w-80 ${backGroundColor(
           stage
-        )}`}
+        )} ${cursorAppearance(isLocked)}`}
       >
         <div className="text-white text-xl mt-7 ml-7">{stage}</div>
         <ul className="flex">
