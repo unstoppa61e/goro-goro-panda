@@ -1,16 +1,19 @@
 import Image from "next/image";
 
-const StageSelectTile = ({ number }) => {
+type Props = {
+  tileNumber: string;
+};
+const StageSelectTile = ({ tileNumber }: Props) => {
   return (
     <>
       <Image
-        src={"/wordplays/" + number + ".png"}
+        src={"/wordplays/" + tileNumber + ".png"}
         width={50}
         height={50}
         objectFit="contain"
         alt="wordplay"
       />
-      <div className="text-center text-white text-3xl">{number}</div>
+      <div className="text-center text-white text-3xl">{tileNumber}</div>
     </>
   );
 };
