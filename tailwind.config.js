@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        unlocked: "#b7d6e8",
+        locked: "#b7d6e8",
         "stage-1": "#ff88bb",
         "stage-2": "#bbeeff",
         "stage-3": "#82eedd",

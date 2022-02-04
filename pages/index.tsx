@@ -11,6 +11,9 @@ const Home: NextPage = () => {
   for (let i = 0; i < piNumber.length; i += 10) {
     panelNumbers.push(piNumber.slice(i, i + 10));
   }
+  const isLocked = (index: number): boolean => {
+    return index !== 0;
+  };
 
   return (
     <div>
@@ -25,7 +28,11 @@ const Home: NextPage = () => {
         <ul className="flex flex-col">
           {panelNumbers.map((panelNumber: string, index: number) => (
             <li key={index}>
-              <StageSelectPanel panelNumber={panelNumber} stage={index + 1} />
+              <StageSelectPanel
+                panelNumber={panelNumber}
+                stage={index + 1}
+                isLocked={isLocked(index)}
+              />
             </li>
           ))}
         </ul>
