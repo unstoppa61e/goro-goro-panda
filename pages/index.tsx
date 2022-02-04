@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 
 import StageSelectHeader from "../components/StageSelectHeader";
+import StageSelectTile from "../components/StageSelectTile";
 
 const Home: NextPage = () => {
   const piNumber =
@@ -29,16 +29,7 @@ const Home: NextPage = () => {
             <ul className="flex">
               {tileNumbers.map((tileNumber: string, index: number) => (
                 <li key={index}>
-                  <Image
-                    src={"/wordplays/" + tileNumber + ".png"}
-                    width={50}
-                    height={50}
-                    objectFit="contain"
-                    alt="wordplay"
-                  />
-                  <div className="text-center text-white text-3xl">
-                    {tileNumber}
-                  </div>
+                  <StageSelectTile number={tileNumber} />
                 </li>
               ))}
             </ul>
