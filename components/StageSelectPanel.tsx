@@ -1,5 +1,7 @@
 import StageSelectTile from './StageSelectTile';
 
+import Link from "next/link";
+
 type Props = {
   panelNumber: string;
   stage: number;
@@ -30,20 +32,22 @@ function StageSelectPanel({ panelNumber, stage, isLocked }: Props) {
   };
 
   return (
-    <div
-      className={`flex py-2.5 mb-5 border-5 rounded-md w-80 ${backGroundColor(
-        stage,
-      )}`}
-    >
-      <div className="text-white text-xl mt-7 ml-7">{stage}</div>
-      <ul className="flex">
-        {tileNumbers.map((tileNumber: string, index: number) => (
-          <li key={index}>
-            <StageSelectTile tileNumber={tileNumber} isLocked={isLocked} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Link href={`/stages/${stage}`}>
+      <a
+        className={`flex py-2.5 mb-5 border-5 rounded-md w-80 ${backGroundColor(
+          stage
+        )}`}
+      >
+        <div className="text-white text-xl mt-7 ml-7">{stage}</div>
+        <ul className="flex">
+          {tileNumbers.map((tileNumber: string, index: number) => (
+            <li key={index}>
+              <StageSelectTile tileNumber={tileNumber} isLocked={isLocked} />
+            </li>
+          ))}
+        </ul>
+      </a>
+    </Link>
   );
 }
 
