@@ -2,15 +2,14 @@ import type { NextPage } from "next";
 import Head from "next/head";
 
 import StageSelectHeader from "../components/StageSelectHeader";
-import StageSelectTile from "../components/StageSelectTile";
+import StageSelectPanel from "../components/StageSelectPanel";
 
 const Home: NextPage = () => {
   const piNumber =
     "1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
-  const panelNumber: string = piNumber.slice(0, 10);
-  const tileNumbers = [];
-  for (let i = 0; i < 10; i += 2) {
-    tileNumbers.push(panelNumber.slice(i, i + 2));
+  const panelNumbers = [];
+  for (let i = 0; i < piNumber.length; i += 10) {
+    panelNumbers.push(piNumber.slice(i, i + 10));
   }
 
   return (
@@ -23,17 +22,12 @@ const Home: NextPage = () => {
 
       <main className="flex flex-col items-center">
         <StageSelectHeader />
-        <ul className="flex">
-          <li className="flex py-2.5 mb-5 border-5 bg-stage-1 rounded-md w-80">
-            <div className="text-white text-xl mt-7 ml-7">1</div>
-            <ul className="flex">
-              {tileNumbers.map((tileNumber: string, index: number) => (
-                <li key={index}>
-                  <StageSelectTile number={tileNumber} />
-                </li>
-              ))}
-            </ul>
-          </li>
+        <ul className="flex flex-col">
+          {panelNumbers.map((panelNumber: string, index: number) => (
+            <li key={index}>
+              <StageSelectPanel panelNumber={panelNumber} stage={index + 1} />
+            </li>
+          ))}
         </ul>
       </main>
     </div>
