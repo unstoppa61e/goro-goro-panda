@@ -1,38 +1,56 @@
-import range from "lodash/range";
+import { ParsedUrlQuery } from 'querystring';
+import { GetStaticProps, GetStaticPaths } from 'next';
 
-export const getStaticProps = async (context) => {
-  const stage = context.params.stage;
+interface Params extends ParsedUrlQuery {
+  stage: string;
+}
+
+export const getStaticProps: GetStaticProps = (context) => {
+  const params = context.params as Params;
+  const stageNumber = params.stage;
+
   return {
-    props: { stage },
+    props: { stageNumber },
   };
 };
 
-export const getStaticPaths = async () => {
-  const paths = range(1, 11).map((n) => ({ params: { stage: n.toString() } }));
+export const getStaticPaths: GetStaticPaths = () => {
+  const stages: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
+  const paths = stages.map((stage: number) => ({
+    params: { stage: stage.toString() },
+  }));
+
   return {
     paths,
     fallback: false,
   };
 };
 
-const Stage = ({ stage }) => {
+type Props = {
+  stageNumber: string;
+};
+
+const Stage = ({ stageNumber }: Props) => {
   const circledNumber = (stageNumber: number): string => {
-    const circledNumbers = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩"];
+    const circledNumbers = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩'];
+
     return circledNumbers[stageNumber - 1];
   };
   const digitsRange = (stageNumber: number): string => {
     const startDigit: number = 10 * (stageNumber - 1) + 1;
     const endDigit = startDigit + 9;
+
     return `${startDigit}~${endDigit}`;
   };
   const stageDescription = (stageNumber: number): string => {
     return `ステージ${circledNumber(stageNumber)} 円周率の${digitsRange(
-      stageNumber
+      stageNumber,
     )}ケタをおぼえよう`;
   };
+
   return (
     <>
-      <h1>{stageDescription(stage)}</h1>
+      <h1>{stageDescription(parseInt(stageNumber))}</h1>
     </>
   );
 };
