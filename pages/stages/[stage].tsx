@@ -1,18 +1,17 @@
-export const getStaticPaths = async () => {
-  const paths = [];
-  for (let i = 1; i < 10; i++) {
-    paths.push({ params: { stage: i.toString() } });
-  }
-  return {
-    paths,
-    fallback: false,
-  };
-};
+import range from "lodash/range";
 
 export const getStaticProps = async (context) => {
   const stage = context.params.stage;
   return {
     props: { stage },
+  };
+};
+
+export const getStaticPaths = async () => {
+  const paths = range(1, 11).map((n) => ({ params: { stage: n.toString() } }));
+  return {
+    paths,
+    fallback: false,
   };
 };
 
