@@ -61,6 +61,7 @@
         "varsIgnorePattern": "_"
       }
     ],
+    "@typescript-eslint/no-non-null-assertion": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
