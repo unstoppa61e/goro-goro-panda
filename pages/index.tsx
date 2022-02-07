@@ -1,12 +1,12 @@
-import type { NextPage } from "next";
-import Head from "next/head";
+import type { NextPage } from 'next';
+import Head from 'next/head';
 
-import StageSelectHeader from "../components/StageSelectHeader";
-import StageSelectPanel from "../components/StageSelectPanel";
+import StageSelectHeader from '../components/StageSelectHeader';
+import StageSelectPanel from '../components/StageSelectPanel';
 
 const Home: NextPage = () => {
   const piNumber =
-    "1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
+    '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679';
   const panelNumbers = [];
   for (let i = 0; i < piNumber.length; i += 10) {
     panelNumbers.push(piNumber.slice(i, i + 10));
