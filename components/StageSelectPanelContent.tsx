@@ -1,4 +1,4 @@
-import StageSelectTile from "./StageSelectTile";
+import StageSelectTile from './StageSelectTile';
 
 type Props = {
   panelNumber: string;
@@ -7,6 +7,7 @@ type Props = {
 };
 const StageSelectPanelContent = ({ panelNumber, stage, isLocked }: Props) => {
   const tileNumbers = panelNumber.match(/.{2}/g)!;
+
   return (
     <>
       <div className="text-white text-xl mt-7 ml-7">{stage}</div>
