@@ -1,12 +1,14 @@
 {
   "extends": "./tsconfig.json",
   "include": [
-    "src/**/*.js",
-    "src/**/*.jsx",
-    "src/**/*.ts",
-    "src/**/*.tsx"
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx",
+    ".eslintrc.json"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "rails-version"
   ]
 }
