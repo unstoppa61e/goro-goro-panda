@@ -1,6 +1,6 @@
-import StageSelectTile from './StageSelectTile';
-
 import Link from "next/link";
+
+import StageSelectPanelContent from "./StageSelectPanelContent";
 
 type Props = {
   panelNumber: string;
@@ -8,12 +8,7 @@ type Props = {
   isLocked: boolean;
 };
 function StageSelectPanel({ panelNumber, stage, isLocked }: Props) {
-  const tileNumbers = [];
-  for (let i = 0; i < panelNumber.length; i += 2) {
-    tileNumbers.push(panelNumber.slice(i, i + 2));
-  }
   const backGroundColor = (stage: number): string => {
-    if (isLocked) return 'bg-locked';
     // Tailwindはクライアントサイドでのランタイムを考慮しないため、クラス名は静的である必要がある。
     const colors: string[] = [
       'bg-stage-1',
@@ -30,32 +25,34 @@ function StageSelectPanel({ panelNumber, stage, isLocked }: Props) {
 
     return colors[stage - 1];
   };
-  const stagePath = (isLocked: boolean, stage: number): string => {
-    if (isLocked) return "";
-    return `/stages/${stage}`;
-  };
-  const cursorAppearance = (isLocked: boolean): string => {
-    return isLocked ? "cursor-not-allowed" : "";
-  };
-
-  return (
-    <Link href={stagePath(isLocked, stage)}>
-      <a
-        className={`flex py-2.5 mb-5 border-5 rounded-md w-80 ${backGroundColor(
-          stage
-        )} ${cursorAppearance(isLocked)}`}
-      >
-        <div className="text-white text-xl mt-7 ml-7">{stage}</div>
-        <ul className="flex">
-          {tileNumbers.map((tileNumber: string, index: number) => (
-            <li key={index}>
-              <StageSelectTile tileNumber={tileNumber} isLocked={isLocked} />
-            </li>
-          ))}
-        </ul>
-      </a>
-    </Link>
-  );
-}
+  const stagePath = (stage: number): string => `/stages/${stage}`;
+  if (isLocked) {
+    return (
+      <div className="flex py-2.5 mb-5 border-5 rounded-md w-80 bg-locked cursor-not-allowed">
+        <StageSelectPanelContent
+          panelNumber={panelNumber}
+          stage={stage}
+          isLocked={isLocked}
+        />
+      </div>
+    );
+  } else {
+    return (
+      <Link href={stagePath(stage)}>
+        <a
+          className={`flex py-2.5 mb-5 border-5 rounded-md w-80 ${backGroundColor(
+            stage
+          )}`}
+        >
+          <StageSelectPanelContent
+            panelNumber={panelNumber}
+            stage={stage}
+            isLocked={isLocked}
+          />
+        </a>
+      </Link>
+    );
+  }
+};
 
 export default StageSelectPanel;
