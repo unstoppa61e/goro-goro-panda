@@ -1,6 +1,6 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import StageSelectPanelContent from "./StageSelectPanelContent";
+import StageSelectPanelContent from './StageSelectPanelContent';
 
 type Props = {
   panelNumber: string;
@@ -41,7 +41,7 @@ function StageSelectPanel({ panelNumber, stage, isLocked }: Props) {
       <Link href={stagePath(stage)}>
         <a
           className={`flex py-2.5 mb-5 border-5 rounded-md w-80 ${backGroundColor(
-            stage
+            stage,
           )}`}
         >
           <StageSelectPanelContent
@@ -53,6 +53,6 @@ function StageSelectPanel({ panelNumber, stage, isLocked }: Props) {
       </Link>
     );
   }
-};
+}
 
 export default StageSelectPanel;
