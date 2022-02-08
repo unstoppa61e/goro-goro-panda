@@ -2,6 +2,7 @@ build/
 public/
 **/coverage/
 **/node_modules/
+**/cypress/
 **/*.min.js
 *.config.js
 .*lintrc.js
