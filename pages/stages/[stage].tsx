@@ -1,7 +1,10 @@
+// import { useState } from 'react'
 import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import StageDescription from '../../components/StageDescription';
 import { NextSeo } from 'next-seo';
+
+import StageDescription from '../../components/StageDescription';
+import Score from '../../components/Score';
 
 interface Params extends ParsedUrlQuery {
   stage: string;
@@ -33,11 +36,15 @@ type Props = {
 };
 
 const Stage = ({ stageNumber }: Props) => {
+  // const [score, setScore] = useState(8)
+  const score = 8;
+
   return (
     <>
       <NextSeo title={`ゴロゴロ円周率 | ステージ${stageNumber}`} />
       <div className="flex flex-col items-center text-white">
         <StageDescription stageNumber={stageNumber} />
+        <Score score={score} />
       </div>
     </>
   );
