@@ -1,5 +1,6 @@
 import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps, GetStaticPaths } from 'next';
+import { NextSeo } from 'next-seo';
 
 interface Params extends ParsedUrlQuery {
   stage: string;
@@ -50,6 +51,7 @@ const Stage = ({ stageNumber }: Props) => {
 
   return (
     <>
+      <NextSeo title={`ゴロゴロ円周率 | ステージ${stageNumber}`} />
       <h1>{stageDescription(parseInt(stageNumber))}</h1>
     </>
   );
