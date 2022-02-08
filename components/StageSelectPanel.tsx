@@ -26,9 +26,13 @@ function StageSelectPanel({ panelNumber, stage, isLocked }: Props) {
     return colors[stage - 1];
   };
   const stagePath = (stage: number): string => `/stages/${stage}`;
+  const panelTestId = (stage: number): string => `stage-select-panel-${stage}`;
   if (isLocked) {
     return (
-      <div className="flex py-2.5 mb-5 border-5 rounded-md w-80 bg-locked cursor-not-allowed">
+      <div
+        className="flex py-2.5 mb-5 border-5 rounded-md w-80 bg-locked cursor-not-allowed"
+        data-testid={panelTestId(stage)}
+      >
         <StageSelectPanelContent
           panelNumber={panelNumber}
           stage={stage}
@@ -43,6 +47,7 @@ function StageSelectPanel({ panelNumber, stage, isLocked }: Props) {
           className={`flex py-2.5 mb-5 border-5 rounded-md w-80 ${backGroundColor(
             stage,
           )}`}
+          data-testid={panelTestId(stage)}
         >
           <StageSelectPanelContent
             panelNumber={panelNumber}
