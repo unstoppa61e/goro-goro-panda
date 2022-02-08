@@ -8,7 +8,7 @@ export default {
     description: 'ゲームとゴロ合わせで円周率を覚えよう！',
     images: [
       {
-        url: 'https://gorogoropanda.com/ogp/ogp.png.',
+        url: 'https://gorogoropanda.com/ogp/ogp.png',
         width: 1200,
         height: 630,
         alt: 'Og Image Alt',
