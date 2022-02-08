@@ -3,14 +3,14 @@ import Image from 'next/image';
 type Props = {
   score: number;
 };
-const Progress = ({ score }: Props) => {
+const Score = ({ score }: Props) => {
   const maxScore = 15;
   const srcPath = (index: number): string =>
     index < score ? '/star_yellow.png' : '/star_gray.png';
   const marks = [];
   for (let i = 0; i < maxScore; i++) {
     marks.push(
-      <li>
+      <li key={i}>
         <Image src={srcPath(i)} alt="score" width={22} height={22} />
       </li>,
     );
@@ -23,4 +23,4 @@ const Progress = ({ score }: Props) => {
   );
 };
 
-export default Progress;
+export default Score;
