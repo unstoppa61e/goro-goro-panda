@@ -5,6 +5,7 @@ import { NextSeo } from 'next-seo';
 
 import StageDescription from '../../components/StageDescription';
 import Score from '../../components/Score';
+import Wordplays from '../../components/Wordplays';
 
 interface Params extends ParsedUrlQuery {
   stage: string;
@@ -36,6 +37,16 @@ type Props = {
 };
 
 const Stage = ({ stageNumber }: Props) => {
+  const stagePiNumber = (stageNumber: string) => {
+    const piNumber =
+      '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679';
+    const stagePiNumberLength = 10;
+    const startIndex = stagePiNumberLength * (parseInt(stageNumber) - 1);
+
+    return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
+  };
+  const wordplayPiNumbers = stagePiNumber(stageNumber).match(/.{2}/g);
+
   // const [score, setScore] = useState(8)
   const score = 8;
 
@@ -45,6 +56,7 @@ const Stage = ({ stageNumber }: Props) => {
       <div className="flex flex-col items-center text-white">
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
+        <Wordplays wordplayPiNumbers={wordplayPiNumbers} />
       </div>
     </>
   );
