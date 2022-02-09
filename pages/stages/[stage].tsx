@@ -6,6 +6,7 @@ import { NextSeo } from 'next-seo';
 import StageDescription from '../../components/StageDescription';
 import Score from '../../components/Score';
 import Wordplays from '../../components/Wordplays';
+import Instruction from '../../components/Instruction';
 
 interface Params extends ParsedUrlQuery {
   stage: string;
@@ -57,6 +58,7 @@ const Stage = ({ stageNumber }: Props) => {
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
         <Wordplays wordplayPiNumbers={wordplayPiNumbers} />
+        <Instruction />
       </div>
     </>
   );
