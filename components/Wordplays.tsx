@@ -13,7 +13,7 @@ const Wordplays = ({ wordplayPiNumbers }: Props) => {
     );
   });
 
-  return <ul className="flex w-80">{wordplayTiles}</ul>;
+  return <ul className="flex w-80 mt-4">{wordplayTiles}</ul>;
 };
 
 export default Wordplays;

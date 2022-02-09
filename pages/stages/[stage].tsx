@@ -47,7 +47,7 @@ const Stage = ({ stageNumber }: Props) => {
 
     return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
   };
-  const wordplayPiNumbers = stagePiNumber(stageNumber).match(/.{2}/g);
+  const wordplayPiNumbers = stagePiNumber(stageNumber).match(/.{2}/g)!;
 
   // const [score, setScore] = useState(8)
   const score = 8;
@@ -55,7 +55,7 @@ const Stage = ({ stageNumber }: Props) => {
   return (
     <>
       <NextSeo title={`ゴロゴロ円周率 | ステージ${stageNumber}`} />
-      <div className="flex flex-col items-center text-white">
+      <div className="flex flex-col items-center text-white mt-6">
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
         <Wordplays wordplayPiNumbers={wordplayPiNumbers} />

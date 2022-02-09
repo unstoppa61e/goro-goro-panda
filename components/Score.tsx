@@ -18,9 +18,9 @@ const Score = ({ score }: Props) => {
   }
 
   return (
-    <>
+    <div className="mt-4">
       <ul className="flex">{marks}</ul>
-    </>
+    </div>
   );
 };
 
