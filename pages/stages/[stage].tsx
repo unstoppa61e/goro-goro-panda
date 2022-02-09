@@ -7,6 +7,7 @@ import StageDescription from '../../components/StageDescription';
 import Score from '../../components/Score';
 import Wordplays from '../../components/Wordplays';
 import Instruction from '../../components/Instruction';
+import Button from '../../components/Button';
 
 interface Params extends ParsedUrlQuery {
   stage: string;
@@ -59,6 +60,7 @@ const Stage = ({ stageNumber }: Props) => {
         <Score score={score} />
         <Wordplays wordplayPiNumbers={wordplayPiNumbers} />
         <Instruction />
+        <Button />
       </div>
     </>
   );
