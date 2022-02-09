@@ -66,7 +66,7 @@ const Stage = ({ stageNumber }: Props) => {
   return (
     <>
       <NextSeo title={`ゴロゴロ円周率 | ステージ${stageNumber}`} />
-      <div className="flex flex-col items-center text-white mt-6">
+      <div className="flex flex-col items-center text-white mt-1">
         <input ref={inputRef} className="w-0 h-0" onInput={handleOnInput} />
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
