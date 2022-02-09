@@ -1,6 +1,13 @@
-const Button = () => {
+type Props = {
+  handleOnClick: () => void;
+};
+
+const Button = ({ handleOnClick }: Props) => {
   return (
-    <button className="rounded-lg h-11 w-36 border-2 border-white bg-ok text-lg font-bold mt-10">
+    <button
+      onClick={handleOnClick}
+      className="rounded-lg h-11 w-36 border-2 border-white bg-ok text-lg font-bold mt-10"
+    >
       おぼえた！
     </button>
   );
