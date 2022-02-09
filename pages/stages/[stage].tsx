@@ -1,4 +1,4 @@
-// import { useState } from 'react'
+import { useRef, FormEvent } from 'react';
 import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { NextSeo } from 'next-seo';
@@ -52,15 +52,27 @@ const Stage = ({ stageNumber }: Props) => {
   // const [score, setScore] = useState(8)
   const score = 8;
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleOnClick = (): void => {
+    if (inputRef.current === null) return;
+    inputRef.current.focus();
+  };
+
+  const handleOnInput = (e: FormEvent<HTMLInputElement>) => {
+    console.log((e.target as HTMLInputElement).value);
+  };
+
   return (
     <>
       <NextSeo title={`ゴロゴロ円周率 | ステージ${stageNumber}`} />
       <div className="flex flex-col items-center text-white mt-6">
+        <input ref={inputRef} className="w-0 h-0" onInput={handleOnInput} />
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
         <Wordplays wordplayPiNumbers={wordplayPiNumbers} />
         <Instruction />
-        <Button />
+        <Button handleOnClick={handleOnClick} />
       </div>
     </>
   );
