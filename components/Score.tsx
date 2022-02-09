@@ -5,15 +5,16 @@ type Props = {
 };
 const Score = ({ score }: Props) => {
   const maxScore = 15;
-  const srcPath = (index: number): string =>
-    index < score ? '/star_yellow.png' : '/star_gray.png';
+  const starYellow = (
+    <Image src="/star_yellow.png" alt="yellow star" width={22} height={22} />
+  );
+  const starGray = (
+    <Image src="/star_gray.png" alt="gray star" width={22} height={22} />
+  );
+  const star = (index: number) => (index < score ? starYellow : starGray);
   const marks = [];
   for (let i = 0; i < maxScore; i++) {
-    marks.push(
-      <li key={i}>
-        <Image src={srcPath(i)} alt="score" width={22} height={22} />
-      </li>,
-    );
+    marks.push(<li key={i}>{star(i)}</li>);
   }
 
   return (
