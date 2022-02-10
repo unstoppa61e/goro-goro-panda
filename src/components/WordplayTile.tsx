@@ -1,16 +1,28 @@
 import Image from 'next/image';
 import NumberTile from './NumberTile';
 
-type Props = {
-  tilePiNumber: string;
+type numberTileNumber = {
+  value: string;
+  id: number;
+  isMistaken: boolean;
+  isClosed: boolean;
+  isFocused: boolean;
 };
 
-const WordplayTile = ({ tilePiNumber }: Props) => {
-  const wordplayImageSrc = (tilePiNumber: string): string => {
-    return `/wordplays/${tilePiNumber}.png`;
+type Props = {
+  tilePiNumbers: numberTileNumber[];
+};
+
+const WordplayTile = ({ tilePiNumbers }: Props) => {
+  const wordplayImageSrc = () => {
+    const str: string = tilePiNumbers
+      .map((eachNumber) => eachNumber.value)
+      .join('');
+
+    return `/wordplays/${str}.png`;
   };
 
-  const numberTiles = tilePiNumber.split('').map((numberTileNumber, index) => {
+  const numberTiles = tilePiNumbers.map((numberTileNumber, index) => {
     return (
       <li key={index}>
         <NumberTile tileNumber={numberTileNumber} />
@@ -23,7 +35,7 @@ const WordplayTile = ({ tilePiNumber }: Props) => {
       <div className="h-full w-14 flex flex-col justify-between">
         <div className="flex justify-center items-center h-14 bg-stage-1 rounded">
           <Image
-            src={wordplayImageSrc(tilePiNumber)}
+            src={wordplayImageSrc()}
             width={50}
             height={50}
             objectFit="contain"

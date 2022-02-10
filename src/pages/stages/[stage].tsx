@@ -1,4 +1,4 @@
-import { useRef, FormEvent } from 'react';
+import { useRef, useState, useEffect, FormEvent } from 'react';
 import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { NextSeo } from 'next-seo';
@@ -38,7 +38,19 @@ type Props = {
   stageNumber: string;
 };
 
+type numberTileNumber = {
+  value: string;
+  id: number;
+  isMistaken: boolean;
+  isClosed: boolean;
+  isFocused: boolean;
+};
+
 const Stage = ({ stageNumber }: Props) => {
+  // const [score, setScore] = useState(8)
+  const [numberTileNumbers, setNumberTileNumbers] = useState<
+    numberTileNumber[]
+  >([]);
   const stagePiNumber = (stageNumber: string) => {
     const piNumber =
       '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679';
@@ -47,9 +59,19 @@ const Stage = ({ stageNumber }: Props) => {
 
     return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
   };
-  const wordplayPiNumbers = stagePiNumber(stageNumber).match(/.{2}/g)!;
+  useEffect(() => {
+    const initialNumbers: numberTileNumber[] = stagePiNumber(stageNumber)
+      .split('')
+      .map((number: string) => ({
+        value: number,
+        id: Math.random(),
+        isMistaken: false,
+        isClosed: false,
+        isFocused: false,
+      }));
+    setNumberTileNumbers(initialNumbers);
+  }, [stageNumber]);
 
-  // const [score, setScore] = useState(8)
   // const incrementScore = () => {
   //   setScore(prevScore => prevScore + 1)
   // }
@@ -73,7 +95,7 @@ const Stage = ({ stageNumber }: Props) => {
         <input ref={inputRef} className="w-0 h-0" onInput={handleOnInput} />
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
-        <Wordplays wordplayPiNumbers={wordplayPiNumbers} />
+        <Wordplays numberTileNumbers={numberTileNumbers} />
         <Instruction />
         <Button handleOnClick={handleOnClick} />
       </div>
