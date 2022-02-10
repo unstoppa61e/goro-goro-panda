@@ -50,6 +50,9 @@ const Stage = ({ stageNumber }: Props) => {
   const wordplayPiNumbers = stagePiNumber(stageNumber).match(/.{2}/g)!;
 
   // const [score, setScore] = useState(8)
+  // const incrementScore = () => {
+  //   setScore(prevScore => prevScore + 1)
+  // }
   const score = 8;
 
   const inputRef = useRef<HTMLInputElement>(null);
