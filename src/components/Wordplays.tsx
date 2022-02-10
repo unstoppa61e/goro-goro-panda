@@ -1,14 +1,27 @@
 import WordplayTile from './WordplayTile';
 
-type Props = {
-  wordplayPiNumbers: string[];
+type numberTileNumber = {
+  value: string;
+  id: number;
+  isMistaken: boolean;
+  isClosed: boolean;
+  isFocused: boolean;
 };
 
-const Wordplays = ({ wordplayPiNumbers }: Props) => {
-  const wordplayTiles = wordplayPiNumbers.map((wordplayPiNumber, index) => {
+type Props = {
+  numberTileNumbers: numberTileNumber[];
+};
+
+const Wordplays = ({ numberTileNumbers }: Props) => {
+  const tilePiNumbersSets = [];
+  for (let i = 0; i < numberTileNumbers.length; i += 2) {
+    tilePiNumbersSets.push(numberTileNumbers.slice(i, i + 2));
+  }
+
+  const wordplayTiles = tilePiNumbersSets.map((tilePiNumbers, index) => {
     return (
       <li key={index}>
-        <WordplayTile tilePiNumber={wordplayPiNumber} />
+        <WordplayTile tilePiNumbers={tilePiNumbers} />
       </li>
     );
   });
