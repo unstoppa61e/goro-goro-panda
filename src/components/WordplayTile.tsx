@@ -6,9 +6,7 @@ type Props = {
 };
 
 const WordplayTile = ({ tilePiNumber }: Props) => {
-  const srcPath = (isLocked: boolean, tilePiNumber: string): string => {
-    if (isLocked) return '/mark_question.png';
-
+  const wordplayImageSrc = (tilePiNumber: string): string => {
     return `/wordplays/${tilePiNumber}.png`;
   };
 
@@ -25,7 +23,14 @@ const WordplayTile = ({ tilePiNumber }: Props) => {
       <div className="h-full w-14 flex flex-col justify-between">
         <div className="flex justify-center items-center h-14 bg-stage-1 rounded">
           <Image
-            src={srcPath(false, tilePiNumber)}
+            src={wordplayImageSrc(tilePiNumber)}
+            width={50}
+            height={50}
+            objectFit="contain"
+            alt="wordplay"
+          />
+          <Image
+            src="/mark_question.png"
             width={50}
             height={50}
             objectFit="contain"
