@@ -59,6 +59,21 @@ const Stage = ({ stageNumber }: Props) => {
 
     return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
   };
+
+  const TargetTilesIndexes = () => {
+    const level = 3;
+    // この 5 はマジックナンバーなので、後ほど変更する
+    const removeTimes = 5 - level;
+    const indexes: number[] = Array.from({ length: 5 }, (_, i) => i);
+    for (let i = 0; i < removeTimes; i++) {
+      const arrayIndex = Math.floor(Math.random() * indexes.length);
+      indexes.splice(arrayIndex, 1);
+    }
+    console.log(indexes);
+
+    return indexes;
+  };
+
   useEffect(() => {
     const initialNumbers: numberTileNumber[] = stagePiNumber(stageNumber)
       .split('')
@@ -98,6 +113,7 @@ const Stage = ({ stageNumber }: Props) => {
         <Wordplays numberTileNumbers={numberTileNumbers} />
         <Instruction />
         <Button handleOnClick={handleOnClick} />
+        <button onClick={TargetTilesIndexes}>focusTiles</button>
       </div>
     </>
   );
