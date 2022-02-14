@@ -149,12 +149,28 @@ const Stage = ({ stageNumber }: Props) => {
     });
   };
 
+  const setIsClosed = () => {
+    setWordplayTiles((prevWordPlayTiles) => {
+      return prevWordPlayTiles.map((wordplayTile) => {
+        if (wordplayTile.isTarget) {
+          const numbers = wordplayTile.numbers.map((number) => ({
+            ...number,
+            isClosed: true,
+          }));
+
+          return { ...wordplayTile, numbers: numbers };
+        } else {
+          return wordplayTile;
+        }
+      });
+    });
+  };
   const handleOnClick = (): void => {
     setMode(Mode.Type);
     setNotSolved();
-    // ここに、isTarget のタイルのナンバーに対し、以下の処理をそれぞれ加える
-    //   1. 全て isClosed: true
-    //   2. 最初の isClosed のものを isFocused
+    setIsClosed();
+    // ここに次の処理を加える
+    // isTarget のタイルのナンバーに対し、最初の isClosed のものを isFocused
     if (inputRef.current === null) return;
     inputRef.current.focus();
   };
