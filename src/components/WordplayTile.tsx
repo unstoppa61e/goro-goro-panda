@@ -1,27 +1,22 @@
 import Image from 'next/image';
 import NumberTile from './NumberTile';
 
-import { numberTileNumber } from '../pages/stages/[stage]';
-
-type tile = {
-  isTarget: boolean;
-};
+import { wordplayTile } from '../pages/stages/[stage]';
 
 type Props = {
-  tilePiNumbers: numberTileNumber[];
-  tile: tile;
+  tile: wordplayTile;
 };
 
-const WordplayTile = ({ tilePiNumbers, tile }: Props) => {
+const WordplayTile = ({ tile }: Props) => {
   const wordplayImageSrc = () => {
-    const str: string = tilePiNumbers
+    const str: string = tile.numbers
       .map((eachNumber) => eachNumber.value)
       .join('');
 
     return `/wordplays/${str}.png`;
   };
 
-  const numberTiles = tilePiNumbers.map((numberTileNumber, index) => {
+  const numberTiles = tile.numbers.map((numberTileNumber, index) => {
     return (
       <li key={index}>
         <NumberTile tileNumber={numberTileNumber} isTarget={tile.isTarget} />

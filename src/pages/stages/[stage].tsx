@@ -54,20 +54,48 @@ export type numberTileNumber = {
   isFocused: boolean;
 };
 
+export type wordplayTile = {
+  isTarget: boolean;
+  numbers: numberTileNumber[];
+};
+
 const Stage = ({ stageNumber }: Props) => {
   const [score, setScore] = useState(0);
   const [mode, setMode] = useState<Mode>(Mode.Remember);
-  const [numberTileNumbers, setNumberTileNumbers] = useState<
-    numberTileNumber[]
-  >([]);
-  const initialTiles = Array.from({ length: 5 }, (_) => ({ isTarget: false }));
-  const [tiles, setTiles] = useState(initialTiles);
-  const stagePiNumber = (stageNumber: string) => {
-    const stagePiNumberLength = 10;
+  const stagePiNumberLength = 10;
+  const wordplayNumberCount = 2;
+  const stageWordplayCount = stagePiNumberLength / wordplayNumberCount;
+  const getStagePiNumber = () => {
     const startIndex = stagePiNumberLength * (parseInt(stageNumber) - 1);
 
     return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
   };
+  const initialWordplayTiles = () => {
+    const initialNumberState = {
+      isMistaken: false,
+      isClosed: false,
+      isFocused: false,
+    };
+    const piNumberChars = getStagePiNumber().split('');
+
+    return Array.from({ length: stageWordplayCount }, (_, index) => {
+      const startIndex = wordplayNumberCount * index;
+      const numbers = piNumberChars
+        .slice(startIndex, startIndex + wordplayNumberCount)
+        .map((number) => ({
+          ...initialNumberState,
+          value: number,
+          id: Math.random(),
+        }));
+
+      return {
+        isTarget: false,
+        numbers: numbers,
+      };
+    });
+  };
+
+  const [wordplayTiles, setWordplayTiles] = useState(initialWordplayTiles());
 
   const targetTilesIndexes = () => {
     const level = 3;
@@ -78,40 +106,25 @@ const Stage = ({ stageNumber }: Props) => {
       const arrayIndex = Math.floor(Math.random() * indexes.length);
       indexes.splice(arrayIndex, 1);
     }
-    console.log(indexes);
 
     return indexes;
   };
 
   const setTarget = () => {
     const targetIndexes = targetTilesIndexes();
-    setTiles((prevTiles) => {
-      return prevTiles.map((tile, index) => {
+    setWordplayTiles((prevWordPlayTiles) => {
+      return prevWordPlayTiles.map((wordplayTile, index) => {
         if (targetIndexes.includes(index)) {
-          return { ...tile, isTarget: true };
+          return { ...wordplayTile, isTarget: true };
         } else {
-          return { ...tile, isTarget: false };
+          return { ...wordplayTile, isTarget: false };
         }
       });
     });
   };
 
   useEffect(() => {
-    const initialNumbers: numberTileNumber[] = stagePiNumber(stageNumber)
-      .split('')
-      .map((number: string) => ({
-        value: number,
-        id: Math.random(),
-        isMistaken: false,
-        isClosed: false,
-        isFocused: false,
-      }));
-    setNumberTileNumbers(initialNumbers);
-  }, [stageNumber]);
-
-  useEffect(() => {
     setTarget();
-    console.log(tiles);
     // 後で消す
     setScore(0);
   }, []);
@@ -139,7 +152,7 @@ const Stage = ({ stageNumber }: Props) => {
         <input ref={inputRef} className="w-0 h-0" onInput={handleOnInput} />
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
-        <Wordplays numberTileNumbers={numberTileNumbers} tiles={tiles} />
+        <Wordplays tiles={wordplayTiles} />
         <Instruction />
         {mode === Mode.Remember ? (
           <Button handleOnClick={handleOnClick} />

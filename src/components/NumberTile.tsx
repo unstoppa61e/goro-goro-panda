@@ -1,10 +1,4 @@
-type numberTileNumber = {
-  value: string;
-  id: number;
-  isMistaken: boolean;
-  isClosed: boolean;
-  isFocused: boolean;
-};
+import { numberTileNumber } from '../pages/stages/[stage]';
 
 type Props = {
   tileNumber: numberTileNumber;
