@@ -9,11 +9,16 @@ type numberTileNumber = {
   isFocused: boolean;
 };
 
-type Props = {
-  tilePiNumbers: numberTileNumber[];
+type tile = {
+  isTarget: boolean;
 };
 
-const WordplayTile = ({ tilePiNumbers }: Props) => {
+type Props = {
+  tilePiNumbers: numberTileNumber[];
+  tile: tile;
+};
+
+const WordplayTile = ({ tilePiNumbers, tile }: Props) => {
   const wordplayImageSrc = () => {
     const str: string = tilePiNumbers
       .map((eachNumber) => eachNumber.value)
@@ -31,7 +36,11 @@ const WordplayTile = ({ tilePiNumbers }: Props) => {
   });
 
   return (
-    <div className="flex items-center justify-center h-24 w-16 py-1 rounded bg-focused">
+    <div
+      className={`flex items-center justify-center h-24 w-16 py-1 rounded  ${
+        tile.isTarget ? 'bg-focused' : ''
+      }`}
+    >
       <div className="h-full w-14 flex flex-col justify-between">
         <div className="flex justify-center items-center h-14 bg-stage-1 rounded relative">
           <div className="absolute flex justify-center items-center">

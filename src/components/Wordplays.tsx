@@ -8,11 +8,16 @@ type numberTileNumber = {
   isFocused: boolean;
 };
 
-type Props = {
-  numberTileNumbers: numberTileNumber[];
+type tile = {
+  isTarget: boolean;
 };
 
-const Wordplays = ({ numberTileNumbers }: Props) => {
+type Props = {
+  numberTileNumbers: numberTileNumber[];
+  tiles: tile[];
+};
+
+const Wordplays = ({ numberTileNumbers, tiles }: Props) => {
   const tilePiNumbersSets = [];
   for (let i = 0; i < numberTileNumbers.length; i += 2) {
     tilePiNumbersSets.push(numberTileNumbers.slice(i, i + 2));
@@ -21,7 +26,7 @@ const Wordplays = ({ numberTileNumbers }: Props) => {
   const wordplayTiles = tilePiNumbersSets.map((tilePiNumbers, index) => {
     return (
       <li key={index}>
-        <WordplayTile tilePiNumbers={tilePiNumbers} />
+        <WordplayTile tilePiNumbers={tilePiNumbers} tile={tiles[index]} />
       </li>
     );
   });

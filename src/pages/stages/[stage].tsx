@@ -51,6 +51,8 @@ const Stage = ({ stageNumber }: Props) => {
   const [numberTileNumbers, setNumberTileNumbers] = useState<
     numberTileNumber[]
   >([]);
+  const initialTiles = Array.from({ length: 5 }, (_) => ({ isTarget: false }));
+  const [tiles, setTiles] = useState(initialTiles);
   const stagePiNumber = (stageNumber: string) => {
     const piNumber =
       '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679';
@@ -60,7 +62,7 @@ const Stage = ({ stageNumber }: Props) => {
     return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
   };
 
-  const TargetTilesIndexes = () => {
+  const targetTilesIndexes = () => {
     const level = 3;
     // この 5 はマジックナンバーなので、後ほど変更する
     const removeTimes = 5 - level;
@@ -72,6 +74,19 @@ const Stage = ({ stageNumber }: Props) => {
     console.log(indexes);
 
     return indexes;
+  };
+
+  const setTarget = () => {
+    const targetIndexes = targetTilesIndexes();
+    setTiles((prevTiles) => {
+      return prevTiles.map((tile, index) => {
+        if (targetIndexes.includes(index)) {
+          return { ...tile, isTarget: true };
+        } else {
+          return { ...tile, isTarget: false };
+        }
+      });
+    });
   };
 
   useEffect(() => {
@@ -86,6 +101,11 @@ const Stage = ({ stageNumber }: Props) => {
       }));
     setNumberTileNumbers(initialNumbers);
   }, [stageNumber]);
+
+  useEffect(() => {
+    setTarget();
+    console.log(tiles);
+  }, []);
 
   // const incrementScore = () => {
   //   setScore(prevScore => prevScore + 1)
@@ -110,10 +130,10 @@ const Stage = ({ stageNumber }: Props) => {
         <input ref={inputRef} className="w-0 h-0" onInput={handleOnInput} />
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
-        <Wordplays numberTileNumbers={numberTileNumbers} />
+        <Wordplays numberTileNumbers={numberTileNumbers} tiles={tiles} />
         <Instruction />
         <Button handleOnClick={handleOnClick} />
-        <button onClick={TargetTilesIndexes}>focusTiles</button>
+        <button onClick={setTarget}>focusTiles</button>
       </div>
     </>
   );
