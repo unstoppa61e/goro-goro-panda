@@ -1,25 +1,15 @@
 import WordplayTile from './WordplayTile';
-import { numberTileNumber } from '../pages/stages/[stage]';
-
-type tile = {
-  isTarget: boolean;
-};
+import { wordplayTile } from '../pages/stages/[stage]';
 
 type Props = {
-  numberTileNumbers: numberTileNumber[];
-  tiles: tile[];
+  tiles: wordplayTile[];
 };
 
-const Wordplays = ({ numberTileNumbers, tiles }: Props) => {
-  const tilePiNumbersSets = [];
-  for (let i = 0; i < numberTileNumbers.length; i += 2) {
-    tilePiNumbersSets.push(numberTileNumbers.slice(i, i + 2));
-  }
-
-  const wordplayTiles = tilePiNumbersSets.map((tilePiNumbers, index) => {
+const Wordplays = ({ tiles }: Props) => {
+  const wordplayTiles = tiles.map((tile, index) => {
     return (
       <li key={index}>
-        <WordplayTile tilePiNumbers={tilePiNumbers} tile={tiles[index]} />
+        <WordplayTile tile={tile} />
       </li>
     );
   });
