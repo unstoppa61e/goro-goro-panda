@@ -3,6 +3,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { NextSeo } from 'next-seo';
 
+import Mode from '../../constants/mode';
 import StageDescription from '../../components/StageDescription';
 import Score from '../../components/Score';
 import Wordplays from '../../components/Wordplays';
@@ -47,7 +48,8 @@ type numberTileNumber = {
 };
 
 const Stage = ({ stageNumber }: Props) => {
-  // const [score, setScore] = useState(8)
+  const [score, setScore] = useState(0);
+  const [mode, setMode] = useState<Mode>(Mode.Remember);
   const [numberTileNumbers, setNumberTileNumbers] = useState<
     numberTileNumber[]
   >([]);
@@ -105,16 +107,18 @@ const Stage = ({ stageNumber }: Props) => {
   useEffect(() => {
     setTarget();
     console.log(tiles);
+    // 後で消す
+    setScore(0);
   }, []);
 
   // const incrementScore = () => {
   //   setScore(prevScore => prevScore + 1)
   // }
-  const score = 8;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleOnClick = (): void => {
+    setMode(Mode.Type);
     if (inputRef.current === null) return;
     inputRef.current.focus();
   };
@@ -132,7 +136,10 @@ const Stage = ({ stageNumber }: Props) => {
         <Score score={score} />
         <Wordplays numberTileNumbers={numberTileNumbers} tiles={tiles} />
         <Instruction />
-        <Button handleOnClick={handleOnClick} />
+        {mode === Mode.Remember ? (
+          <Button handleOnClick={handleOnClick} />
+        ) : null}
+
         <button onClick={setTarget}>focusTiles</button>
       </div>
     </>
