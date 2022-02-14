@@ -3,7 +3,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { NextSeo } from 'next-seo';
 
-import Mode from '../../constants/mode';
+import { piNumber } from '../index';
 import StageDescription from '../../components/StageDescription';
 import Score from '../../components/Score';
 import Wordplays from '../../components/Wordplays';
@@ -35,11 +35,18 @@ export const getStaticPaths: GetStaticPaths = () => {
   };
 };
 
+const Mode = {
+  Remember: 'remember',
+  Type: 'type',
+} as const;
+
+export type Mode = typeof Mode[keyof typeof Mode];
+
 type Props = {
   stageNumber: string;
 };
 
-type numberTileNumber = {
+export type numberTileNumber = {
   value: string;
   id: number;
   isMistaken: boolean;
@@ -56,8 +63,6 @@ const Stage = ({ stageNumber }: Props) => {
   const initialTiles = Array.from({ length: 5 }, (_) => ({ isTarget: false }));
   const [tiles, setTiles] = useState(initialTiles);
   const stagePiNumber = (stageNumber: string) => {
-    const piNumber =
-      '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679';
     const stagePiNumberLength = 10;
     const startIndex = stagePiNumberLength * (parseInt(stageNumber) - 1);
 
