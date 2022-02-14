@@ -56,6 +56,7 @@ export type numberTileNumber = {
 
 export type wordplayTile = {
   isTarget: boolean;
+  isSolved: boolean;
   numbers: numberTileNumber[];
 };
 
@@ -90,6 +91,7 @@ const Stage = ({ stageNumber }: Props) => {
 
       return {
         isTarget: false,
+        isSolved: true,
         numbers: numbers,
       };
     });
@@ -135,8 +137,24 @@ const Stage = ({ stageNumber }: Props) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const setNotSolved = () => {
+    setWordplayTiles((prevWordPlayTiles) => {
+      return prevWordPlayTiles.map((wordplayTile) => {
+        if (wordplayTile.isTarget) {
+          return { ...wordplayTile, isSolved: false };
+        } else {
+          return wordplayTile;
+        }
+      });
+    });
+  };
+
   const handleOnClick = (): void => {
     setMode(Mode.Type);
+    setNotSolved();
+    // ここに、isTarget のタイルのナンバーに対し、以下の処理をそれぞれ加える
+    //   1. 全て isClosed: true
+    //   2. 最初の isClosed のものを isFocused
     if (inputRef.current === null) return;
     inputRef.current.focus();
   };

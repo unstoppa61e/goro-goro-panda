@@ -28,6 +28,8 @@ const WordplayTile = ({ tile }: Props) => {
     <div className="bg-black bg-opacity-50 rounded absolute w-full h-full" />
   );
 
+  const isClosed = tile.isTarget && !tile.isSolved;
+
   return (
     <div
       className={`flex items-center justify-center h-24 w-16 py-1 rounded  ${
@@ -43,7 +45,9 @@ const WordplayTile = ({ tile }: Props) => {
               height={50}
               objectFit="contain"
               alt="wordplay"
-              className="rotate-y-0"
+              className={`transition-all ease-in duration-200 ${
+                isClosed ? 'rotate-y-90' : 'rotate-y-0 delay-200'
+              }`}
             />
           </div>
           {tile.isTarget ? null : mask}
@@ -53,8 +57,10 @@ const WordplayTile = ({ tile }: Props) => {
             width={50}
             height={50}
             objectFit="contain"
-            alt="wordplay"
-            className="rotate-y-90"
+            alt="question mark"
+            className={`transition-all ease-in duration-200 ${
+              isClosed ? 'delay-200 rotate-y-0' : 'rotate-y-90'
+            }`}
           />
         </div>
         <ul className="flex justify-between">{numberTiles}</ul>
