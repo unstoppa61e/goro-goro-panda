@@ -1,12 +1,5 @@
 import WordplayTile from './WordplayTile';
-
-type numberTileNumber = {
-  value: string;
-  id: number;
-  isMistaken: boolean;
-  isClosed: boolean;
-  isFocused: boolean;
-};
+import { numberTileNumber } from '../pages/stages/[stage]';
 
 type tile = {
   isTarget: boolean;
