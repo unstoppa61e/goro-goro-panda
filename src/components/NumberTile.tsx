@@ -12,7 +12,7 @@ const NumberTile = ({ tileNumber, isTarget }: Props) => {
   return (
     <div
       className={`flex justify-center items-center w-6 h-7 ${
-        tileNumber.isFocused ? 'bg-focused' : 'bg-white'
+        tileNumber.isFocused ? 'duration-500 bg-focused' : 'bg-white'
       } rounded text-black text-2xl font-bold relative`}
     >
       <div
