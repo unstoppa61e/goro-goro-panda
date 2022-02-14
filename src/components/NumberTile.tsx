@@ -15,12 +15,21 @@ const NumberTile = ({ tileNumber, isTarget }: Props) => {
         tileNumber.isFocused ? 'duration-500 bg-focused' : 'bg-white'
       } rounded text-black text-2xl font-bold relative`}
     >
-      <div
-        className={`transition-all ease-in duration-200 ${
-          tileNumber.isClosed ? 'rotate-y-90' : 'rotate-y-0 delay-200'
-        }`}
-      >
-        {tileNumber.value}
+      <div className="transition-all ease-in duration-200 relative flex justify-center items-center">
+        <div
+          className={`absolute ${
+            tileNumber.isClosed ? 'rotate-y-90' : 'rotate-y-0 delay-200'
+          }`}
+        >
+          {tileNumber.value}
+        </div>
+        <div
+          className={`pb-2 ${
+            tileNumber.isFocused ? 'rotate-y-0 delay-200' : 'rotate-y-90'
+          }`}
+        >
+          _
+        </div>
       </div>
       {isTarget ? null : mask}
     </div>
