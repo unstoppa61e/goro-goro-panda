@@ -30,10 +30,14 @@ const WordplayTile = ({ tilePiNumbers, tile }: Props) => {
   const numberTiles = tilePiNumbers.map((numberTileNumber, index) => {
     return (
       <li key={index}>
-        <NumberTile tileNumber={numberTileNumber} />
+        <NumberTile tileNumber={numberTileNumber} isTarget={tile.isTarget} />
       </li>
     );
   });
+
+  const mask = (
+    <div className="bg-black bg-opacity-50 rounded absolute w-full h-full" />
+  );
 
   return (
     <div
@@ -53,6 +57,8 @@ const WordplayTile = ({ tilePiNumbers, tile }: Props) => {
               className="rotate-y-0"
             />
           </div>
+          {tile.isTarget ? null : mask}
+
           <Image
             src="/mark_question.png"
             width={50}
