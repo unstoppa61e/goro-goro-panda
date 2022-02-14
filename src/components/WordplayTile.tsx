@@ -32,8 +32,8 @@ const WordplayTile = ({ tile }: Props) => {
 
   return (
     <div
-      className={`flex items-center justify-center h-24 w-16 py-1 rounded  ${
-        tile.isTarget ? 'bg-focused' : ''
+      className={`flex items-center justify-center h-24 w-16 py-1 rounded ${
+        tile.isTarget && tile.isSolved ? 'bg-focused' : 'duration-500'
       }`}
     >
       <div className="h-full w-14 flex flex-col justify-between">

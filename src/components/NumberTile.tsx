@@ -10,8 +10,18 @@ const NumberTile = ({ tileNumber, isTarget }: Props) => {
   );
 
   return (
-    <div className="flex justify-center items-center w-6 h-7 bg-white rounded text-black text-2xl font-bold relative">
-      {tileNumber.value}
+    <div
+      className={`flex justify-center items-center w-6 h-7 ${
+        tileNumber.isFocused ? 'bg-focused' : 'bg-white'
+      } rounded text-black text-2xl font-bold relative`}
+    >
+      <div
+        className={`transition-all ease-in duration-200 ${
+          tileNumber.isClosed ? 'rotate-y-90' : 'rotate-y-0 delay-200'
+        }`}
+      >
+        {tileNumber.value}
+      </div>
       {isTarget ? null : mask}
     </div>
   );
