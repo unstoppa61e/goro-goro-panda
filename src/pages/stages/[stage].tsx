@@ -197,8 +197,27 @@ const Stage = ({ stageNumber }: Props) => {
     inputRef.current.focus();
   };
 
+  const focusedNumber = (): string => {
+    for (let i = 0; i < wordplayTiles.length; i++) {
+      for (let j = 0; j < wordplayTiles[i].numbers.length; j++) {
+        const targetNumber = wordplayTiles[i].numbers[j];
+        if (targetNumber.isFocused) return targetNumber.value;
+      }
+    }
+
+    return '';
+  };
+
+  const putDebug = (input: string, focused: string) => {
+    const result = focused === input ? 'Same' : 'Different';
+    console.log(`${result}(input: ${input}, focused: ${focused})`);
+  };
+
   const handleOnInput = (e: FormEvent<HTMLInputElement>) => {
-    console.log((e.target as HTMLInputElement).value);
+    const input = (e.target as HTMLInputElement).value;
+    const focused = focusedNumber();
+    putDebug(input, focused);
+    (e.target as HTMLInputElement).value = '';
   };
 
   return (
