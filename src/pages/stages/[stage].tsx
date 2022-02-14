@@ -213,8 +213,6 @@ const Stage = ({ stageNumber }: Props) => {
         {mode === Mode.Remember ? (
           <Button handleOnClick={handleOnClick} />
         ) : null}
-
-        <button onClick={setTarget}>focusTiles</button>
       </div>
     </>
   );
