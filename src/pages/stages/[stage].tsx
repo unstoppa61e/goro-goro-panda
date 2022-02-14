@@ -165,12 +165,34 @@ const Stage = ({ stageNumber }: Props) => {
       });
     });
   };
+  const focusFirstTargetNumber = () => {
+    setWordplayTiles((prevWordPlayTiles) => {
+      let isDone = false;
+
+      return prevWordPlayTiles.map((wordplayTile) => {
+        if (!isDone && wordplayTile.isTarget) {
+          const numbers = wordplayTile.numbers.map((number, index) => {
+            if (index === 0) {
+              isDone = true;
+
+              return { ...number, isFocused: true };
+            } else {
+              return number;
+            }
+          });
+
+          return { ...wordplayTile, numbers: numbers };
+        } else {
+          return wordplayTile;
+        }
+      });
+    });
+  };
   const handleOnClick = (): void => {
     setMode(Mode.Type);
     setNotSolved();
     setIsClosed();
-    // ここに次の処理を加える
-    // isTarget のタイルのナンバーに対し、最初の isClosed のものを isFocused
+    focusFirstTargetNumber();
     if (inputRef.current === null) return;
     inputRef.current.focus();
   };
