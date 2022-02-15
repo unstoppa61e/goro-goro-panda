@@ -50,10 +50,6 @@ export const CONDITION = {
 
 export type Condition = typeof CONDITION[keyof typeof CONDITION];
 
-type Props = {
-  stageNumber: string;
-};
-
 export type numberTileNumber = {
   value: string;
   id: number;
@@ -68,18 +64,28 @@ export type wordplayTile = {
   numbers: numberTileNumber[];
 };
 
+const stagePiNumberLength = 10;
+const wordplayNumberCount = 2;
+const stageWordplayCount = stagePiNumberLength / wordplayNumberCount;
+
+type Props = {
+  stageNumber: string;
+};
+
 const Stage = ({ stageNumber }: Props) => {
   const [score, setScore] = useState(0);
   const [mode, setMode] = useState<Mode>(MODE.Remember);
   const [condition, setCondition] = useState<Condition>(CONDITION.Normal);
-  const stagePiNumberLength = 10;
-  const wordplayNumberCount = 2;
-  const stageWordplayCount = stagePiNumberLength / wordplayNumberCount;
+  const [wordplayTiles, setWordplayTiles] = useState<wordplayTile[]>([]);
+  const [level, setLevel] = useState(1);
+  const [targetIndexes, setTargetIndexes] = useState<number[]>([]);
+
   const getStagePiNumber = () => {
     const startIndex = stagePiNumberLength * (parseInt(stageNumber) - 1);
 
     return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
   };
+
   const initialWordplayTiles = () => {
     const initialNumberState = {
       isMistaken: false,
@@ -106,17 +112,32 @@ const Stage = ({ stageNumber }: Props) => {
     });
   };
 
-  const [wordplayTiles, setWordplayTiles] = useState(initialWordplayTiles());
+  useEffect(() => {
+    setWordplayTiles(initialWordplayTiles());
+  }, []);
 
-  const targetTilesIndexes = () => {
-    const level = 3;
-    // この 5 はマジックナンバーなので、後ほど変更する
-    const removeTimes = 5 - level;
-    const indexes: number[] = Array.from({ length: 5 }, (_, i) => i);
-    for (let i = 0; i < removeTimes; i++) {
-      const arrayIndex = Math.floor(Math.random() * indexes.length);
-      indexes.splice(arrayIndex, 1);
+  const arrayEqual = (a: number[], b: number[]) => {
+    if (!Array.isArray(a)) return false;
+    if (!Array.isArray(b)) return false;
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; ++i) {
+      if (a[i] !== b[i]) return false;
     }
+
+    return true;
+  };
+
+  const targetTilesIndexes = (): number[] => {
+    const removeTimes = 5 - level;
+    let indexes: number[];
+    do {
+      indexes = Array.from({ length: 5 }, (_, i) => i);
+      for (let i = 0; i < removeTimes; i++) {
+        const arrayIndex = Math.floor(Math.random() * indexes.length);
+        indexes.splice(arrayIndex, 1);
+      }
+    } while (arrayEqual(indexes, targetIndexes));
+    setTargetIndexes(indexes);
 
     return indexes;
   };
@@ -136,7 +157,14 @@ const Stage = ({ stageNumber }: Props) => {
 
   useEffect(() => {
     setTarget();
-  }, []);
+    if (score === 5 || score === 8 || score === 11 || score === 14) {
+      setLevel((prevLevel) => prevLevel + 1);
+    }
+  }, [score]);
+
+  useEffect(() => {
+    setTarget();
+  }, [level]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -226,16 +254,16 @@ const Stage = ({ stageNumber }: Props) => {
 
   useEffect(() => {
     if (
+      !areAllSolved() ||
       condition === CONDITION.Failure ||
       mode !== MODE.Type ||
-      !areAllSolved() ||
       inputRef.current === null
     )
       return;
     inputRef.current.blur();
     setMode(MODE.Remember);
     setScore((prevScore) => prevScore + 1);
-    setTarget();
+    console.log(`score: ${score}`);
   }, [wordplayTiles]);
 
   const handleCorrectInput = () => {
