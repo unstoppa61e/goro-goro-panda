@@ -127,13 +127,7 @@ const Stage = ({ stageNumber }: Props) => {
 
   useEffect(() => {
     setTarget();
-    // 後で消す
-    setScore(0);
   }, []);
-
-  // const incrementScore = () => {
-  //   setScore(prevScore => prevScore + 1)
-  // }
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -212,11 +206,29 @@ const Stage = ({ stageNumber }: Props) => {
     console.log(`${result}(input: ${input}, focused: ${focused})`);
   };
 
+  const areAllSolved = (): boolean => {
+    for (const wordplayTile of wordplayTiles) {
+      if (!wordplayTile.isSolved) return false;
+    }
+
+    return true;
+  };
+
+  useEffect(() => {
+    if (mode === MODE.Type && areAllSolved()) {
+      if (inputRef.current === null) return;
+      inputRef.current.blur();
+      setMode(MODE.Remember);
+      setScore((prevScore) => prevScore + 1);
+      setTarget();
+    }
+  }, [wordplayTiles]);
+
   const handleCorrectInput = () => {
-    setWordplayTiles((prevWordPlayTiles) => {
+    setWordplayTiles((prevWordplayTiles) => {
       let foundFocused = false;
 
-      return prevWordPlayTiles.map((wordplayTile) => {
+      return prevWordplayTiles.map((wordplayTile) => {
         if (!wordplayTile.isTarget || wordplayTile.isSolved) {
           return wordplayTile;
         } else {
