@@ -18,9 +18,7 @@ export const getStaticProps: GetStaticProps = (context) => {
   const params = context.params as Params;
   const stageNumber = params.stage;
 
-  return {
-    props: { stageNumber },
-  };
+  return { props: { stageNumber } };
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -29,17 +27,13 @@ export const getStaticPaths: GetStaticPaths = () => {
     params: { stage: stage.toString() },
   }));
 
-  return {
-    paths,
-    fallback: false,
-  };
+  return { paths, fallback: false };
 };
 
 export const MODE = {
   Remember: 'remember',
   Type: 'type',
 } as const;
-
 export type Mode = typeof MODE[keyof typeof MODE];
 
 export const CONDITION = {
@@ -47,15 +41,13 @@ export const CONDITION = {
   Success: 'success',
   Failure: 'failure',
 } as const;
-
 export type Condition = typeof CONDITION[keyof typeof CONDITION];
 
 export type numberTileNumber = {
   value: string;
-  id: number;
-  isMistaken: boolean;
   isClosed: boolean;
   isFocused: boolean;
+  isMistaken: boolean;
 };
 
 export type wordplayTile = {
@@ -86,12 +78,13 @@ const Stage = ({ stageNumber }: Props) => {
     return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
   };
 
+  const defaultNumberState = {
+    isClosed: false,
+    isFocused: false,
+    isMistaken: false,
+  };
+
   const initialWordplayTiles = () => {
-    const initialNumberState = {
-      isMistaken: false,
-      isClosed: false,
-      isFocused: false,
-    };
     const piNumberChars = getStagePiNumber().split('');
 
     return Array.from({ length: stageWordplayCount }, (_, index) => {
@@ -99,9 +92,8 @@ const Stage = ({ stageNumber }: Props) => {
       const numbers = piNumberChars
         .slice(startIndex, startIndex + wordplayNumberCount)
         .map((number) => ({
-          ...initialNumberState,
+          ...defaultNumberState,
           value: number,
-          id: Math.random(),
         }));
 
       return {
@@ -127,11 +119,12 @@ const Stage = ({ stageNumber }: Props) => {
     return true;
   };
 
-  const targetTilesIndexes = (): number[] => {
-    const removeTimes = 5 - level;
+  const getTargetTilesIndexes = (): number[] => {
+    const maxLevel = 5;
+    const removeTimes = maxLevel - level;
     let indexes: number[];
     do {
-      indexes = Array.from({ length: 5 }, (_, i) => i);
+      indexes = Array.from({ length: stageWordplayCount }, (_, i) => i);
       for (let i = 0; i < removeTimes; i++) {
         const arrayIndex = Math.floor(Math.random() * indexes.length);
         indexes.splice(arrayIndex, 1);
@@ -142,11 +135,11 @@ const Stage = ({ stageNumber }: Props) => {
     return indexes;
   };
 
-  const setTarget = () => {
-    const targetIndexes = targetTilesIndexes();
+  const changeTargets = () => {
+    const targetTilesIndexes = getTargetTilesIndexes();
     setWordplayTiles((prevWordPlayTiles) => {
       return prevWordPlayTiles.map((wordplayTile, index) => {
-        if (targetIndexes.includes(index)) {
+        if (targetTilesIndexes.includes(index)) {
           return { ...wordplayTile, isTarget: true };
         } else {
           return { ...wordplayTile, isTarget: false };
@@ -156,14 +149,15 @@ const Stage = ({ stageNumber }: Props) => {
   };
 
   useEffect(() => {
-    setTarget();
     if (score === 5 || score === 8 || score === 11 || score === 14) {
       setLevel((prevLevel) => prevLevel + 1);
+    } else {
+      changeTargets();
     }
   }, [score]);
 
   useEffect(() => {
-    setTarget();
+    changeTargets();
   }, [level]);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -196,12 +190,15 @@ const Stage = ({ stageNumber }: Props) => {
       });
     });
   };
+
   const focusFirstTargetNumber = () => {
     setWordplayTiles((prevWordPlayTiles) => {
       let isDone = false;
 
       return prevWordPlayTiles.map((wordplayTile) => {
-        if (!isDone && wordplayTile.isTarget) {
+        if (!wordplayTile.isTarget || isDone) {
+          return wordplayTile;
+        } else {
           const numbers = wordplayTile.numbers.map((number, index) => {
             if (index === 0) {
               isDone = true;
@@ -213,12 +210,11 @@ const Stage = ({ stageNumber }: Props) => {
           });
 
           return { ...wordplayTile, numbers: numbers };
-        } else {
-          return wordplayTile;
         }
       });
     });
   };
+
   const handleOnClick = (): void => {
     setCondition(CONDITION.Normal);
     setMode(MODE.Type);
@@ -254,9 +250,9 @@ const Stage = ({ stageNumber }: Props) => {
 
   useEffect(() => {
     if (
-      !areAllSolved() ||
       condition === CONDITION.Failure ||
       mode !== MODE.Type ||
+      !areAllSolved() ||
       inputRef.current === null
     )
       return;
@@ -282,12 +278,7 @@ const Stage = ({ stageNumber }: Props) => {
               foundFocused = true;
               if (index === 1) isSecond = true;
 
-              return {
-                ...number,
-                isFocused: false,
-                isMistaken: false,
-                isClosed: false,
-              };
+              return { ...number, ...defaultNumberState };
             } else if (foundFocused) {
               foundFocused = false;
 
@@ -305,31 +296,21 @@ const Stage = ({ stageNumber }: Props) => {
 
   const handleWrongInput = () => {
     setCondition(CONDITION.Failure);
+    setMode(MODE.Remember);
     setWordplayTiles((prevWordplayTiles) => {
       return prevWordplayTiles.map((wordplayTile) => {
         if (!wordplayTile.isTarget) return wordplayTile;
         const numbers = wordplayTile.numbers.map((number) => {
           if (number.isFocused) {
-            return {
-              ...number,
-              isFocused: false,
-              isMistaken: true,
-              isClosed: false,
-            };
+            return { ...number, ...defaultNumberState, isMistaken: true };
           } else {
-            return {
-              ...number,
-              isFocused: false,
-              isMistaken: false,
-              isClosed: false,
-            };
+            return { ...number, ...defaultNumberState };
           }
         });
 
         return { ...wordplayTile, isSolved: true, numbers: numbers };
       });
     });
-    setMode(MODE.Remember);
     if (inputRef.current === null) return;
     inputRef.current.blur();
   };
