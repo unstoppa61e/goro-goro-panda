@@ -42,6 +42,14 @@ export const MODE = {
 
 export type Mode = typeof MODE[keyof typeof MODE];
 
+export const CONDITION = {
+  Normal: 'normal',
+  Success: 'success',
+  Failure: 'failure',
+} as const;
+
+export type Condition = typeof CONDITION[keyof typeof CONDITION];
+
 type Props = {
   stageNumber: string;
 };
@@ -63,6 +71,7 @@ export type wordplayTile = {
 const Stage = ({ stageNumber }: Props) => {
   const [score, setScore] = useState(0);
   const [mode, setMode] = useState<Mode>(MODE.Remember);
+  const [condition, setCondition] = useState<Condition>(CONDITION.Normal);
   const stagePiNumberLength = 10;
   const wordplayNumberCount = 2;
   const stageWordplayCount = stagePiNumberLength / wordplayNumberCount;
@@ -183,6 +192,7 @@ const Stage = ({ stageNumber }: Props) => {
     });
   };
   const handleOnClick = (): void => {
+    setCondition(CONDITION.Normal);
     setMode(MODE.Type);
     setNotSolved();
     setIsClosed();
@@ -215,16 +225,21 @@ const Stage = ({ stageNumber }: Props) => {
   };
 
   useEffect(() => {
-    if (mode === MODE.Type && areAllSolved()) {
-      if (inputRef.current === null) return;
-      inputRef.current.blur();
-      setMode(MODE.Remember);
-      setScore((prevScore) => prevScore + 1);
-      setTarget();
-    }
+    if (
+      condition === CONDITION.Failure ||
+      mode !== MODE.Type ||
+      !areAllSolved() ||
+      inputRef.current === null
+    )
+      return;
+    inputRef.current.blur();
+    setMode(MODE.Remember);
+    setScore((prevScore) => prevScore + 1);
+    setTarget();
   }, [wordplayTiles]);
 
   const handleCorrectInput = () => {
+    setCondition(CONDITION.Success);
     setWordplayTiles((prevWordplayTiles) => {
       let foundFocused = false;
 
@@ -260,6 +275,37 @@ const Stage = ({ stageNumber }: Props) => {
     });
   };
 
+  const handleWrongInput = () => {
+    setCondition(CONDITION.Failure);
+    setWordplayTiles((prevWordplayTiles) => {
+      return prevWordplayTiles.map((wordplayTile) => {
+        if (!wordplayTile.isTarget) return wordplayTile;
+        const numbers = wordplayTile.numbers.map((number) => {
+          if (number.isFocused) {
+            return {
+              ...number,
+              isFocused: false,
+              isMistaken: true,
+              isClosed: false,
+            };
+          } else {
+            return {
+              ...number,
+              isFocused: false,
+              isMistaken: false,
+              isClosed: false,
+            };
+          }
+        });
+
+        return { ...wordplayTile, isSolved: true, numbers: numbers };
+      });
+    });
+    setMode(MODE.Remember);
+    if (inputRef.current === null) return;
+    inputRef.current.blur();
+  };
+
   const handleOnInput = (e: FormEvent<HTMLInputElement>): void => {
     const input = (e.target as HTMLInputElement).value;
     const focused = focusedNumber();
@@ -267,9 +313,7 @@ const Stage = ({ stageNumber }: Props) => {
     if (input === focused) {
       handleCorrectInput();
     } else {
-      // handleWrongInput()
-      // isMistaken 付加
-      // モード: Remember
+      handleWrongInput();
     }
     (e.target as HTMLInputElement).value = '';
   };
