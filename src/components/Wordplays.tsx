@@ -1,15 +1,16 @@
 import WordplayTile from './WordplayTile';
-import { wordplayTile } from '../pages/stages/[stage]';
+import { Mode, wordplayTile } from '../pages/stages/[stage]';
 
 type Props = {
+  mode: Mode;
   tiles: wordplayTile[];
 };
 
-const Wordplays = ({ tiles }: Props) => {
+const Wordplays = ({ mode, tiles }: Props) => {
   const wordplayTiles = tiles.map((tile, index) => {
     return (
       <li key={index}>
-        <WordplayTile tile={tile} />
+        <WordplayTile mode={mode} tile={tile} />
       </li>
     );
   });

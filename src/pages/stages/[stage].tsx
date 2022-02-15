@@ -35,12 +35,12 @@ export const getStaticPaths: GetStaticPaths = () => {
   };
 };
 
-const Mode = {
+export const MODE = {
   Remember: 'remember',
   Type: 'type',
 } as const;
 
-export type Mode = typeof Mode[keyof typeof Mode];
+export type Mode = typeof MODE[keyof typeof MODE];
 
 type Props = {
   stageNumber: string;
@@ -62,7 +62,7 @@ export type wordplayTile = {
 
 const Stage = ({ stageNumber }: Props) => {
   const [score, setScore] = useState(0);
-  const [mode, setMode] = useState<Mode>(Mode.Remember);
+  const [mode, setMode] = useState<Mode>(MODE.Remember);
   const stagePiNumberLength = 10;
   const wordplayNumberCount = 2;
   const stageWordplayCount = stagePiNumberLength / wordplayNumberCount;
@@ -189,7 +189,7 @@ const Stage = ({ stageNumber }: Props) => {
     });
   };
   const handleOnClick = (): void => {
-    setMode(Mode.Type);
+    setMode(MODE.Type);
     setNotSolved();
     setIsClosed();
     focusFirstTargetNumber();
@@ -198,10 +198,9 @@ const Stage = ({ stageNumber }: Props) => {
   };
 
   const focusedNumber = (): string => {
-    for (let i = 0; i < wordplayTiles.length; i++) {
-      for (let j = 0; j < wordplayTiles[i].numbers.length; j++) {
-        const targetNumber = wordplayTiles[i].numbers[j];
-        if (targetNumber.isFocused) return targetNumber.value;
+    for (const wordplayTile of wordplayTiles) {
+      for (const number of wordplayTile.numbers) {
+        if (number.isFocused) return number.value;
       }
     }
 
@@ -213,10 +212,53 @@ const Stage = ({ stageNumber }: Props) => {
     console.log(`${result}(input: ${input}, focused: ${focused})`);
   };
 
-  const handleOnInput = (e: FormEvent<HTMLInputElement>) => {
+  const handleCorrectInput = () => {
+    setWordplayTiles((prevWordPlayTiles) => {
+      let foundFocused = false;
+
+      return prevWordPlayTiles.map((wordplayTile) => {
+        if (!wordplayTile.isTarget || wordplayTile.isSolved) {
+          return wordplayTile;
+        } else {
+          let isSecond = false;
+          const numbers = wordplayTile.numbers.map((number, index) => {
+            if (!number.isClosed) return number;
+            if (number.isFocused) {
+              foundFocused = true;
+              if (index === 1) isSecond = true;
+
+              return {
+                ...number,
+                isFocused: false,
+                isMistaken: false,
+                isClosed: false,
+              };
+            } else if (foundFocused) {
+              foundFocused = false;
+
+              return { ...number, isFocused: true };
+            } else {
+              return number;
+            }
+          });
+
+          return { ...wordplayTile, isSolved: isSecond, numbers: numbers };
+        }
+      });
+    });
+  };
+
+  const handleOnInput = (e: FormEvent<HTMLInputElement>): void => {
     const input = (e.target as HTMLInputElement).value;
     const focused = focusedNumber();
     putDebug(input, focused);
+    if (input === focused) {
+      handleCorrectInput();
+    } else {
+      // handleWrongInput()
+      // isMistaken 付加
+      // モード: Remember
+    }
     (e.target as HTMLInputElement).value = '';
   };
 
@@ -227,9 +269,9 @@ const Stage = ({ stageNumber }: Props) => {
         <input ref={inputRef} className="w-0 h-0" onInput={handleOnInput} />
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
-        <Wordplays tiles={wordplayTiles} />
+        <Wordplays mode={mode} tiles={wordplayTiles} />
         <Instruction />
-        {mode === Mode.Remember ? (
+        {mode === MODE.Remember ? (
           <Button handleOnClick={handleOnClick} />
         ) : null}
       </div>
