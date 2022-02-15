@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import NumberTile from './NumberTile';
 
-import { wordplayTile } from '../pages/stages/[stage]';
+import { MODE, Mode, wordplayTile } from '../pages/stages/[stage]';
 
 type Props = {
+  mode: Mode;
   tile: wordplayTile;
 };
 
-const WordplayTile = ({ tile }: Props) => {
+const WordplayTile = ({ mode, tile }: Props) => {
   const wordplayImageSrc = () => {
     const str: string = tile.numbers
       .map((eachNumber) => eachNumber.value)
@@ -33,7 +34,9 @@ const WordplayTile = ({ tile }: Props) => {
   return (
     <div
       className={`flex items-center justify-center h-24 w-16 py-1 rounded ${
-        tile.isTarget && tile.isSolved ? 'bg-focused' : 'duration-500'
+        mode === MODE.Remember && tile.isTarget && tile.isSolved
+          ? 'bg-focused'
+          : 'duration-500'
       }`}
     >
       <div className="h-full w-14 flex flex-col justify-between">
