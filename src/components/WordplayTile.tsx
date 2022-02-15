@@ -26,17 +26,21 @@ const WordplayTile = ({ mode, tile }: Props) => {
   });
 
   const mask = (
-    <div className="bg-black bg-opacity-50 rounded absolute w-full h-full" />
+    <div
+      className={`${
+        tile.isTarget ? '' : 'bg-black'
+      } bg-opacity-50 rounded absolute w-full h-full transition-all ease-in duration-500`}
+    />
   );
 
   const isClosed = tile.isTarget && !tile.isSolved;
 
   return (
     <div
-      className={`flex items-center justify-center h-24 w-16 py-1 rounded ${
+      className={`flex items-center justify-center h-24 w-16 py-1 rounded duration-500 ${
         mode === MODE.Remember && tile.isTarget && tile.isSolved
-          ? 'bg-focused'
-          : 'duration-500'
+          ? 'bg-focused ease-in'
+          : ''
       }`}
     >
       <div className="h-full w-14 flex flex-col justify-between">
@@ -53,7 +57,7 @@ const WordplayTile = ({ mode, tile }: Props) => {
               }`}
             />
           </div>
-          {tile.isTarget ? null : mask}
+          {mask}
 
           <Image
             src="/mark_question.png"
