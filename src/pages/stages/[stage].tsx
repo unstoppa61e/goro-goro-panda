@@ -259,11 +259,6 @@ const Stage = ({ stageNumber }: Props) => {
     return '';
   };
 
-  const putDebug = (input: string, focused: string) => {
-    const result = focused === input ? 'Same' : 'Different';
-    console.log(`${result}(input: ${input}, focused: ${focused})`);
-  };
-
   const areAllSolved = (): boolean => {
     for (const wordplayTile of wordplayTiles) {
       if (!wordplayTile.isSolved) return false;
@@ -338,11 +333,27 @@ const Stage = ({ stageNumber }: Props) => {
     inputRef.current.blur();
   };
 
+  const isInputCorrect = (input: string, focused: string) => {
+    const numberCombinations: { [key: string]: string[] } = {
+      '0': ['0', '０'],
+      '1': ['1', '１'],
+      '2': ['2', '２'],
+      '3': ['3', '３'],
+      '4': ['4', '４'],
+      '5': ['5', '５'],
+      '6': ['6', '６'],
+      '7': ['7', '７'],
+      '8': ['8', '８'],
+      '9': ['9', '９'],
+    };
+
+    return numberCombinations[focused].includes(input);
+  };
+
   const handleOnInput = (e: FormEvent<HTMLInputElement>): void => {
     const input = (e.target as HTMLInputElement).value;
     const focused = focusedNumber();
-    putDebug(input, focused);
-    if (input === focused) {
+    if (isInputCorrect(input, focused)) {
       handleCorrectInput();
     } else {
       handleWrongInput();
