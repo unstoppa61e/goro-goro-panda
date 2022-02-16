@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, FormEvent } from 'react';
+import { useRef, useState, useEffect, FormEvent, useCallback } from 'react';
 import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { NextSeo } from 'next-seo';
@@ -90,7 +90,7 @@ const Stage = ({ stageNumber }: Props) => {
     isMistaken: false,
   };
 
-  const initialWordplayTiles = () => {
+  const initialWordplayTiles = useCallback(() => {
     const piNumberChars = getStagePiNumber().split('');
 
     return Array.from({ length: stageWordplayCount }, (_, index) => {
@@ -108,13 +108,13 @@ const Stage = ({ stageNumber }: Props) => {
         numbers: numbers,
       };
     });
-  };
+  }, []);
 
   useEffect(() => {
     setWordplayTiles(initialWordplayTiles());
   }, []);
 
-  const arrayEqual = (a: number[], b: number[]) => {
+  const arrayEqual = useCallback((a: number[], b: number[]) => {
     if (!Array.isArray(a)) return false;
     if (!Array.isArray(b)) return false;
     if (a.length !== b.length) return false;
@@ -123,17 +123,20 @@ const Stage = ({ stageNumber }: Props) => {
     }
 
     return true;
-  };
+  }, []);
 
-  const combinationAlreadyExists = (indexes: number[]) => {
-    for (const combination of targetIndexesCombinations) {
-      if (arrayEqual(combination, indexes)) {
-        return true;
+  const combinationAlreadyExists = useCallback(
+    (indexes: number[]) => {
+      for (const combination of targetIndexesCombinations) {
+        if (arrayEqual(combination, indexes)) {
+          return true;
+        }
       }
-    }
 
-    return false;
-  };
+      return false;
+    },
+    [targetIndexesCombinations],
+  );
 
   const getTargetTilesIndexes = (): number[] => {
     const maxLevel = 5;
@@ -186,7 +189,7 @@ const Stage = ({ stageNumber }: Props) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const setNotSolved = () => {
+  const setNotSolved = useCallback(() => {
     setWordplayTiles((prevWordplayTiles) => {
       return prevWordplayTiles.map((wordplayTile) => {
         if (wordplayTile.isTarget) {
@@ -196,9 +199,9 @@ const Stage = ({ stageNumber }: Props) => {
         }
       });
     });
-  };
+  }, [wordplayTiles]);
 
-  const setIsClosed = () => {
+  const setIsClosed = useCallback(() => {
     setWordplayTiles((prevWordPlayTiles) => {
       return prevWordPlayTiles.map((wordplayTile) => {
         if (wordplayTile.isTarget) {
@@ -213,9 +216,9 @@ const Stage = ({ stageNumber }: Props) => {
         }
       });
     });
-  };
+  }, [wordplayTiles]);
 
-  const focusFirstTargetNumber = () => {
+  const focusFirstTargetNumber = useCallback(() => {
     setWordplayTiles((prevWordPlayTiles) => {
       let isDone = false;
 
@@ -237,9 +240,9 @@ const Stage = ({ stageNumber }: Props) => {
         }
       });
     });
-  };
+  }, [wordplayTiles]);
 
-  const handleOnClick = (): void => {
+  const handleOnClick = useCallback((): void => {
     setCondition(CONDITION.Normal);
     setMode(MODE.Type);
     setNotSolved();
@@ -247,7 +250,7 @@ const Stage = ({ stageNumber }: Props) => {
     focusFirstTargetNumber();
     if (inputRef.current === null) return;
     inputRef.current.focus();
-  };
+  }, []);
 
   const focusedNumber = (): string => {
     for (const wordplayTile of wordplayTiles) {
@@ -361,7 +364,35 @@ const Stage = ({ stageNumber }: Props) => {
     (e.target as HTMLInputElement).value = '';
   };
 
-  const toggleModal = () => {
+  // const keyPress = useCallback((event) => {
+  //   const enterKeyCode = 13;
+  //   if (event.keyCode !== enterKeyCode) return;
+  // handleOnClick();
+
+  // switch (mode) {
+  //   case MODE.Remember:
+  //     const enterKeyCode = 13;
+  //     if (event.keyCode !== enterKeyCode) break
+  //     handleOnClick();
+  //     break;
+  //   case MODE.Type:
+  //     if (inputRef.current === null) break;
+  //     inputRef.current.focus();
+  //     break;
+  //   default:
+  //     break;
+  // }
+  // }, [])
+
+  // useEffect(() => {
+  //   document.addEventListener("keypress", keyPress,false);
+  //
+  //   return () => {
+  //     document.removeEventListener("keypress", keyPress,false);
+  //   }
+  // }, [keyPress])
+
+  const toggleModal = useCallback(() => {
     setMode((prevMode) => {
       if (prevMode === MODE.Clear) {
         return MODE.Remember;
@@ -369,7 +400,7 @@ const Stage = ({ stageNumber }: Props) => {
         return MODE.Clear;
       }
     });
-  };
+  }, []);
 
   const nextStageNumber = () => {
     return parseInt(stageNumber) + 1;
@@ -383,6 +414,7 @@ const Stage = ({ stageNumber }: Props) => {
         nextStageNumber={nextStageNumber()}
       />
       <div className="flex flex-col items-center text-white">
+        {/*<input ref={inputRef} className="w-0 h-0" onInput={handleOnInput} onBlur={() => {inputRef.current.focus()}} />*/}
         <input ref={inputRef} className="w-0 h-0" onInput={handleOnInput} />
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
