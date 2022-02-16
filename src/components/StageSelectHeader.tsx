@@ -8,6 +8,8 @@ function StageSelectHeader() {
         alt="site logo"
         width={100}
         height={100}
+        onContextMenu={(e) => e.preventDefault()}
+        onMouseDown={(e) => e.preventDefault()}
       />
       <h1 className="text-xl text-white">
         ゲームと

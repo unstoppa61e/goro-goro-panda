@@ -19,6 +19,8 @@ function StageSelectTile({ tileNumber, isLocked }: Props) {
         height={50}
         objectFit="contain"
         alt="wordplay"
+        onContextMenu={(e) => e.preventDefault()}
+        onMouseDown={(e) => e.preventDefault()}
       />
       <div className="text-center text-white text-3xl">{tileNumber}</div>
     </>

@@ -7,10 +7,24 @@ type Props = {
 };
 const Score = ({ score }: Props) => {
   const starYellow = (
-    <Image src="/star_yellow.png" alt="yellow star" width={22} height={22} />
+    <Image
+      src="/star_yellow.png"
+      alt="yellow star"
+      width={22}
+      height={22}
+      onContextMenu={(e) => e.preventDefault()}
+      onMouseDown={(e) => e.preventDefault()}
+    />
   );
   const starGray = (
-    <Image src="/star_gray.png" alt="gray star" width={22} height={22} />
+    <Image
+      src="/star_gray.png"
+      alt="gray star"
+      width={22}
+      height={22}
+      onContextMenu={(e) => e.preventDefault()}
+      onMouseDown={(e) => e.preventDefault()}
+    />
   );
   const star = (index: number) => (index < score ? starYellow : starGray);
   const marks = [];
