@@ -354,9 +354,10 @@ const Stage = ({ stageNumber }: Props) => {
   };
 
   const handleOnInput = (e: FormEvent<HTMLInputElement>): void => {
-    const input = (e.target as HTMLInputElement).value;
-    const focused = focusedNumber();
-    if (isInputCorrect(input, focused)) {
+    const inputStr = (e.target as HTMLInputElement).value;
+    const inputChar = inputStr[inputStr.length - 1];
+    const focusedChar = focusedNumber();
+    if (isInputCorrect(inputChar, focusedChar)) {
       handleCorrectInput();
     } else {
       handleWrongInput();
