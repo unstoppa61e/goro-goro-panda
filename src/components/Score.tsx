@@ -1,10 +1,11 @@
 import Image from 'next/image';
 
+import { maxScore } from '../pages/stages/[stage]';
+
 type Props = {
   score: number;
 };
 const Score = ({ score }: Props) => {
-  const maxScore = 15;
   const starYellow = (
     <Image src="/star_yellow.png" alt="yellow star" width={22} height={22} />
   );
