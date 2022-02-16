@@ -9,6 +9,7 @@ import Score from '../../components/Score';
 import Wordplays from '../../components/Wordplays';
 import Instruction from '../../components/Instruction';
 import Button from '../../components/Button';
+import Modal from '../../components/Modal';
 
 interface Params extends ParsedUrlQuery {
   stage: string;
@@ -33,6 +34,7 @@ export const getStaticPaths: GetStaticPaths = () => {
 export const MODE = {
   Remember: 'remember',
   Type: 'type',
+  Clear: 'clear',
 } as const;
 export type Mode = typeof MODE[keyof typeof MODE];
 
@@ -171,6 +173,8 @@ const Stage = ({ stageNumber }: Props) => {
       setLevel((prevLevel) => prevLevel + 1);
     } else if (score < maxScore) {
       changeTargets();
+    } else {
+      setMode(MODE.Clear);
     }
   }, [score]);
 
@@ -279,7 +283,6 @@ const Stage = ({ stageNumber }: Props) => {
     inputRef.current.blur();
     setMode(MODE.Remember);
     setScore((prevScore) => prevScore + 1);
-    console.log(`score: ${score}`);
   }, [wordplayTiles]);
 
   const handleCorrectInput = () => {
@@ -347,9 +350,27 @@ const Stage = ({ stageNumber }: Props) => {
     (e.target as HTMLInputElement).value = '';
   };
 
+  const toggleModal = () => {
+    setMode((prevMode) => {
+      if (prevMode === MODE.Clear) {
+        return MODE.Remember;
+      } else {
+        return MODE.Clear;
+      }
+    });
+  };
+
+  const nextStageNumber = () => {
+    return parseInt(stageNumber) + 1;
+  };
+
   return (
     <>
       <NextSeo title={`ゴロゴロ円周率 | ステージ${stageNumber}`} />
+      <Modal
+        visible={mode === MODE.Clear}
+        nextStageNumber={nextStageNumber()}
+      />
       <div className="flex flex-col items-center text-white">
         <input ref={inputRef} className="w-0 h-0" onInput={handleOnInput} />
         <StageDescription stageNumber={stageNumber} />
@@ -359,6 +380,7 @@ const Stage = ({ stageNumber }: Props) => {
         {mode === MODE.Remember ? (
           <Button handleOnClick={handleOnClick} />
         ) : null}
+        <button onClick={toggleModal}>button</button>
       </div>
     </>
   );

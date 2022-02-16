@@ -7,6 +7,9 @@ type Props = {
   stage: number;
   isLocked: boolean;
 };
+
+export const stagePath = (stage: number): string => `/stages/${stage}`;
+
 function StageSelectPanel({ panelNumber, stage, isLocked }: Props) {
   const backGroundColor = (stage: number): string => {
     // Tailwindはクライアントサイドでのランタイムを考慮しないため、クラス名は静的である必要がある。
@@ -25,7 +28,6 @@ function StageSelectPanel({ panelNumber, stage, isLocked }: Props) {
 
     return colors[stage - 1];
   };
-  const stagePath = (stage: number): string => `/stages/${stage}`;
   const panelTestId = (stage: number): string => `stage-select-panel-${stage}`;
   if (isLocked) {
     return (
