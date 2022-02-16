@@ -56,6 +56,8 @@ export type wordplayTile = {
   numbers: numberTileNumber[];
 };
 
+export const maxScore = 15;
+
 const stagePiNumberLength = 10;
 const wordplayNumberCount = 2;
 const stageWordplayCount = stagePiNumberLength / wordplayNumberCount;
@@ -70,7 +72,9 @@ const Stage = ({ stageNumber }: Props) => {
   const [condition, setCondition] = useState<Condition>(CONDITION.Normal);
   const [wordplayTiles, setWordplayTiles] = useState<wordplayTile[]>([]);
   const [level, setLevel] = useState(1);
-  const [targetIndexes, setTargetIndexes] = useState<number[]>([]);
+  const [targetIndexesCombinations, setTargetIndexesCombinations] = useState<
+    number[][]
+  >([]);
 
   const getStagePiNumber = () => {
     const startIndex = stagePiNumberLength * (parseInt(stageNumber) - 1);
@@ -119,6 +123,16 @@ const Stage = ({ stageNumber }: Props) => {
     return true;
   };
 
+  const combinationAlreadyExists = (indexes: number[]) => {
+    for (const combination of targetIndexesCombinations) {
+      if (arrayEqual(combination, indexes)) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
   const getTargetTilesIndexes = (): number[] => {
     const maxLevel = 5;
     const removeTimes = maxLevel - level;
@@ -129,8 +143,12 @@ const Stage = ({ stageNumber }: Props) => {
         const arrayIndex = Math.floor(Math.random() * indexes.length);
         indexes.splice(arrayIndex, 1);
       }
-    } while (arrayEqual(indexes, targetIndexes));
-    setTargetIndexes(indexes);
+      indexes.sort();
+    } while (combinationAlreadyExists(indexes));
+    setTargetIndexesCombinations((prevTargetIndexesCombinations) => [
+      ...prevTargetIndexesCombinations,
+      indexes,
+    ]);
 
     return indexes;
   };
@@ -151,20 +169,22 @@ const Stage = ({ stageNumber }: Props) => {
   useEffect(() => {
     if (score === 5 || score === 8 || score === 11 || score === 14) {
       setLevel((prevLevel) => prevLevel + 1);
-    } else {
+    } else if (score < maxScore) {
       changeTargets();
     }
   }, [score]);
 
   useEffect(() => {
+    if (level === 1) return;
+    setTargetIndexesCombinations([]);
     changeTargets();
   }, [level]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const setNotSolved = () => {
-    setWordplayTiles((prevWordPlayTiles) => {
-      return prevWordPlayTiles.map((wordplayTile) => {
+    setWordplayTiles((prevWordplayTiles) => {
+      return prevWordplayTiles.map((wordplayTile) => {
         if (wordplayTile.isTarget) {
           return { ...wordplayTile, isSolved: false };
         } else {
@@ -330,7 +350,7 @@ const Stage = ({ stageNumber }: Props) => {
   return (
     <>
       <NextSeo title={`ゴロゴロ円周率 | ステージ${stageNumber}`} />
-      <div className="flex flex-col items-center text-white mt-1">
+      <div className="flex flex-col items-center text-white">
         <input ref={inputRef} className="w-0 h-0" onInput={handleOnInput} />
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
