@@ -9,6 +9,8 @@ const Instruction = () => {
         width={75}
         height={88}
         alt="panda"
+        onContextMenu={(e) => e.preventDefault()}
+        onMouseDown={(e) => e.preventDefault()}
       />
       <div className="flex flex-col justify-center bg-white rounded-lg py-1 px-4 w-60">
         {/*<div className="flex items-center text-ok font-bold">*/}

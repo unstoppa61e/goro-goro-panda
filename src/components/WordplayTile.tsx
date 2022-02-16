@@ -55,6 +55,8 @@ const WordplayTile = ({ mode, tile }: Props) => {
               className={`transition-all ease-in duration-200 ${
                 isClosed ? 'rotate-y-90' : 'rotate-y-0 delay-200'
               }`}
+              onContextMenu={(e) => e.preventDefault()}
+              onMouseDown={(e) => e.preventDefault()}
             />
           </div>
           {mask}
@@ -68,6 +70,8 @@ const WordplayTile = ({ mode, tile }: Props) => {
             className={`transition-all ease-in duration-200 ${
               isClosed ? 'delay-200 rotate-y-0' : 'rotate-y-90'
             }`}
+            onContextMenu={(e) => e.preventDefault()}
+            onMouseDown={(e) => e.preventDefault()}
           />
         </div>
         <ul className="flex justify-between">{numberTiles}</ul>

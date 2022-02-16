@@ -23,6 +23,8 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
             width={320}
             height={226}
             alt="frame"
+            onContextMenu={(e) => e.preventDefault()}
+            onMouseDown={(e) => e.preventDefault()}
           />
           <div className="flex absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
             <Image
@@ -31,6 +33,8 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
               width={70}
               height={100}
               alt="panda"
+              onContextMenu={(e) => e.preventDefault()}
+              onMouseDown={(e) => e.preventDefault()}
             />
             <div className="text-base w-48 ml-4">
               うわー！
