@@ -417,7 +417,12 @@ const Stage = ({ stageNumber }: Props) => {
         nextStageNumber={nextStageNumber()}
       />
       <div className="flex flex-col items-center text-white">
-        <input ref={inputRef} className="w-0 h-0" onInput={handleOnInput} />
+        <input
+          ref={inputRef}
+          className="w-0 h-0"
+          onInput={handleOnInput}
+          type="number"
+        />
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
         <Wordplays mode={mode} tiles={wordplayTiles} />
