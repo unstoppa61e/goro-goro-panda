@@ -392,15 +392,15 @@ const Stage = ({ stageNumber }: Props) => {
     };
   }, [keyPress]);
 
-  const toggleModal = useCallback(() => {
-    setMode((prevMode) => {
-      if (prevMode === MODE.Clear) {
-        return MODE.Remember;
-      } else {
-        return MODE.Clear;
-      }
-    });
-  }, []);
+  // const toggleModal = useCallback(() => {
+  //   setMode((prevMode) => {
+  //     if (prevMode === MODE.Clear) {
+  //       return MODE.Remember;
+  //     } else {
+  //       return MODE.Clear;
+  //     }
+  //   });
+  // }, []);
 
   const nextStageNumber = () => {
     return parseInt(stageNumber) + 1;
@@ -420,7 +420,7 @@ const Stage = ({ stageNumber }: Props) => {
         <Wordplays mode={mode} tiles={wordplayTiles} />
         <Instruction condition={condition} mode={mode} />
         <Button handleOnClick={handleOnClick} />
-        <button onClick={toggleModal}>button</button>
+        {/*<button onClick={toggleModal} className="mt-8 border-2 p-2 text-xl">toggle modal for debug</button>*/}
       </div>
     </>
   );
