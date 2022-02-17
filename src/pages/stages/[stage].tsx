@@ -108,7 +108,7 @@ const Stage = ({ stageNumber }: Props) => {
         numbers: numbers,
       };
     });
-  }, []);
+  }, [defaultNumberState, getStagePiNumber]);
 
   useEffect(() => {
     setWordplayTiles(initialWordplayTiles());
@@ -135,7 +135,7 @@ const Stage = ({ stageNumber }: Props) => {
 
       return false;
     },
-    [targetIndexesCombinations],
+    [arrayEqual, targetIndexesCombinations],
   );
 
   const getTargetTilesIndexes = (): number[] => {
@@ -199,7 +199,7 @@ const Stage = ({ stageNumber }: Props) => {
         }
       });
     });
-  }, [wordplayTiles]);
+  }, []);
 
   const setIsClosed = useCallback(() => {
     setWordplayTiles((prevWordPlayTiles) => {
@@ -216,7 +216,7 @@ const Stage = ({ stageNumber }: Props) => {
         }
       });
     });
-  }, [wordplayTiles]);
+  }, []);
 
   const focusFirstTargetNumber = useCallback(() => {
     setWordplayTiles((prevWordPlayTiles) => {
@@ -240,7 +240,7 @@ const Stage = ({ stageNumber }: Props) => {
         }
       });
     });
-  }, [wordplayTiles]);
+  }, []);
 
   const handleOnClick = useCallback((): void => {
     setCondition(CONDITION.Normal);
@@ -365,33 +365,31 @@ const Stage = ({ stageNumber }: Props) => {
     (e.target as HTMLInputElement).value = '';
   };
 
-  // const keyPress = useCallback((event) => {
-  //   const enterKeyCode = 13;
-  //   if (event.keyCode !== enterKeyCode) return;
-  // handleOnClick();
+  const keyPress = useCallback(
+    (event: KeyboardEvent) => {
+      switch (mode) {
+        case MODE.Remember:
+          if (event.code !== 'Enter') break;
+          handleOnClick();
+          break;
+        case MODE.Type:
+          if (inputRef.current === null) break;
+          inputRef.current.focus();
+          break;
+        default:
+          break;
+      }
+    },
+    [handleOnClick, mode],
+  );
 
-  // switch (mode) {
-  //   case MODE.Remember:
-  //     const enterKeyCode = 13;
-  //     if (event.keyCode !== enterKeyCode) break
-  //     handleOnClick();
-  //     break;
-  //   case MODE.Type:
-  //     if (inputRef.current === null) break;
-  //     inputRef.current.focus();
-  //     break;
-  //   default:
-  //     break;
-  // }
-  // }, [])
+  useEffect(() => {
+    document.addEventListener('keypress', keyPress, false);
 
-  // useEffect(() => {
-  //   document.addEventListener("keypress", keyPress,false);
-  //
-  //   return () => {
-  //     document.removeEventListener("keypress", keyPress,false);
-  //   }
-  // }, [keyPress])
+    return () => {
+      document.removeEventListener('keypress', keyPress, false);
+    };
+  }, [keyPress]);
 
   const toggleModal = useCallback(() => {
     setMode((prevMode) => {
@@ -415,15 +413,12 @@ const Stage = ({ stageNumber }: Props) => {
         nextStageNumber={nextStageNumber()}
       />
       <div className="flex flex-col items-center text-white">
-        {/*<input ref={inputRef} className="w-0 h-0" onInput={handleOnInput} onBlur={() => {inputRef.current.focus()}} />*/}
         <input ref={inputRef} className="w-0 h-0" onInput={handleOnInput} />
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
         <Wordplays mode={mode} tiles={wordplayTiles} />
         <Instruction />
-        {mode === MODE.Remember ? (
-          <Button handleOnClick={handleOnClick} />
-        ) : null}
+        <Button handleOnClick={handleOnClick} />
         <button onClick={toggleModal}>button</button>
       </div>
     </>
