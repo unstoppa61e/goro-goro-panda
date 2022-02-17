@@ -42,6 +42,7 @@ export const CONDITION = {
   Normal: 'normal',
   Success: 'success',
   Failure: 'failure',
+  LeveledUp: 'leveled up',
 } as const;
 export type Condition = typeof CONDITION[keyof typeof CONDITION];
 
@@ -185,6 +186,7 @@ const Stage = ({ stageNumber }: Props) => {
     if (level === 1) return;
     setTargetIndexesCombinations([]);
     changeTargets();
+    setCondition(CONDITION.LeveledUp);
   }, [level]);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -246,6 +248,7 @@ const Stage = ({ stageNumber }: Props) => {
     if (inputRef.current === null) return;
     inputRef.current.focus();
     if (mode !== MODE.Remember) return;
+    setCondition(CONDITION.Normal);
     setMode(MODE.Type);
     setNotSolved();
     setIsClosed();
