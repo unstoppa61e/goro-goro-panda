@@ -246,7 +246,6 @@ const Stage = ({ stageNumber }: Props) => {
     if (inputRef.current === null) return;
     inputRef.current.focus();
     if (mode !== MODE.Remember) return;
-    setCondition(CONDITION.Normal);
     setMode(MODE.Type);
     setNotSolved();
     setIsClosed();
@@ -280,6 +279,7 @@ const Stage = ({ stageNumber }: Props) => {
     )
       return;
     inputRef.current.blur();
+    setCondition(CONDITION.Normal);
     setMode(MODE.Remember);
     setScore((prevScore) => prevScore + 1);
   }, [wordplayTiles]);
