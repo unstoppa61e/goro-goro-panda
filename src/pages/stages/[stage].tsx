@@ -243,14 +243,15 @@ const Stage = ({ stageNumber }: Props) => {
   }, []);
 
   const handleOnClick = useCallback((): void => {
+    if (inputRef.current === null) return;
+    inputRef.current.focus();
+    if (mode !== MODE.Remember) return;
     setCondition(CONDITION.Normal);
     setMode(MODE.Type);
     setNotSolved();
     setIsClosed();
     focusFirstTargetNumber();
-    if (inputRef.current === null) return;
-    inputRef.current.focus();
-  }, []);
+  }, [mode]);
 
   const focusedNumber = (): string => {
     for (const wordplayTile of wordplayTiles) {
