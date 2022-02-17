@@ -417,7 +417,7 @@ const Stage = ({ stageNumber }: Props) => {
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
         <Wordplays mode={mode} tiles={wordplayTiles} />
-        <Instruction />
+        <Instruction condition={condition} mode={mode} />
         <Button handleOnClick={handleOnClick} />
         <button onClick={toggleModal}>button</button>
       </div>
