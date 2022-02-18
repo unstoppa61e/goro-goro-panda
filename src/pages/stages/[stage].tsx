@@ -3,13 +3,14 @@ import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { NextSeo } from 'next-seo';
 
-import { piNumber } from '../index';
 import StageDescription from '../../components/StageDescription';
 import Score from '../../components/Score';
 import Wordplays from '../../components/Wordplays';
 import Instruction from '../../components/Instruction';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
+import { piNumber } from '../index';
+import { clearedStage } from '../_app';
 
 interface Params extends ParsedUrlQuery {
   stage: string;
@@ -114,6 +115,15 @@ const Stage = ({ stageNumber }: Props) => {
   useEffect(() => {
     setWordplayTiles(initialWordplayTiles());
   }, []);
+
+  useEffect(() => {
+    if (mode !== MODE.Clear || typeof window === 'undefined') return;
+    const currentStageNumber = parseInt(stageNumber);
+    const clearedStageNumber = parseInt(localStorage.getItem(clearedStage)!);
+    if (currentStageNumber > clearedStageNumber) {
+      localStorage.setItem('clearedStage', stageNumber);
+    }
+  }, [mode]);
 
   const arrayEqual = useCallback((a: number[], b: number[]) => {
     if (!Array.isArray(a)) return false;
