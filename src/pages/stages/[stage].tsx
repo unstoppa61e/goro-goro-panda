@@ -10,7 +10,7 @@ import Instruction from '../../components/Instruction';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import { piNumber } from '../index';
-import { clearedStage } from '../_app';
+import { useClearedStage } from '../../hooks/useClearedStage';
 
 interface Params extends ParsedUrlQuery {
   stage: string;
@@ -79,6 +79,7 @@ const Stage = ({ stageNumber }: Props) => {
   const [targetIndexesCombinations, setTargetIndexesCombinations] = useState<
     number[][]
   >([]);
+  const [clearedStage, setClearedStage] = useClearedStage(0);
 
   const getStagePiNumber = () => {
     const startIndex = stagePiNumberLength * (parseInt(stageNumber) - 1);
@@ -119,9 +120,9 @@ const Stage = ({ stageNumber }: Props) => {
   useEffect(() => {
     if (mode !== MODE.Clear || typeof window === 'undefined') return;
     const currentStageNumber = parseInt(stageNumber);
-    const clearedStageNumber = parseInt(localStorage.getItem(clearedStage)!);
+    const clearedStageNumber = parseInt(clearedStage);
     if (currentStageNumber > clearedStageNumber) {
-      localStorage.setItem('clearedStage', stageNumber);
+      setClearedStage(stageNumber);
     }
   }, [mode]);
 

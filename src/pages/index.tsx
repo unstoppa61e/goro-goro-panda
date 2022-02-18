@@ -8,9 +8,6 @@ export const piNumber =
 
 const Home: NextPage = () => {
   const panelNumbers = piNumber.match(/.{10}/g)!;
-  const isLocked = (index: number): boolean => {
-    return index !== 0;
-  };
 
   return (
     <div>
@@ -19,11 +16,7 @@ const Home: NextPage = () => {
         <ul className="flex flex-col">
           {panelNumbers.map((panelNumber: string, index: number) => (
             <li key={index}>
-              <StageSelectPanel
-                panelNumber={panelNumber}
-                stage={index + 1}
-                isLocked={isLocked(index)}
-              />
+              <StageSelectPanel panelNumber={panelNumber} stage={index + 1} />
             </li>
           ))}
         </ul>

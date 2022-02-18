@@ -1,16 +1,20 @@
 import Link from 'next/link';
 
 import StageSelectPanelContent from './StageSelectPanelContent';
+import { useClearedStage } from '../hooks/useClearedStage';
 
 type Props = {
   panelNumber: string;
   stage: number;
-  isLocked: boolean;
 };
 
 export const stagePath = (stage: number): string => `/stages/${stage}`;
 
-function StageSelectPanel({ panelNumber, stage, isLocked }: Props) {
+function StageSelectPanel({ panelNumber, stage }: Props) {
+  const clearedStage = useClearedStage(0)[0];
+
+  const isLocked = stage > parseInt(clearedStage) + 1;
+
   const backGroundColor = (stage: number): string => {
     // Tailwindはクライアントサイドでのランタイムを考慮しないため、クラス名は静的である必要がある。
     const colors: string[] = [

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import { DefaultSeo, NextSeo } from 'next-seo';
 
@@ -8,12 +7,6 @@ import SEO from '../../next-seo.config';
 export const clearedStage = 'clearedStage';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    if (!Object.prototype.hasOwnProperty.call(localStorage, clearedStage)) {
-      localStorage.setItem(clearedStage, '0');
-    }
-  }, []);
-
   return (
     <>
       <DefaultSeo {...SEO} />
