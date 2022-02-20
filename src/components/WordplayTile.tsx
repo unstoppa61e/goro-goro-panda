@@ -2,13 +2,15 @@ import Image from 'next/image';
 import NumberTile from './NumberTile';
 
 import { MODE, Mode, wordplayTile } from '../pages/stages/[stage]';
+import { backGroundColor } from './StageSelectPanel';
 
 type Props = {
   mode: Mode;
   tile: wordplayTile;
+  stageNumber: string;
 };
 
-const WordplayTile = ({ mode, tile }: Props) => {
+const WordplayTile = ({ mode, tile, stageNumber }: Props) => {
   const wordplayImageSrc = () => {
     const str: string = tile.numbers
       .map((eachNumber) => eachNumber.value)
@@ -44,7 +46,11 @@ const WordplayTile = ({ mode, tile }: Props) => {
       }`}
     >
       <div className="h-full w-14 flex flex-col justify-between">
-        <div className="flex justify-center items-center h-14 bg-stage-1 rounded relative">
+        <div
+          className={`flex justify-center items-center h-14 ${backGroundColor(
+            parseInt(stageNumber),
+          )} rounded relative`}
+        >
           <div className="absolute flex justify-center items-center">
             <Image
               src={wordplayImageSrc()}
