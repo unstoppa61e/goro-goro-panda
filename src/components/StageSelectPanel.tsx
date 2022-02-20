@@ -17,20 +17,20 @@ function StageSelectPanel({ panelNumber, stage }: Props) {
 
   const backGroundColor = (stage: number): string => {
     // Tailwindはクライアントサイドでのランタイムを考慮しないため、クラス名は静的である必要がある。
-    const colors: string[] = [
-      'bg-stage-1',
-      'bg-stage-2',
-      'bg-stage-3',
-      'bg-stage-4',
-      'bg-stage-5',
-      'bg-stage-6',
-      'bg-stage-7',
-      'bg-stage-8',
-      'bg-stage-9',
-      'bg-stage-10',
-    ];
+    const colors: { [key: number]: string } = {
+      1: 'bg-stage-1',
+      2: 'bg-stage-2',
+      3: 'bg-stage-3',
+      4: 'bg-stage-4',
+      5: 'bg-stage-5',
+      6: 'bg-stage-6',
+      7: 'bg-stage-7',
+      8: 'bg-stage-8',
+      9: 'bg-stage-9',
+      10: 'bg-stage-10',
+    };
 
-    return colors[stage - 1];
+    return colors[stage];
   };
   const panelTestId = (stage: number): string => `stage-select-panel-${stage}`;
   if (isLocked) {
