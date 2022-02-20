@@ -11,6 +11,7 @@ import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import { piNumber } from '../index';
 import { useClearedStage } from '../../hooks/useClearedStage';
+import { useRouter } from 'next/router';
 
 interface Params extends ParsedUrlQuery {
   stage: string;
@@ -113,9 +114,20 @@ const Stage = ({ stageNumber }: Props) => {
     });
   }, [defaultNumberState, getStagePiNumber]);
 
+  const dynamicRoute = useRouter().asPath;
+
   useEffect(() => {
+    setScore(0);
+    setMode(MODE.Remember);
+    setCondition(CONDITION.Normal);
     setWordplayTiles(initialWordplayTiles());
-  }, []);
+    setLevel(1);
+    setTargetIndexesCombinations([]);
+  }, [dynamicRoute]);
+
+  // useEffect(() => {
+  //   setWordplayTiles(initialWordplayTiles());
+  // }, []);
 
   useEffect(() => {
     if (mode !== MODE.Clear || typeof window === 'undefined') return;
