@@ -35,6 +35,9 @@ module.exports = {
         ok: '#46d2aa',
         ng: '#ff3978',
       },
+      fontFamily: {
+        'kosugi-maru': ['Kosugi Maru'],
+      },
     },
   },
   plugins: [rotateY],
