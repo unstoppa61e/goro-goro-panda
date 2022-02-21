@@ -391,6 +391,7 @@ const Stage = ({ stageNumber }: Props) => {
         case MODE.Type: {
           const code = event.code;
           const inputChar = code[code.length - 1];
+          if (isNaN(Number(inputChar))) break;
           handleInputNumber(inputChar);
           break;
         }
