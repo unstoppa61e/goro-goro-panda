@@ -37,6 +37,7 @@ module.exports = {
       },
       fontFamily: {
         'kosugi-maru': ['Kosugi Maru'],
+        'varela-round': ['Varela Round'],
       },
     },
   },

@@ -10,7 +10,9 @@ const StageSelectPanelContent = ({ panelNumber, stage, isLocked }: Props) => {
 
   return (
     <>
-      <div className="text-white text-xl mt-7 ml-7">{stage}</div>
+      <div className="text-white text-xl mt-7 ml-7 font-varela-round">
+        {stage}
+      </div>
       <ul className="flex">
         {tileNumbers.map((tileNumber: string, index: number) => (
           <li key={index}>
