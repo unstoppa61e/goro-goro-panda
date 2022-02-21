@@ -68,7 +68,7 @@ const Instruction = ({ condition, mode }: Props) => {
   const messageOnMode = useCallback((mode: Mode) => {
     switch (mode) {
       case MODE.Remember:
-        return <div className="text-black">黄色の部分をおぼえよう！</div>;
+        return <div className="text-black">黄色の部分を覚えよう！</div>;
       case MODE.Type:
         return (
           <div className="text-black">
