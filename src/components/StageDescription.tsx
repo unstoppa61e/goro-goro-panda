@@ -3,7 +3,7 @@ type Props = {
 };
 
 const StageDescription = ({ stageNumber }: Props) => {
-  const displayStage = (stageNumber: string): string => {
+  const displayStage = (stageNumber: string) => {
     const circledNumbers: { [key: string]: string } = {
       '1': '①',
       '2': '②',
@@ -17,17 +17,23 @@ const StageDescription = ({ stageNumber }: Props) => {
       '10': '⑩',
     };
 
-    return `ステージ${circledNumbers[stageNumber]}`;
+    return <div>ステージ{circledNumbers[stageNumber]}</div>;
   };
-  const displayDigitsRange = (stageNumber: number): string => {
+  const displayDigitsRange = (stageNumber: number) => {
     const startDigit: number = 10 * (stageNumber - 1) + 1;
     const endDigit = startDigit + 9;
 
-    return `円周率の${startDigit}~${endDigit}ケタをおぼえよう`;
+    return (
+      <div>
+        円周率の{startDigit}
+        <span className="font-mono">~</span>
+        {endDigit}ケタを覚えよう
+      </div>
+    );
   };
 
   return (
-    <h1 className="mt-1">
+    <h1 className="mt-1 flex font-kosugi-maru">
       {displayStage(stageNumber)}
       <span className="ml-4" />
       {displayDigitsRange(parseInt(stageNumber))}

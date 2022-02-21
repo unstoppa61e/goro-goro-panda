@@ -11,7 +11,7 @@ function StageSelectHeader() {
         onContextMenu={(e) => e.preventDefault()}
         onMouseDown={(e) => e.preventDefault()}
       />
-      <h1 className="text-xl text-white">
+      <h1 className="text-xl text-white font-kosugi-maru">
         ゲームと
         <br />
         ゴロ合わせで

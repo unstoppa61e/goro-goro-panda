@@ -40,34 +40,30 @@ const Instruction = ({ condition, mode }: Props) => {
     [imgSrc],
   );
 
-  const messageOnCondition = useCallback(
-    (condition: Condition) => {
-      switch (condition) {
-        case CONDITION.Success:
-          return (
-            <div className="flex items-center text-ok font-bold">
-              <span className="text-2xl mr-1.5">○</span>いいね！ その調子だよ！
-            </div>
-          );
-        case CONDITION.LeveledUp:
-          return (
-            <div className="flex items-center text-ok font-bold">
-              <span className="text-xl mr-2">🎉</span>レベルアップ！
-            </div>
-          );
-        case CONDITION.Failure:
-          return (
-            <div className="flex items-center text-ng font-bold">
-              <span className="text-xl mr-2">❌</span>失敗は成功のもと！
-            </div>
-          );
-        default:
-          break;
-      }
-    },
-    // [condition],
-    [],
-  );
+  const messageOnCondition = useCallback((condition: Condition) => {
+    switch (condition) {
+      case CONDITION.Success:
+        return (
+          <div className="flex items-center text-ok font-bold">
+            <span className="text-2xl mr-1.5">○</span>いいね！ その調子だよ！
+          </div>
+        );
+      case CONDITION.LeveledUp:
+        return (
+          <div className="flex items-center text-ok font-bold">
+            <span className="text-xl mr-2">🎉</span>レベルアップ！
+          </div>
+        );
+      case CONDITION.Failure:
+        return (
+          <div className="flex items-center text-ng font-bold">
+            <span className="text-xl mr-2">❌</span>失敗は成功のもと！
+          </div>
+        );
+      default:
+        break;
+    }
+  }, []);
 
   const messageOnMode = useCallback((mode: Mode) => {
     switch (mode) {
@@ -89,7 +85,7 @@ const Instruction = ({ condition, mode }: Props) => {
   return (
     <div className="flex justify-between w-80 mt-3">
       {imageOnCondition(condition)}
-      <div className="flex flex-col justify-center bg-white rounded-lg py-1 px-4 w-60">
+      <div className="flex flex-col justify-center bg-white rounded-lg py-1 px-4 w-60 font-kosugi-maru">
         {messageOnCondition(condition)}
         {messageOnMode(mode)}
       </div>
