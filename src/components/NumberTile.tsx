@@ -19,7 +19,7 @@ const NumberTile = ({ tileNumber, isTarget }: Props) => {
           : 'bg-white'
       } rounded text-black text-2xl font-bold relative`}
     >
-      <div className="transition-all ease-in duration-200 relative flex justify-center items-center">
+      <div className="transition-all ease-in duration-200 relative flex justify-center items-center font-sans">
         <div
           className={`absolute ${
             tileNumber.isClosed ? 'rotate-y-90' : 'rotate-y-0 delay-200'
