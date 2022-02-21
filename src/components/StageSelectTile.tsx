@@ -13,15 +13,17 @@ function StageSelectTile({ tileNumber, isLocked }: Props) {
 
   return (
     <>
-      <Image
-        src={srcPath(isLocked, tileNumber)}
-        width={50}
-        height={50}
-        objectFit="contain"
-        alt="wordplay"
-        onContextMenu={(e) => e.preventDefault()}
-        onMouseDown={(e) => e.preventDefault()}
-      />
+      <div className="pointer-events-none">
+        <Image
+          src={srcPath(isLocked, tileNumber)}
+          width={50}
+          height={50}
+          objectFit="contain"
+          alt="wordplay"
+          onContextMenu={(e) => e.preventDefault()}
+          onMouseDown={(e) => e.preventDefault()}
+        />
+      </div>
       <div className="text-center text-white text-3xl">{tileNumber}</div>
     </>
   );
