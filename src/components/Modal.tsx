@@ -11,7 +11,7 @@ type Props = {
 const Modal = ({ visible, nextStageNumber }: Props) => {
   return (
     <div
-      className={`flex justify-center fixed w-full h-full bg-black bg-opacity-40 duration-100 transition-all z-10 ${
+      className={`flex justify-center fixed w-full h-full bg-black bg-opacity-40 duration-100 transition-all z-10 font-kosugi-maru ${
         visible ? 'scale-110' : 'invisible'
       }`}
     >
