@@ -37,7 +37,7 @@ function StageSelectPanel({ panelNumber, stage }: Props) {
   if (isLocked) {
     return (
       <div
-        className="flex py-2.5 mb-5 border-5 rounded-md w-80 bg-locked cursor-not-allowed"
+        className="flex pt-3 pb-2 mb-5 border-5 rounded-xl w-80 bg-locked cursor-not-allowed"
         data-testid={panelTestId(stage)}
       >
         <StageSelectPanelContent
@@ -51,7 +51,7 @@ function StageSelectPanel({ panelNumber, stage }: Props) {
     return (
       <Link href={stagePath(stage)}>
         <a
-          className={`flex py-2.5 mb-5 border-5 rounded-md w-80 ${backGroundColor(
+          className={`flex pt-3 pb-2 mb-5 border-5 rounded-xl w-80 ${backGroundColor(
             stage,
           )}`}
           data-testid={panelTestId(stage)}
