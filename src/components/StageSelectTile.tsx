@@ -24,7 +24,7 @@ function StageSelectTile({ tileNumber, isLocked }: Props) {
           onMouseDown={(e) => e.preventDefault()}
         />
       </div>
-      <div className="text-center text-white text-3xl font-varela-round">
+      <div className="text-center text-white text-2xl font-varela-round -mt-2">
         {tileNumber}
       </div>
     </>
