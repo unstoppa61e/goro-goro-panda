@@ -37,7 +37,7 @@ const Instruction = ({ condition, mode }: Props) => {
         />
       );
     },
-    [condition],
+    [imgSrc],
   );
 
   const messageOnCondition = useCallback(
@@ -65,28 +65,26 @@ const Instruction = ({ condition, mode }: Props) => {
           break;
       }
     },
-    [condition],
+    // [condition],
+    [],
   );
 
-  const messageOnMode = useCallback(
-    (mode: Mode) => {
-      switch (mode) {
-        case MODE.Remember:
-          return <div className="text-black">黄色の部分をおぼえよう！</div>;
-        case MODE.Type:
-          return (
-            <div className="text-black">
-              黄色の四角に入る数字を
-              <br />
-              入力してね！
-            </div>
-          );
-        default:
-          break;
-      }
-    },
-    [mode],
-  );
+  const messageOnMode = useCallback((mode: Mode) => {
+    switch (mode) {
+      case MODE.Remember:
+        return <div className="text-black">黄色の部分をおぼえよう！</div>;
+      case MODE.Type:
+        return (
+          <div className="text-black">
+            黄色の四角に入る数字を
+            <br />
+            入力してね！
+          </div>
+        );
+      default:
+        break;
+    }
+  }, []);
 
   return (
     <div className="flex justify-between w-80 mt-3">

@@ -1,4 +1,5 @@
-import { useRef, useState, useEffect, FormEvent, useCallback } from 'react';
+// import { useRef, useState, useEffect, FormEvent, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { NextSeo } from 'next-seo';
@@ -12,6 +13,7 @@ import Modal from '../../components/Modal';
 import { piNumber } from '../index';
 import { useClearedStage } from '../../hooks/useClearedStage';
 import { useRouter } from 'next/router';
+import Keyboard from '../../components/Keyboard';
 
 interface Params extends ParsedUrlQuery {
   stage: string;
@@ -71,6 +73,12 @@ type Props = {
   stageNumber: string;
 };
 
+const defaultNumberState = {
+  isClosed: false,
+  isFocused: false,
+  isMistaken: false,
+};
+
 const Stage = ({ stageNumber }: Props) => {
   const [score, setScore] = useState(0);
   const [mode, setMode] = useState<Mode>(MODE.Remember);
@@ -82,19 +90,12 @@ const Stage = ({ stageNumber }: Props) => {
   >([]);
   const [clearedStage, setClearedStage] = useClearedStage(0);
 
-  const getStagePiNumber = () => {
-    const startIndex = stagePiNumberLength * (parseInt(stageNumber) - 1);
-
-    return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
-  };
-
-  const defaultNumberState = {
-    isClosed: false,
-    isFocused: false,
-    isMistaken: false,
-  };
-
   const initialWordplayTiles = useCallback(() => {
+    const getStagePiNumber = () => {
+      const startIndex = stagePiNumberLength * (parseInt(stageNumber) - 1);
+
+      return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
+    };
     const piNumberChars = getStagePiNumber().split('');
 
     return Array.from({ length: stageWordplayCount }, (_, index) => {
@@ -112,7 +113,7 @@ const Stage = ({ stageNumber }: Props) => {
         numbers: numbers,
       };
     });
-  }, [defaultNumberState, getStagePiNumber]);
+  }, [stageNumber]);
 
   const dynamicRoute = useRouter().asPath;
 
@@ -124,10 +125,6 @@ const Stage = ({ stageNumber }: Props) => {
     setLevel(1);
     setTargetIndexesCombinations([]);
   }, [dynamicRoute]);
-
-  // useEffect(() => {
-  //   setWordplayTiles(initialWordplayTiles());
-  // }, []);
 
   useEffect(() => {
     if (mode !== MODE.Clear || typeof window === 'undefined') return;
@@ -212,8 +209,6 @@ const Stage = ({ stageNumber }: Props) => {
     setCondition(CONDITION.LeveledUp);
   }, [level]);
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
   const setNotSolved = useCallback(() => {
     setWordplayTiles((prevWordplayTiles) => {
       return prevWordplayTiles.map((wordplayTile) => {
@@ -268,8 +263,6 @@ const Stage = ({ stageNumber }: Props) => {
   }, []);
 
   const handleOnClick = useCallback((): void => {
-    if (inputRef.current === null) return;
-    inputRef.current.focus();
     if (mode !== MODE.Remember) return;
     setCondition(CONDITION.Normal);
     setMode(MODE.Type);
@@ -278,7 +271,7 @@ const Stage = ({ stageNumber }: Props) => {
     focusFirstTargetNumber();
   }, [mode]);
 
-  const focusedNumber = (): string => {
+  const focusedNumber = useCallback((): string => {
     for (const wordplayTile of wordplayTiles) {
       for (const number of wordplayTile.numbers) {
         if (number.isFocused) return number.value;
@@ -286,7 +279,7 @@ const Stage = ({ stageNumber }: Props) => {
     }
 
     return '';
-  };
+  }, [wordplayTiles]);
 
   const areAllSolved = (): boolean => {
     for (const wordplayTile of wordplayTiles) {
@@ -300,11 +293,9 @@ const Stage = ({ stageNumber }: Props) => {
     if (
       condition === CONDITION.Failure ||
       mode !== MODE.Type ||
-      !areAllSolved() ||
-      inputRef.current === null
+      !areAllSolved()
     )
       return;
-    inputRef.current.blur();
     setCondition(CONDITION.Normal);
     setMode(MODE.Remember);
     setScore((prevScore) => prevScore + 1);
@@ -359,11 +350,10 @@ const Stage = ({ stageNumber }: Props) => {
         return { ...wordplayTile, isSolved: true, numbers: numbers };
       });
     });
-    if (inputRef.current === null) return;
-    inputRef.current.blur();
   };
 
-  const isInputCorrect = (input: string, focused: string) => {
+  const isInputCorrect = (input: string) => {
+    const focused = focusedNumber();
     const numberCombinations: { [key: string]: string[] } = {
       '0': ['0', '０'],
       '1': ['1', '１'],
@@ -380,17 +370,16 @@ const Stage = ({ stageNumber }: Props) => {
     return numberCombinations[focused].includes(input);
   };
 
-  const handleOnInput = (e: FormEvent<HTMLInputElement>): void => {
-    const inputStr = (e.target as HTMLInputElement).value;
-    const inputChar = inputStr[inputStr.length - 1];
-    const focusedChar = focusedNumber();
-    if (isInputCorrect(inputChar, focusedChar)) {
-      handleCorrectInput();
-    } else {
-      handleWrongInput();
-    }
-    (e.target as HTMLInputElement).value = '';
-  };
+  const handleInputNumber = useCallback(
+    (inputChar: string) => {
+      if (isInputCorrect(inputChar)) {
+        handleCorrectInput();
+      } else {
+        handleWrongInput();
+      }
+    },
+    [wordplayTiles],
+  );
 
   const keyPress = useCallback(
     (event: KeyboardEvent) => {
@@ -399,15 +388,17 @@ const Stage = ({ stageNumber }: Props) => {
           if (event.code !== 'Enter') break;
           handleOnClick();
           break;
-        case MODE.Type:
-          if (inputRef.current === null) break;
-          inputRef.current.focus();
+        case MODE.Type: {
+          const code = event.code;
+          const inputChar = code[code.length - 1];
+          handleInputNumber(inputChar);
           break;
+        }
         default:
           break;
       }
     },
-    [handleOnClick, mode],
+    [handleInputNumber, handleOnClick, mode],
   );
 
   useEffect(() => {
@@ -440,12 +431,6 @@ const Stage = ({ stageNumber }: Props) => {
         nextStageNumber={nextStageNumber()}
       />
       <div className="flex flex-col items-center text-white">
-        <input
-          ref={inputRef}
-          className="w-0 h-0"
-          onInput={handleOnInput}
-          type="number"
-        />
         <StageDescription stageNumber={stageNumber} />
         <Score score={score} />
         <Wordplays
@@ -454,8 +439,11 @@ const Stage = ({ stageNumber }: Props) => {
           stageNumber={stageNumber}
         />
         <Instruction condition={condition} mode={mode} />
-        <Button handleOnClick={handleOnClick} />
-        {/*<button onClick={toggleModal} className="mt-8 border-2 p-2 text-xl">toggle modal for debug</button>*/}
+        {mode === MODE.Remember ? (
+          <Button handleOnClick={handleOnClick} />
+        ) : (
+          <Keyboard handleInputNumber={handleInputNumber} />
+        )}
       </div>
     </>
   );
