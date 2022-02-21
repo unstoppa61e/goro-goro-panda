@@ -352,7 +352,7 @@ const Stage = ({ stageNumber }: Props) => {
     });
   };
 
-  const isInputCorrect = (input: string) => {
+  const isCorrectInput = (input: string) => {
     const focused = focusedNumber();
     const numberCombinations: { [key: string]: string[] } = {
       '0': ['0', '０'],
@@ -372,7 +372,7 @@ const Stage = ({ stageNumber }: Props) => {
 
   const handleInputNumber = useCallback(
     (inputChar: string) => {
-      if (isInputCorrect(inputChar)) {
+      if (isCorrectInput(inputChar)) {
         handleCorrectInput();
       } else {
         handleWrongInput();
