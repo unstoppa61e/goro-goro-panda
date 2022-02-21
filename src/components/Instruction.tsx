@@ -85,9 +85,11 @@ const Instruction = ({ condition, mode }: Props) => {
   return (
     <div className="flex justify-between w-80 mt-3">
       {imageOnCondition(condition)}
-      <div className="flex flex-col justify-center bg-white rounded-lg py-1 px-4 w-60 font-kosugi-maru">
-        {messageOnCondition(condition)}
-        {messageOnMode(mode)}
+      <div className="flex flex-col justify-center items-center bg-white rounded-lg py-1 px-3 w-60 font-kosugi-maru">
+        <div>
+          {messageOnCondition(condition)}
+          {messageOnMode(mode)}
+        </div>
       </div>
     </div>
   );
