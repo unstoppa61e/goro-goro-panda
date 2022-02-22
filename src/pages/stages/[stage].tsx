@@ -425,6 +425,15 @@ const Stage = ({ stageNumber }: Props) => {
     return parseInt(stageNumber) + 1;
   };
 
+  const firstTargetNumber = useCallback((): string => {
+    for (const tile of wordplayTiles) {
+      if (tile.isTarget)
+        return tile.numbers.map((number) => number.value).join('');
+    }
+
+    return '';
+  }, [wordplayTiles]);
+
   return (
     <>
       <NextSeo title={`ゴロゴロ円周率 | ステージ${stageNumber}`} />
@@ -440,7 +449,12 @@ const Stage = ({ stageNumber }: Props) => {
           tiles={wordplayTiles}
           stageNumber={stageNumber}
         />
-        <Instruction condition={condition} mode={mode} />
+        <Instruction
+          condition={condition}
+          mode={mode}
+          level={level}
+          firstTargetNumber={firstTargetNumber()}
+        />
         {mode === MODE.Remember ? (
           <Button handleOnClick={handleOnClick} />
         ) : (
