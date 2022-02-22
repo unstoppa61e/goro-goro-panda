@@ -39,6 +39,9 @@ module.exports = {
         'kosugi-maru': ['Kosugi Maru'],
         'varela-round': ['Varela Round'],
       },
+      borderWidth: {
+        6: '6px',
+      },
     },
   },
   plugins: [rotateY],
