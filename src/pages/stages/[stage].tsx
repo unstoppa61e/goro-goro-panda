@@ -2,17 +2,19 @@ import { useState, useEffect, useCallback } from 'react';
 import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { NextSeo } from 'next-seo';
+import dynamic from 'next/dynamic';
 
 import StageDescription from '../../components/StageDescription';
 import Score from '../../components/Score';
 import Wordplays from '../../components/Wordplays';
 import Instruction from '../../components/Instruction';
 import Button from '../../components/Button';
-import Modal from '../../components/Modal';
 import { piNumber } from '../index';
 import { useClearedStage } from '../../hooks/useClearedStage';
 import { useRouter } from 'next/router';
 import Keyboard from '../../components/Keyboard';
+
+const Modal = dynamic(() => import('../../components/Modal'), { ssr: false });
 
 interface Params extends ParsedUrlQuery {
   stage: string;
