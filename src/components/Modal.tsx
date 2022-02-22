@@ -61,29 +61,33 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
     >
       <div className="flex flex-col items-center absolute top-20 bg-white w-80 h-72 rounded-md">
         <div className="relative h-56">
-          <Image
-            src={frameSrc()}
-            objectFit="contain"
-            width={320}
-            height={226}
-            alt="frame"
-            onContextMenu={(e) => e.preventDefault()}
-            onMouseDown={(e) => e.preventDefault()}
-          />
+          <div className="pointer-events-none">
+            <Image
+              src={frameSrc()}
+              objectFit="contain"
+              width={320}
+              height={226}
+              alt="frame"
+              onContextMenu={(e) => e.preventDefault()}
+              onMouseDown={(e) => e.preventDefault()}
+            />
+          </div>
           <div className="flex flex-col absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
             <h1 className="text-base text-center font-bold">
               🎉クリア、おめでとう！🎉
             </h1>
             <div className="flex mt-2">
-              <Image
-                src="/pandas/panda_happy_1.png"
-                objectFit="contain"
-                width={90}
-                height={100}
-                alt="panda"
-                onContextMenu={(e) => e.preventDefault()}
-                onMouseDown={(e) => e.preventDefault()}
-              />
+              <div className="pointer-events-none">
+                <Image
+                  src="/pandas/panda_happy_1.png"
+                  objectFit="contain"
+                  width={90}
+                  height={100}
+                  alt="panda"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onMouseDown={(e) => e.preventDefault()}
+                />
+              </div>
               <div className="text-sm w-48 ml-4">
                 {admirationHead()}
                 {admirationBody()}
