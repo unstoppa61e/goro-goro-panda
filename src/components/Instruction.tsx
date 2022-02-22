@@ -159,7 +159,7 @@ const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
       default:
         break;
     }
-  }, [mode, firstTargetNumber]);
+  }, [level, mode, firstTargetNumber]);
 
   return (
     <div className="flex justify-between w-80 mt-3">
