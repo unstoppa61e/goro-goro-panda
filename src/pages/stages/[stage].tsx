@@ -1,4 +1,3 @@
-// import { useRef, useState, useEffect, FormEvent, useCallback } from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps, GetStaticPaths } from 'next';
