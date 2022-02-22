@@ -72,9 +72,9 @@ const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
     }
   }, []);
 
-  const imageOnCondition = useCallback(
-    (condition: Condition) => {
-      return (
+  const imageOnCondition = useCallback(() => {
+    return (
+      <div className="pointer-events-none">
         <Image
           src={imgSrc(condition)}
           objectFit="contain"
@@ -84,10 +84,9 @@ const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
           onContextMenu={(e) => e.preventDefault()}
           onMouseDown={(e) => e.preventDefault()}
         />
-      );
-    },
-    [imgSrc],
-  );
+      </div>
+    );
+  }, [condition, imgSrc]);
 
   const messageOnCondition = useCallback(() => {
     switch (condition) {
@@ -164,7 +163,7 @@ const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
 
   return (
     <div className="flex justify-between w-80 mt-3">
-      {imageOnCondition(condition)}
+      {imageOnCondition()}
       <div className="flex flex-col justify-center items-center bg-white rounded-lg py-1 px-3 w-60 font-kosugi-maru">
         <div>
           {messageOnCondition()}

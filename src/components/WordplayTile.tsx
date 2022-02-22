@@ -49,7 +49,7 @@ const WordplayTile = ({ mode, tile, stageNumber }: Props) => {
         <div
           className={`flex justify-center items-center h-14 ${backGroundColor(
             parseInt(stageNumber),
-          )} rounded relative`}
+          )} rounded relative pointer-events-none`}
         >
           <div className="absolute flex justify-center items-center">
             <Image

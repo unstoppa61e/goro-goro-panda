@@ -34,7 +34,7 @@ const Score = ({ score }: Props) => {
 
   return (
     <div>
-      <ul className="flex">{marks}</ul>
+      <ul className="flex pointer-events-none">{marks}</ul>
     </div>
   );
 };
