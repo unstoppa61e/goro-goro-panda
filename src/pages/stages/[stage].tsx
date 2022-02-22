@@ -193,8 +193,14 @@ const Stage = ({ stageNumber }: Props) => {
     });
   };
 
+  const isLeveUpScore = (score: number): boolean => {
+    const levelUpScores = [5, 8, 11, 14];
+
+    return levelUpScores.includes(score);
+  };
+
   useEffect(() => {
-    if (score === 5 || score === 8 || score === 11 || score === 14) {
+    if (isLeveUpScore(score)) {
       setLevel((prevLevel) => prevLevel + 1);
     } else if (score < maxScore) {
       changeTargets();
@@ -297,10 +303,11 @@ const Stage = ({ stageNumber }: Props) => {
       !areAllSolved()
     )
       return;
-    setCondition(CONDITION.Normal);
     setMode(MODE.Remember);
     setScore((prevScore) => prevScore + 1);
-  }, [wordplayTiles]);
+    if (isLeveUpScore(score + 1)) return;
+    setCondition(CONDITION.Normal);
+  }, [score, wordplayTiles]);
 
   const handleCorrectInput = () => {
     setCondition(CONDITION.Success);
