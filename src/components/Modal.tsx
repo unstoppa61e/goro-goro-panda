@@ -59,7 +59,7 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
         visible ? 'scale-110' : 'invisible'
       }`}
     >
-      <div className="flex flex-col items-center absolute top-20 bg-white w-80 h-72 rounded-md">
+      <div className="flex flex-col items-center absolute top-44 bg-white w-80 h-72 rounded-md">
         <div className="relative h-56">
           <div className="pointer-events-none">
             <Image
@@ -72,8 +72,9 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
               onMouseDown={(e) => e.preventDefault()}
             />
           </div>
+          {/*<div className="flex flex-col absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">*/}
           <div className="flex flex-col absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
-            <h1 className="text-base text-center font-bold">
+            <h1 className="text-base text-center font-bold block">
               🎉クリア、おめでとう！🎉
             </h1>
             <div className="flex mt-2">
