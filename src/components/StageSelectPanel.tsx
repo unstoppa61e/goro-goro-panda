@@ -34,6 +34,7 @@ function StageSelectPanel({ panelNumber, stage }: Props) {
   const isLocked = stage > parseInt(clearedStage) + 1;
 
   const panelTestId = (stage: number): string => `stage-select-panel-${stage}`;
+  // Linkタグにhrefを指定しないとWarningが出るため、冗長ではあるが２パターンに書き分けている
   if (isLocked) {
     return (
       <div
