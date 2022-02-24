@@ -59,7 +59,7 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
         visible ? 'scale-110' : 'invisible'
       }`}
     >
-      <div className="flex flex-col items-center absolute top-44 bg-white w-80 h-72 rounded-md">
+      <div className="flex flex-col items-center absolute top-36 bg-white w-80 h-72 rounded-md">
         <div className="relative h-56">
           <div className="pointer-events-none">
             <Image
@@ -72,18 +72,17 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
               onMouseDown={(e) => e.preventDefault()}
             />
           </div>
-          {/*<div className="flex flex-col absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">*/}
-          <div className="flex flex-col absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
-            <h1 className="text-base text-center font-bold block">
+          <div className="flex flex-col items-center absolute top-0 left-0 w-full">
+            <h1 className="mt-12 mb-2 text-base font-bold">
               🎉クリア、おめでとう！🎉
             </h1>
-            <div className="flex mt-2">
+            <div className="flex w-full ml-28">
               <div className="pointer-events-none">
                 <Image
                   src="/pandas/panda_happy_1.png"
                   objectFit="contain"
-                  width={90}
-                  height={100}
+                  width={70}
+                  height={80}
                   alt="panda"
                   onContextMenu={(e) => e.preventDefault()}
                   onMouseDown={(e) => e.preventDefault()}
