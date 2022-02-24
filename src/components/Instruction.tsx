@@ -93,7 +93,12 @@ const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
       case CONDITION.Success:
         return (
           <div className="flex items-center text-ok font-bold">
-            <span className="text-2xl mr-1.5">○</span>いいね！ その調子だよ！
+            <span className="text-xl mr-1.5">○</span>
+            <p>
+              いいね！
+              <span className="mr-0.5" />
+              その調子だよ！
+            </p>
           </div>
         );
       case CONDITION.LeveledUp:
