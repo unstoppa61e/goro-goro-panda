@@ -449,7 +449,7 @@ const Stage = ({ stageNumber }: Props) => {
         nextStageNumber={nextStageNumber()}
       />
       <div className="flex justify-center">
-        <div className="w-80 flex flex-col items-center text-white">
+        <div className="w-80 py-6 flex flex-col items-center text-white">
           <StageDescription stageNumber={stageNumber} />
           <Score score={score} />
           <Wordplays
