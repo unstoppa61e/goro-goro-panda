@@ -18,6 +18,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      blur: {
+        xs: '2px',
+      },
       colors: {
         locked: '#b7d6e8',
         'stage-1': '#ff88bb',

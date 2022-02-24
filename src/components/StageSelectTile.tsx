@@ -6,19 +6,32 @@ type Props = {
   firstTile: boolean;
 };
 function StageSelectTile({ tileNumber, isLocked, firstTile }: Props) {
-  const srcPath = (isLocked: boolean, tileNumber: string): string => {
-    if (isLocked) return '/mark_question.png';
-
+  const srcPath = (tileNumber: string): string => {
     return `/wordplays/${tileNumber}.png`;
   };
 
   const piStartIndicator = <div className="absolute -ml-3">3.</div>;
 
-  return (
-    <>
-      <div className="pointer-events-none">
+  const questionImage = (
+    <div className="absolute z-10">
+      <Image
+        src="/mark_question.png"
+        width={50}
+        height={50}
+        objectFit="contain"
+        alt="wordplay"
+        onContextMenu={(e) => e.preventDefault()}
+        onMouseDown={(e) => e.preventDefault()}
+      />
+    </div>
+  );
+
+  const image = (
+    <div className="pointer-events-none relative">
+      {isLocked ? questionImage : null}
+      <div className={`${isLocked ? 'brightness-0 invert blur-xs' : ''}`}>
         <Image
-          src={srcPath(isLocked, tileNumber)}
+          src={srcPath(tileNumber)}
           width={50}
           height={50}
           objectFit="contain"
@@ -27,10 +40,20 @@ function StageSelectTile({ tileNumber, isLocked, firstTile }: Props) {
           onMouseDown={(e) => e.preventDefault()}
         />
       </div>
-      <div className="text-center text-white text-2xl font-varela-round -mt-2 relative">
-        {firstTile ? piStartIndicator : null}
-        {tileNumber}
-      </div>
+    </div>
+  );
+
+  const number = (
+    <div className="text-center text-white text-2xl font-varela-round -mt-2">
+      {firstTile ? piStartIndicator : null}
+      {tileNumber}
+    </div>
+  );
+
+  return (
+    <>
+      {image}
+      {number}
     </>
   );
 }
