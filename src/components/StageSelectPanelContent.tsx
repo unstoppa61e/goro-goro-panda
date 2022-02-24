@@ -8,21 +8,33 @@ type Props = {
 const StageSelectPanelContent = ({ panelNumber, stage, isLocked }: Props) => {
   const tileNumbers = panelNumber.match(/.{2}/g)!;
 
-  return (
-    <div className="w-full flex items-center px-2">
-      <div className="w-16 flex flex-col items-center">
-        <p className="text-white text-xs scale-75">ステージ</p>
-        <div className="flex h-9 w-9 justify-center items-center text-black text-2xl font-varela-round bg-white rounded-full">
-          {stage}
-        </div>
+  const stageIndicator = (
+    <div className="w-16 flex flex-col items-center">
+      <p className="text-white text-xs scale-75">ステージ</p>
+      <div className="flex h-9 w-9 justify-center items-center text-black text-2xl font-varela-round bg-white rounded-full">
+        {stage}
       </div>
-      <ul className="w-full flex justify-between">
-        {tileNumbers.map((tileNumber: string, index: number) => (
-          <li key={index}>
-            <StageSelectTile tileNumber={tileNumber} isLocked={isLocked} />
-          </li>
-        ))}
-      </ul>
+    </div>
+  );
+
+  const tiles = (
+    <ul className="w-full flex justify-between relative ml-1">
+      {tileNumbers.map((tileNumber: string, index: number) => (
+        <li key={index}>
+          <StageSelectTile
+            tileNumber={tileNumber}
+            isLocked={isLocked}
+            firstTile={stage === 1 && index === 0}
+          />
+        </li>
+      ))}
+    </ul>
+  );
+
+  return (
+    <div className="w-full flex items-center pl-2 pr-3 relative">
+      {stageIndicator}
+      {tiles}
     </div>
   );
 };
