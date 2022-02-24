@@ -448,25 +448,27 @@ const Stage = ({ stageNumber }: Props) => {
         visible={mode === MODE.Clear}
         nextStageNumber={nextStageNumber()}
       />
-      <div className="flex flex-col items-center text-white">
-        <StageDescription stageNumber={stageNumber} />
-        <Score score={score} />
-        <Wordplays
-          mode={mode}
-          tiles={wordplayTiles}
-          stageNumber={stageNumber}
-        />
-        <Instruction
-          condition={condition}
-          mode={mode}
-          level={level}
-          firstTargetNumber={firstTargetNumber()}
-        />
-        {mode === MODE.Remember ? (
-          <Button handleOnClick={handleOnClick} />
-        ) : (
-          <Keyboard handleInputNumber={handleInputNumber} />
-        )}
+      <div className="flex justify-center">
+        <div className="w-80 flex flex-col items-center text-white">
+          <StageDescription stageNumber={stageNumber} />
+          <Score score={score} />
+          <Wordplays
+            mode={mode}
+            tiles={wordplayTiles}
+            stageNumber={stageNumber}
+          />
+          <Instruction
+            condition={condition}
+            mode={mode}
+            level={level}
+            firstTargetNumber={firstTargetNumber()}
+          />
+          {mode === MODE.Remember ? (
+            <Button handleOnClick={handleOnClick} />
+          ) : (
+            <Keyboard handleInputNumber={handleInputNumber} />
+          )}
+        </div>
       </div>
     </>
   );
