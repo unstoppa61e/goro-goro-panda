@@ -22,7 +22,7 @@ const Keyboard = ({ handleInputNumber: handleInputNumber }: Props) => {
     );
   }
 
-  return <div className="w-full mt-3">{keyRows}</div>;
+  return <div className="w-full">{keyRows}</div>;
 };
 
 export default Keyboard;
