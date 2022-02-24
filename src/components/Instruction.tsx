@@ -74,7 +74,7 @@ const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
 
   const imageOnCondition = useCallback(() => {
     return (
-      <div className="pointer-events-none">
+      <div className="pointer-events-none w-20">
         <Image
           src={imgSrc(condition)}
           objectFit="contain"
@@ -167,7 +167,7 @@ const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
   }, [level, mode, firstTargetNumber]);
 
   return (
-    <div className="flex justify-between w-80 mt-3">
+    <div className="flex justify-between w-full mt-3">
       {imageOnCondition()}
       <div className="flex flex-col justify-center items-center bg-white rounded-lg py-1 px-3 w-60 font-kosugi-maru">
         <div>
