@@ -3,13 +3,16 @@ import Image from 'next/image';
 type Props = {
   tileNumber: string;
   isLocked: boolean;
+  firstTile: boolean;
 };
-function StageSelectTile({ tileNumber, isLocked }: Props) {
+function StageSelectTile({ tileNumber, isLocked, firstTile }: Props) {
   const srcPath = (isLocked: boolean, tileNumber: string): string => {
     if (isLocked) return '/mark_question.png';
 
     return `/wordplays/${tileNumber}.png`;
   };
+
+  const piStartIndicator = <div className="absolute -ml-3">3.</div>;
 
   return (
     <>
@@ -24,7 +27,8 @@ function StageSelectTile({ tileNumber, isLocked }: Props) {
           onMouseDown={(e) => e.preventDefault()}
         />
       </div>
-      <div className="text-center text-white text-2xl font-varela-round -mt-2">
+      <div className="text-center text-white text-2xl font-varela-round -mt-2 relative">
+        {firstTile ? piStartIndicator : null}
         {tileNumber}
       </div>
     </>
