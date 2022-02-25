@@ -12,6 +12,7 @@
     "type-check": "tsc --pretty --noEmit"
   },
   "dependencies": {
+    "lottie-web": "^5.8.1",
     "next": "12.0.10",
     "next-seo": "^5.1.0",
     "react": "17.0.2",
