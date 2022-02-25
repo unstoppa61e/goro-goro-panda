@@ -9,7 +9,7 @@ const StageSelectPanelContent = ({ panelNumber, stage, isLocked }: Props) => {
   const tileNumbers = panelNumber.match(/.{2}/g)!;
 
   const stageIndicator = (
-    <div className="w-16 flex flex-col items-center">
+    <div className="w-16 mb-4 flex flex-col items-center">
       <p className="text-white text-xs scale-75">ステージ</p>
       <div className="h-9 w-9 flex justify-center items-center text-black text-2xl font-varela-round bg-white rounded-full">
         {stage}
