@@ -5,8 +5,6 @@ import '../styles/globals.css';
 import SEO from '../../next-seo.config';
 import { useDisablePinchZoomEffect } from '../hooks/useDisablePinchZoomEffect';
 
-export const clearedStage = 'clearedStage';
-
 function MyApp({ Component, pageProps }: AppProps) {
   useDisablePinchZoomEffect();
 
