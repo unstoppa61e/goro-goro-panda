@@ -35,7 +35,7 @@ const StageDescription = ({ stageNumber }: Props) => {
   return (
     <h1 className="mb-3 flex font-kosugi-maru">
       {displayStage(stageNumber)}
-      <span className="ml-4" />
+      <span className="ml-2" />
       {displayDigitsRange(parseInt(stageNumber))}
     </h1>
   );
