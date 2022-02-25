@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import React from 'react';
 
 type Props = {
   tileNumber: string;
@@ -20,8 +21,12 @@ function StageSelectTile({ tileNumber, isLocked, firstTile }: Props) {
         height={50}
         objectFit="contain"
         alt="wordplay"
-        onContextMenu={(e) => e.preventDefault()}
-        onMouseDown={(e) => e.preventDefault()}
+        onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
+          e.preventDefault()
+        }
+        onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
+          e.preventDefault()
+        }
       />
     </div>
   );
@@ -36,8 +41,12 @@ function StageSelectTile({ tileNumber, isLocked, firstTile }: Props) {
           height={50}
           objectFit="contain"
           alt="wordplay"
-          onContextMenu={(e) => e.preventDefault()}
-          onMouseDown={(e) => e.preventDefault()}
+          onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
+            e.preventDefault()
+          }
+          onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
+            e.preventDefault()
+          }
         />
       </div>
     </div>

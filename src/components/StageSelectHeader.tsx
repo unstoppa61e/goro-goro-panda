@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import React from 'react';
 
 function StageSelectHeader() {
   return (
@@ -9,8 +10,12 @@ function StageSelectHeader() {
           alt="site logo"
           width={100}
           height={100}
-          onContextMenu={(e) => e.preventDefault()}
-          onMouseDown={(e) => e.preventDefault()}
+          onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
+            e.preventDefault()
+          }
+          onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
+            e.preventDefault()
+          }
         />
       </div>
       <h1 className="text-xl text-white font-kosugi-maru">
