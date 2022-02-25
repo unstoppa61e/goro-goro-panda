@@ -1,5 +1,6 @@
 # ゴロゴロ円周率
-![logo](https://user-images.githubusercontent.com/46347198/148153312-fdd79820-28bf-4ade-b873-55269c544839.png)
+
+![goro-goro-panda-github](https://user-images.githubusercontent.com/46347198/155643231-1d522055-80ac-42d4-85a0-bb4b8d1648c0.png)
 
 ## 概要
 
