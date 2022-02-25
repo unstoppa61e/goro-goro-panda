@@ -58,8 +58,8 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
 
   return (
     <div
-      className={`flex justify-center fixed w-full h-full bg-black bg-opacity-40 duration-100 transition-all z-10 font-kosugi-maru ${
-        visible ? 'scale-110' : 'invisible'
+      className={`flex justify-center fixed w-full h-full bg-black bg-opacity-40 z-10 font-kosugi-maru ${
+        visible ? 'transition-all duration-100 scale-110' : 'invisible'
       }`}
     >
       <div className="flex flex-col items-center absolute top-36 bg-white w-80 h-72 rounded-md">
