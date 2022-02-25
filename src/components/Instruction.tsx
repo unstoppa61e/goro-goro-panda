@@ -173,7 +173,7 @@ const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
   return (
     <div className="mb-10 flex justify-between w-full">
       {imageOnCondition()}
-      <div className="flex flex-col justify-center items-center bg-white rounded-lg py-1 px-3 w-60 font-kosugi-maru">
+      <div className="flex flex-col justify-center items-center bg-white rounded-lg py-1 px-3 w-60 font-kosugi-maru relative before:left before:absolute before:-left-4 before:top-7 before:border-8 before:border-transparent before:border-r-8 before:border-r-white">
         <div>
           {messageOnCondition()}
           {messageOnMode()}
