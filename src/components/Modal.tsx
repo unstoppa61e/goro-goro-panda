@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { stagePath } from './StageSelectPanel';
+import React from 'react';
 
 type Props = {
   visible: boolean;
@@ -50,7 +51,9 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
     ];
     const message = messages[dice(messages.length)];
 
-    return message.map((phrase, index) => <p key={index}>{phrase}</p>);
+    return message.map((phrase: string, index: number) => (
+      <p key={index}>{phrase}</p>
+    ));
   };
 
   return (
@@ -68,8 +71,12 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
               width={320}
               height={226}
               alt="frame"
-              onContextMenu={(e) => e.preventDefault()}
-              onMouseDown={(e) => e.preventDefault()}
+              onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
+                e.preventDefault()
+              }
+              onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
+                e.preventDefault()
+              }
             />
           </div>
           <div className="flex flex-col items-center absolute top-0 left-0 w-full">
@@ -84,8 +91,12 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
                   width={70}
                   height={80}
                   alt="panda"
-                  onContextMenu={(e) => e.preventDefault()}
-                  onMouseDown={(e) => e.preventDefault()}
+                  onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
+                    e.preventDefault()
+                  }
+                  onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
+                    e.preventDefault()
+                  }
                 />
               </div>
               <div className="text-sm w-48 ml-4">

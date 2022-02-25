@@ -1,8 +1,14 @@
 import Image from 'next/image';
 import NumberTile from './NumberTile';
 
-import { MODE, Mode, wordplayTile } from '../pages/stages/[stage]';
+import {
+  MODE,
+  Mode,
+  numberTileNumber,
+  wordplayTile,
+} from '../pages/stages/[stage]';
 import { backGroundColor } from './StageSelectPanel';
+import React from 'react';
 
 type Props = {
   mode: Mode;
@@ -13,19 +19,21 @@ type Props = {
 const WordplayTile = ({ mode, tile, stageNumber }: Props) => {
   const wordplayImageSrc = () => {
     const str: string = tile.numbers
-      .map((eachNumber) => eachNumber.value)
+      .map((eachNumber: numberTileNumber) => eachNumber.value)
       .join('');
 
     return `/wordplays/${str}.png`;
   };
 
-  const numberTiles = tile.numbers.map((numberTileNumber, index) => {
-    return (
-      <li key={index}>
-        <NumberTile tileNumber={numberTileNumber} isTarget={tile.isTarget} />
-      </li>
-    );
-  });
+  const numberTiles = tile.numbers.map(
+    (numberTileNumber: numberTileNumber, index: number) => {
+      return (
+        <li key={index}>
+          <NumberTile tileNumber={numberTileNumber} isTarget={tile.isTarget} />
+        </li>
+      );
+    },
+  );
 
   const mask = (
     <div
@@ -61,8 +69,12 @@ const WordplayTile = ({ mode, tile, stageNumber }: Props) => {
               className={`transition-all ease-in duration-200 ${
                 isClosed ? 'rotate-y-90' : 'rotate-y-0 delay-200'
               }`}
-              onContextMenu={(e) => e.preventDefault()}
-              onMouseDown={(e) => e.preventDefault()}
+              onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
+                e.preventDefault()
+              }
+              onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
+                e.preventDefault()
+              }
             />
           </div>
           {mask}
@@ -76,8 +88,12 @@ const WordplayTile = ({ mode, tile, stageNumber }: Props) => {
             className={`transition-all ease-in duration-200 ${
               isClosed ? 'delay-200 rotate-y-0' : 'rotate-y-90'
             }`}
-            onContextMenu={(e) => e.preventDefault()}
-            onMouseDown={(e) => e.preventDefault()}
+            onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
+              e.preventDefault()
+            }
+            onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
+              e.preventDefault()
+            }
           />
         </div>
         <ul className="flex justify-between">{numberTiles}</ul>

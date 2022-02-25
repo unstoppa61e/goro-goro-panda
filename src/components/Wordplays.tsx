@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Wordplays = ({ mode, tiles, stageNumber }: Props) => {
-  const wordplayTiles = tiles.map((tile, index) => {
+  const wordplayTiles = tiles.map((tile: wordplayTile, index: number) => {
     return (
       <li key={index}>
         <WordplayTile mode={mode} tile={tile} stageNumber={stageNumber} />

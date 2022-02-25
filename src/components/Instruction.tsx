@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import Image from 'next/image';
 import { CONDITION, Condition, MODE, Mode } from '../pages/stages/[stage]';
 
@@ -81,8 +81,12 @@ const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
           width={75}
           height={88}
           alt="panda"
-          onContextMenu={(e) => e.preventDefault()}
-          onMouseDown={(e) => e.preventDefault()}
+          onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
+            e.preventDefault()
+          }
+          onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
+            e.preventDefault()
+          }
         />
       </div>
     );

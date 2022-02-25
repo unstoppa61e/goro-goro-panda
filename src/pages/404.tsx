@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 const NotFound = () => {
@@ -24,8 +24,12 @@ const NotFound = () => {
           width={251}
           height={289}
           alt="worried panda"
-          onContextMenu={(e) => e.preventDefault()}
-          onMouseDown={(e) => e.preventDefault()}
+          onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
+            e.preventDefault()
+          }
+          onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
+            e.preventDefault()
+          }
         />
       </div>
 

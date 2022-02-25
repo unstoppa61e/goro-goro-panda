@@ -6,7 +6,7 @@ type Props = {
 
 const Keyboard = ({ handleInputNumber: handleInputNumber }: Props) => {
   const keyNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-  const keys = keyNumbers.map((keyNumber) => (
+  const keys = keyNumbers.map((keyNumber: number) => (
     <NumberKey
       keyNumber={keyNumber}
       handleInputNumber={handleInputNumber}
