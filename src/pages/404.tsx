@@ -12,7 +12,7 @@ const NotFound = () => {
         console.log(e);
       });
     }, 5000);
-  }, []);
+  }, [router]);
 
   return (
     <div className="flex flex-col items-center text-white text-4xl font-varela-round mt-8">
