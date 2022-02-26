@@ -56,6 +56,9 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
     ));
   };
 
+  const lastStageNumber = 10;
+  const messagePath = '/thank-you-for-playing';
+
   return (
     <div
       className={`flex justify-center fixed w-full h-full bg-black bg-opacity-40 z-10 font-kosugi-maru ${
@@ -112,7 +115,13 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
               ステージをえらぶ
             </a>
           </Link>
-          <Link href={stagePath(nextStageNumber)}>
+          <Link
+            href={
+              nextStageNumber <= lastStageNumber
+                ? stagePath(nextStageNumber)
+                : messagePath
+            }
+          >
             <a className="w-36 py-2 cursor-pointer rounded bg-green-400 hover:bg-green-500">
               次に進む
             </a>
