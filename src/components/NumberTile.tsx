@@ -1,4 +1,5 @@
 import { numberTileNumber } from '../pages/stages/[stage]';
+import FireworkAnimation from './FireworkAnimation';
 
 type Props = {
   tileNumber: numberTileNumber;
@@ -7,6 +8,12 @@ type Props = {
 const NumberTile = ({ tileNumber, isTarget }: Props) => {
   const mask = (
     <div className="bg-black bg-opacity-50 rounded absolute w-full h-full" />
+  );
+
+  const animation = (
+    <div className="absolute">
+      <FireworkAnimation />
+    </div>
   );
 
   return (
@@ -19,6 +26,7 @@ const NumberTile = ({ tileNumber, isTarget }: Props) => {
           : 'bg-white'
       } rounded text-black text-2xl font-bold relative`}
     >
+      {tileNumber.wasCorrect ? animation : null}
       <div className="transition-all ease-in duration-200 relative flex justify-center items-center font-sans">
         <div
           className={`absolute ${
