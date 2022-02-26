@@ -369,7 +369,7 @@ const Stage = ({ stageNumber }: Props) => {
 
                 return { ...number, isFocused: true };
               } else {
-                return { ...number };
+                return number;
               }
             },
           );
