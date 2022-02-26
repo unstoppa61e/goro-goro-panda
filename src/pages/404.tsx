@@ -11,7 +11,7 @@ const NotFound = () => {
       router.push('/').catch((e) => {
         console.log(e);
       });
-    }, 3000);
+    }, 5000);
   }, []);
 
   return (
@@ -36,7 +36,7 @@ const NotFound = () => {
       <div className="text-xl font-kosugi-maru mt-6">
         <p>このページはありません。</p>
         <p>
-          ３秒後に
+          ５秒後に
           <Link href="/">
             <a>ステージ選択</a>
           </Link>
