@@ -64,6 +64,7 @@ export type numberTileNumber = {
   isClosed: boolean;
   isFocused: boolean;
   isMistaken: boolean;
+  wasCorrect: boolean;
 };
 
 export type wordplayTile = {
@@ -86,6 +87,7 @@ const defaultNumberState = {
   isClosed: false,
   isFocused: false,
   isMistaken: false,
+  wasCorrect: false,
 };
 
 const Stage = ({ stageNumber }: Props) => {
@@ -331,8 +333,21 @@ const Stage = ({ stageNumber }: Props) => {
     setCondition(CONDITION.Normal);
   }, [score, wordplayTiles]);
 
+  const resetWasCorrect = () => {
+    setWordplayTiles((prevWordplayTiles: wordplayTile[]) => {
+      return prevWordplayTiles.map((wordplayTile: wordplayTile) => {
+        const numbers = wordplayTile.numbers.map((number: numberTileNumber) => {
+          return { ...number, wasCorrect: false };
+        });
+
+        return { ...wordplayTile, numbers: numbers };
+      });
+    });
+  };
+
   const handleCorrectInput = () => {
     setCondition(CONDITION.Success);
+    resetWasCorrect();
     setWordplayTiles((prevWordplayTiles: wordplayTile[]) => {
       let foundFocused = false;
 
@@ -348,13 +363,13 @@ const Stage = ({ stageNumber }: Props) => {
                 foundFocused = true;
                 if (index === 1) isSecond = true;
 
-                return { ...number, ...defaultNumberState };
+                return { ...number, ...defaultNumberState, wasCorrect: true };
               } else if (foundFocused) {
                 foundFocused = false;
 
                 return { ...number, isFocused: true };
               } else {
-                return number;
+                return { ...number };
               }
             },
           );
