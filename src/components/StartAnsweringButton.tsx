@@ -2,7 +2,7 @@ type Props = {
   handleOnClick: () => void;
 };
 
-const Button = ({ handleOnClick }: Props) => {
+const StartAnsweringButton = ({ handleOnClick }: Props) => {
   return (
     <>
       {/*buttonタグ + 小杉丸ゴシックフォントの組み合わせだと、スマホでのみ、１文字目（「覚」）が他の文字より明るくなるというバグに遭遇したため、divにしてある*/}
@@ -16,4 +16,4 @@ const Button = ({ handleOnClick }: Props) => {
   );
 };
 
-export default Button;
+export default StartAnsweringButton;
