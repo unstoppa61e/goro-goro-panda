@@ -97,7 +97,7 @@ const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
       case CONDITION.Success:
         return (
           <div className="flex items-center text-ok font-bold">
-            <span className="text-xl mr-1.5">○</span>
+            <span className="text-xl mr-0.5">○</span>
             <p>
               いいね！
               <span className="mr-0.5" />
@@ -173,7 +173,7 @@ const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
   return (
     <div className="mb-10 flex justify-between w-full">
       {imageOnCondition()}
-      <div className="flex flex-col justify-center items-center bg-white rounded-lg py-1 px-3 w-60 font-kosugi-maru relative before:absolute before:-left-4 before:top-7 before:border-8 before:border-transparent before:border-r-8 before:border-r-white">
+      <div className="flex flex-col justify-center items-center bg-white rounded-lg py-1 px-3 w-60 mr-1 font-kosugi-maru relative before:absolute before:-left-4 before:top-7 before:border-8 before:border-transparent before:border-r-8 before:border-r-white">
         <div>
           {messageOnCondition()}
           {messageOnMode()}
