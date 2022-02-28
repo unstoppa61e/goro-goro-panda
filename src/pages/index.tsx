@@ -13,9 +13,9 @@ const Home: NextPage = () => {
     <div>
       <main className="flex flex-col items-center">
         <StageSelectHeader />
-        <ul className="flex flex-col">
+        <ul className="flex flex-col items-center">
           {panelNumbers.map((panelNumber: string, index: number) => (
-            <li key={index}>
+            <li key={index} className="flex justify-center items-center h-28">
               <StageSelectPanel panelNumber={panelNumber} stage={index + 1} />
             </li>
           ))}
