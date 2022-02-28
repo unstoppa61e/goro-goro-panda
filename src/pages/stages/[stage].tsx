@@ -13,6 +13,7 @@ import { piNumber } from '../index';
 import { useClearedStage } from '../../hooks/useClearedStage';
 import { useRouter } from 'next/router';
 import Keyboard from '../../components/Keyboard';
+import ReviewButton from '../../components/ReviewButton';
 
 const Modal = dynamic(() => import('../../components/Modal'), { ssr: false });
 
@@ -399,6 +400,21 @@ const Stage = ({ stageNumber }: Props) => {
     });
   };
 
+  const handleReviewButtonClick = () => {
+    setCondition(CONDITION.Normal);
+    setMode(MODE.Remember);
+    setWordplayTiles((prevWordplayTiles: wordplayTile[]) => {
+      return prevWordplayTiles.map((wordplayTile: wordplayTile) => {
+        if (!wordplayTile.isTarget) return wordplayTile;
+        const numbers = wordplayTile.numbers.map((number: numberTileNumber) => {
+          return { ...number, ...defaultNumberState };
+        });
+
+        return { ...wordplayTile, isSolved: true, numbers: numbers };
+      });
+    });
+  };
+
   const isCorrectInput = (input: string) => {
     const focused = focusedNumber();
     const numberCombinations: { [key: string]: string[] } = {
@@ -472,6 +488,19 @@ const Stage = ({ stageNumber }: Props) => {
     return '';
   }, [wordplayTiles]);
 
+  const typingModeTools = () => {
+    return (
+      <div className="flex flex-col">
+        <div className="flex justify-center">
+          <Keyboard handleInputNumber={handleInputNumber} />
+        </div>
+        <div className="mt-4 flex justify-center">
+          <ReviewButton handleOnClick={handleReviewButtonClick} />
+        </div>
+      </div>
+    );
+  };
+
   // const toggleModal = useCallback(() => {
   //   setMode((prevMode) => {
   //     if (prevMode === MODE.Clear) {
@@ -507,7 +536,7 @@ const Stage = ({ stageNumber }: Props) => {
           {mode === MODE.Remember ? (
             <StartAnsweringButton handleOnClick={handleOnClick} />
           ) : (
-            <Keyboard handleInputNumber={handleInputNumber} />
+            typingModeTools()
           )}
           {/*<button onClick={toggleModal} className="mt-8 border-2 p-2 text-xl">*/}
           {/*  toggle modal for debug*/}
