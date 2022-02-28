@@ -16,7 +16,7 @@ const Keyboard = ({ handleInputNumber: handleInputNumber }: Props) => {
   const keyRows = [];
   for (let i = 0; i < keys.length; i += keys.length / 2) {
     keyRows.push(
-      <div className={`flex justify-between ${i === 0 ? '' : 'mt-2'}`} key={i}>
+      <div className="flex" key={i}>
         {keys.slice(i, i + keys.length / 2)}
       </div>,
     );
