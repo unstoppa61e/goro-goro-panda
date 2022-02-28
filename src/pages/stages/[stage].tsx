@@ -8,7 +8,7 @@ import StageDescription from '../../components/StageDescription';
 import Score from '../../components/Score';
 import Wordplays from '../../components/Wordplays';
 import Instruction from '../../components/Instruction';
-import Button from '../../components/Button';
+import StartAnsweringButton from '../../components/StartAnsweringButton';
 import { piNumber } from '../index';
 import { useClearedStage } from '../../hooks/useClearedStage';
 import { useRouter } from 'next/router';
@@ -505,7 +505,7 @@ const Stage = ({ stageNumber }: Props) => {
             firstTargetNumber={firstTargetNumber()}
           />
           {mode === MODE.Remember ? (
-            <Button handleOnClick={handleOnClick} />
+            <StartAnsweringButton handleOnClick={handleOnClick} />
           ) : (
             <Keyboard handleInputNumber={handleInputNumber} />
           )}
