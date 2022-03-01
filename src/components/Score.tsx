@@ -18,7 +18,7 @@ const Score = ({ score }: Props) => {
     );
   }
 
-  return <ul className="mb-6 flex">{marks}</ul>;
+  return <ul className="flex">{marks}</ul>;
 };
 
 export default Score;
