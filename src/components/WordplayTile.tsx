@@ -59,7 +59,13 @@ const WordplayTile = ({ mode, tile, stageNumber }: Props) => {
             parseInt(stageNumber),
           )} rounded relative pointer-events-none`}
         >
-          <div className="absolute flex justify-center items-center">
+          <div
+            className={`absolute flex justify-center items-center ${
+              tile.isSolved && tile.isTarget && mode === MODE.Type
+                ? 'animate-bounce'
+                : ''
+            }`}
+          >
             <Image
               src={wordplayImageSrc()}
               width={50}
