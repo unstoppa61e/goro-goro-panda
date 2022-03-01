@@ -26,7 +26,7 @@ const NumberTile = ({ tileNumber, isTarget }: Props) => {
           : 'bg-white'
       } rounded text-black text-2xl font-bold relative`}
     >
-      {tileNumber.wasCorrect ? animation : null}
+      {tileNumber.isCorrectLast ? animation : null}
       <div className="transition-all ease-in relative flex justify-center items-center font-sans">
         <div
           className={`absolute ${
