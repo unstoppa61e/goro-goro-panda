@@ -49,7 +49,7 @@ const WordplayTile = ({ mode, tile, stageNumber }: Props) => {
     <div
       className={`flex items-center justify-center h-24 w-16 py-1 rounded duration-500 ${
         mode === MODE.Remember && tile.isTarget && tile.isSolved
-          ? 'bg-focused ease-in'
+          ? 'bg-focused ease-in animate-tada'
           : ''
       }`}
     >
