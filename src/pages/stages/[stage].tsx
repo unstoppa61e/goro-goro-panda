@@ -100,6 +100,7 @@ const Stage = ({ stageNumber }: Props) => {
   const [targetIndexesCombinations, setTargetIndexesCombinations] = useState<
     number[][]
   >([]);
+  const [typeModeCount, setTypeModeCount] = useState(0);
   const [clearedStage, setClearedStage] = useClearedStage(0);
 
   const initialWordplayTiles = useCallback(() => {
@@ -294,12 +295,26 @@ const Stage = ({ stageNumber }: Props) => {
     });
   }, []);
 
+  const resetIsCorrectLast = () => {
+    setWordplayTiles((prevWordplayTiles: wordplayTile[]) => {
+      return prevWordplayTiles.map((wordplayTile: wordplayTile) => {
+        const numbers = wordplayTile.numbers.map((number: numberTileNumber) => {
+          return { ...number, isCorrectLast: false };
+        });
+
+        return { ...wordplayTile, numbers: numbers };
+      });
+    });
+  };
+
   const handleOnClick = useCallback((): void => {
     if (mode !== MODE.Remember) return;
+    resetIsCorrectLast();
     setCondition(CONDITION.Normal);
     setMode(MODE.Type);
     setNotSolved();
     setIsClosed();
+    setTypeModeCount((prevTypeModeCount: number) => prevTypeModeCount + 1);
     focusFirstTargetNumber();
   }, [mode]);
 
@@ -333,18 +348,6 @@ const Stage = ({ stageNumber }: Props) => {
     if (isLeveUpScore(score + 1)) return;
     setCondition(CONDITION.Normal);
   }, [score, wordplayTiles]);
-
-  const resetIsCorrectLast = () => {
-    setWordplayTiles((prevWordplayTiles: wordplayTile[]) => {
-      return prevWordplayTiles.map((wordplayTile: wordplayTile) => {
-        const numbers = wordplayTile.numbers.map((number: numberTileNumber) => {
-          return { ...number, isCorrectLast: false };
-        });
-
-        return { ...wordplayTile, numbers: numbers };
-      });
-    });
-  };
 
   const handleCorrectInput = () => {
     setCondition(CONDITION.Success);
@@ -535,6 +538,7 @@ const Stage = ({ stageNumber }: Props) => {
               mode={mode}
               tiles={wordplayTiles}
               stageNumber={stageNumber}
+              typeModeCount={typeModeCount}
             />
           </div>
           <div className="mt-5 w-full flex justify-center">

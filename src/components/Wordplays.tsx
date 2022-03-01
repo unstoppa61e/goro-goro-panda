@@ -5,13 +5,19 @@ type Props = {
   mode: Mode;
   tiles: wordplayTile[];
   stageNumber: string;
+  typeModeCount: number;
 };
 
-const Wordplays = ({ mode, tiles, stageNumber }: Props) => {
+const Wordplays = ({ mode, tiles, stageNumber, typeModeCount }: Props) => {
   const wordplayTiles = tiles.map((tile: wordplayTile, index: number) => {
     return (
       <li key={index}>
-        <WordplayTile mode={mode} tile={tile} stageNumber={stageNumber} />
+        <WordplayTile
+          mode={mode}
+          tile={tile}
+          stageNumber={stageNumber}
+          typeModeCount={typeModeCount}
+        />
       </li>
     );
   });
