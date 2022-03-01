@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss/plugin');
+const withAnimations = require('animated-tailwindcss');
 
 const rotateY = plugin(function ({ addUtilities }) {
   addUtilities({
@@ -11,7 +12,7 @@ const rotateY = plugin(function ({ addUtilities }) {
   });
 });
 
-module.exports = {
+module.exports = withAnimations({
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
@@ -58,4 +59,4 @@ module.exports = {
       });
     }),
   ],
-};
+});
