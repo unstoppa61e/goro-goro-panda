@@ -22,9 +22,7 @@ const Star = ({ isBright }: Props) => {
             onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
               e.preventDefault()
             }
-            className={`transition-all ease-in duration-200 ${
-              isBright ? 'delay-200 rotate-y-0' : 'rotate-y-90'
-            }`}
+            className={`${isBright ? 'animate-swing' : 'invisible'}`}
           />
         </div>
         <Image
@@ -39,9 +37,7 @@ const Star = ({ isBright }: Props) => {
           onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
             e.preventDefault()
           }
-          className={`transition-all ease-in duration-200 ${
-            isBright ? 'rotate-y-90' : 'rotate-y-0 delay-200'
-          }`}
+          className={` ${isBright ? 'invisible' : ''}`}
         />
       </div>
     </>
