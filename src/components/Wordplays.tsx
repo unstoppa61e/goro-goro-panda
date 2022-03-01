@@ -16,7 +16,7 @@ const Wordplays = ({ mode, tiles, stageNumber }: Props) => {
     );
   });
 
-  return <ul className="mb-10 flex w-full">{wordplayTiles}</ul>;
+  return <ul className="flex w-full">{wordplayTiles}</ul>;
 };
 
 export default Wordplays;

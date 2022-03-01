@@ -490,11 +490,11 @@ const Stage = ({ stageNumber }: Props) => {
 
   const typingModeTools = () => {
     return (
-      <div className="flex flex-col">
+      <div className="mt-5 flex flex-col">
         <div className="flex justify-center">
           <Keyboard handleInputNumber={handleInputNumber} />
         </div>
-        <div className="mt-4 flex justify-center">
+        <div className="mt-5 flex justify-center">
           <ReviewButton handleOnClick={handleReviewButtonClick} />
         </div>
       </div>
@@ -519,22 +519,32 @@ const Stage = ({ stageNumber }: Props) => {
         nextStageNumber={nextStageNumber()}
       />
       <div className="flex justify-center">
-        <div className="w-80 py-6 flex flex-col items-center text-white">
-          <StageDescription stageNumber={stageNumber} />
-          <Score score={score} />
-          <Wordplays
-            mode={mode}
-            tiles={wordplayTiles}
-            stageNumber={stageNumber}
-          />
-          <Instruction
-            condition={condition}
-            mode={mode}
-            level={level}
-            firstTargetNumber={firstTargetNumber()}
-          />
+        <div className="w-80 py-4 flex flex-col items-center text-white">
+          <div className="w-full flex justify-center">
+            <StageDescription stageNumber={stageNumber} />
+          </div>
+          <div className="mt-2 w-full flex justify-center">
+            <Score score={score} />
+          </div>
+          <div className="mt-2 w-full flex justify-center">
+            <Wordplays
+              mode={mode}
+              tiles={wordplayTiles}
+              stageNumber={stageNumber}
+            />
+          </div>
+          <div className="mt-5 w-full flex justify-center">
+            <Instruction
+              condition={condition}
+              mode={mode}
+              level={level}
+              firstTargetNumber={firstTargetNumber()}
+            />
+          </div>
           {mode === MODE.Remember ? (
-            <StartAnsweringButton handleOnClick={handleOnClick} />
+            <div className="mt-20 w-full flex justify-center">
+              <StartAnsweringButton handleOnClick={handleOnClick} />
+            </div>
           ) : (
             typingModeTools()
           )}
