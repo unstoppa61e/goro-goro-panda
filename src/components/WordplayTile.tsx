@@ -14,9 +14,10 @@ type Props = {
   mode: Mode;
   tile: wordplayTile;
   stageNumber: string;
+  typeModeCount: number;
 };
 
-const WordplayTile = ({ mode, tile, stageNumber }: Props) => {
+const WordplayTile = ({ mode, tile, stageNumber, typeModeCount }: Props) => {
   const wordplayImageSrc = () => {
     const str: string = tile.numbers
       .map((eachNumber: numberTileNumber) => eachNumber.value)
@@ -29,7 +30,11 @@ const WordplayTile = ({ mode, tile, stageNumber }: Props) => {
     (numberTileNumber: numberTileNumber, index: number) => {
       return (
         <li key={index}>
-          <NumberTile tileNumber={numberTileNumber} isTarget={tile.isTarget} />
+          <NumberTile
+            tileNumber={numberTileNumber}
+            isTarget={tile.isTarget}
+            typeModeCount={typeModeCount}
+          />
         </li>
       );
     },

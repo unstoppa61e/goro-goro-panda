@@ -4,8 +4,20 @@ import FireworkAnimation from './FireworkAnimation';
 type Props = {
   tileNumber: numberTileNumber;
   isTarget: boolean;
+  typeModeCount: number;
 };
-const NumberTile = ({ tileNumber, isTarget }: Props) => {
+
+const animations = [
+  'animate-swing',
+  'animate-rubberBand',
+  'animate-headShake',
+  'animate-heartBeat',
+  'animate-bounce',
+  'animate-jello',
+  'animate-wobble',
+];
+
+const NumberTile = ({ tileNumber, isTarget, typeModeCount }: Props) => {
   const mask = (
     <div className="bg-black bg-opacity-50 rounded absolute w-full h-full" />
   );
@@ -16,6 +28,8 @@ const NumberTile = ({ tileNumber, isTarget }: Props) => {
     </div>
   );
 
+  const animationSrc = animations[typeModeCount % animations.length];
+
   return (
     <div
       className={`flex justify-center items-center w-6 h-7 ${
@@ -24,6 +38,8 @@ const NumberTile = ({ tileNumber, isTarget }: Props) => {
           : tileNumber.isMistaken
           ? 'duration-500 bg-mistaken'
           : 'bg-white'
+      } ${
+        tileNumber.isCorrectLast ? animationSrc : ''
       } rounded text-black text-2xl font-bold relative`}
     >
       {tileNumber.isCorrectLast ? animation : null}
