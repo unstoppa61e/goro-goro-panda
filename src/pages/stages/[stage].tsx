@@ -65,7 +65,7 @@ export type numberTileNumber = {
   isClosed: boolean;
   isFocused: boolean;
   isMistaken: boolean;
-  wasCorrect: boolean;
+  isCorrectLast: boolean;
 };
 
 export type wordplayTile = {
@@ -88,7 +88,7 @@ const defaultNumberState = {
   isClosed: false,
   isFocused: false,
   isMistaken: false,
-  wasCorrect: false,
+  isCorrectLast: false,
 };
 
 const Stage = ({ stageNumber }: Props) => {
@@ -334,11 +334,11 @@ const Stage = ({ stageNumber }: Props) => {
     setCondition(CONDITION.Normal);
   }, [score, wordplayTiles]);
 
-  const resetWasCorrect = () => {
+  const resetIsCorrectLast = () => {
     setWordplayTiles((prevWordplayTiles: wordplayTile[]) => {
       return prevWordplayTiles.map((wordplayTile: wordplayTile) => {
         const numbers = wordplayTile.numbers.map((number: numberTileNumber) => {
-          return { ...number, wasCorrect: false };
+          return { ...number, isCorrectLast: false };
         });
 
         return { ...wordplayTile, numbers: numbers };
@@ -348,7 +348,7 @@ const Stage = ({ stageNumber }: Props) => {
 
   const handleCorrectInput = () => {
     setCondition(CONDITION.Success);
-    resetWasCorrect();
+    resetIsCorrectLast();
     setWordplayTiles((prevWordplayTiles: wordplayTile[]) => {
       let foundFocused = false;
 
@@ -364,7 +364,11 @@ const Stage = ({ stageNumber }: Props) => {
                 foundFocused = true;
                 if (index === 1) isSecond = true;
 
-                return { ...number, ...defaultNumberState, wasCorrect: true };
+                return {
+                  ...number,
+                  ...defaultNumberState,
+                  isCorrectLast: true,
+                };
               } else if (foundFocused) {
                 foundFocused = false;
 
