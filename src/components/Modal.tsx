@@ -1,15 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import React, { memo } from 'react';
 
 import { stagePath } from './StageSelectPanel';
-import React from 'react';
 
 type Props = {
   visible: boolean;
   nextStageNumber: number;
 };
 
-const Modal = ({ visible, nextStageNumber }: Props) => {
+const Modal = memo(function modal({ visible, nextStageNumber }: Props) {
   const dice = (count: number): number => {
     return Math.floor(Math.random() * count);
   };
@@ -61,11 +61,15 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
 
   return (
     <div
-      className={`flex justify-center fixed w-full h-full bg-black bg-opacity-40 z-10 font-kosugi-maru ${
-        visible ? 'transition-all duration-100 scale-110' : 'invisible'
+      className={`flex justify-center fixed w-full h-full bg-black bg-opacity-40 z-20 font-kosugi-maru ${
+        visible ? '' : 'invisible'
       }`}
     >
-      <div className="flex flex-col items-center absolute top-36 bg-white w-80 h-72 rounded-md">
+      <div
+        className={`flex flex-col items-center absolute top-36 bg-white w-80 h-72 rounded-md ${
+          visible ? 'transition-all duration-200 scale-110' : 'scale-0'
+        }`}
+      >
         <div className="flex justify-center relative h-56">
           <div className="pointer-events-none">
             <Image
@@ -131,6 +135,6 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
       </div>
     </div>
   );
-};
+});
 
 export default Modal;
