@@ -1,16 +1,19 @@
 import NumberKey from './NumberKey';
+import { Mode } from '../pages/stages/[stage]';
 
 type Props = {
   handleInputNumber: (number: string) => void;
+  mode: Mode;
 };
 
-const Keyboard = ({ handleInputNumber: handleInputNumber }: Props) => {
+const Keyboard = ({ handleInputNumber, mode }: Props) => {
   const keyNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
   const keys = keyNumbers.map((keyNumber: number) => (
     <NumberKey
       keyNumber={keyNumber}
       handleInputNumber={handleInputNumber}
       key={keyNumber}
+      mode={mode}
     />
   ));
   const keyRows = [];

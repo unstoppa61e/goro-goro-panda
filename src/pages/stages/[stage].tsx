@@ -499,7 +499,7 @@ const Stage = ({ stageNumber }: Props) => {
     return (
       <div className="mt-5 flex flex-col">
         <div className="flex justify-center">
-          <Keyboard handleInputNumber={handleInputNumber} />
+          <Keyboard handleInputNumber={handleInputNumber} mode={mode} />
         </div>
         <div className="mt-5 flex justify-center">
           <ReviewButton handleOnClick={handleReviewButtonClick} />
