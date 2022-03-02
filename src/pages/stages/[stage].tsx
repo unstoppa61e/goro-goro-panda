@@ -480,9 +480,9 @@ const Stage = ({ stageNumber }: Props) => {
     };
   }, [keyPress]);
 
-  const nextStageNumber = () => {
+  const nextStageNumber = useCallback(() => {
     return parseInt(stageNumber) + 1;
-  };
+  }, [mode]);
 
   const firstTargetNumber = useCallback((): string => {
     for (const tile of wordplayTiles) {
