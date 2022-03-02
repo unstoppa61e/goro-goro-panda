@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const ThankYouForPlaying = () => {
   const sentences = [
-    'そして、こんなにいっぱい遊んでくれて、ありがとう！',
+    'いっぱい遊んでくれて、ありがとう！',
     'ここまで来られたなんて、きみは本当に努力家だね。',
     'きみのがんばりが実を結んで、こんなに円周率を覚えられたんだ！',
     'そんなきみが、他のことも同じようにがんばっていけたなら、きっと、色んなことがどんどんできるようになっていくんだろうね。',
@@ -22,14 +22,14 @@ const ThankYouForPlaying = () => {
   return (
     <div className="flex flex-col items-center font-kosugi-maru pb-8">
       <div className="text-black mt-6 mx-4 bg-white rounded-2xl px-6 py-5 relative before:absolute before:-bottom-5 before:mx-auto before:w-0 before:h-0 before:border-transparent before:left-0 before:right-0 before:border-10 before:border-t-10 before:border-t-white">
-        <h1 className="text-base mb-5 font-bold">
+        <h1 className="flex justify-center text-base mb-5 font-bold">
           🎉{' '}
           <span className="border-b-4 border-ok py-1">
-            全ステージクリア、おめでとう！
+            全ステージクリア おめでとう！
           </span>{' '}
           🎉
         </h1>
-        <div className="text-sm px-1">{messageBody}</div>
+        <div className="text-base px-1">{messageBody}</div>
       </div>
       <div className="pointer-events-none mt-6 mb-3 mr-9">
         <Image
