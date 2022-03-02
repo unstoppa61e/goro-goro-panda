@@ -22,7 +22,7 @@ const NumberTile = ({ tileNumber, isTarget, typeModeCount }: Props) => {
     <div className="bg-black bg-opacity-50 rounded absolute w-full h-full" />
   );
 
-  const animation = (
+  const firework = (
     <div className="absolute">
       <FireworkAnimation />
     </div>
@@ -42,7 +42,7 @@ const NumberTile = ({ tileNumber, isTarget, typeModeCount }: Props) => {
         tileNumber.isCorrectLast ? animationSrc : ''
       } rounded text-black text-2xl font-bold relative`}
     >
-      {tileNumber.isCorrectLast ? animation : null}
+      {tileNumber.isCorrectLast ? firework : null}
       <div className="transition-all ease-in relative flex justify-center items-center font-sans">
         <div
           className={`absolute ${
