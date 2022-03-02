@@ -66,7 +66,7 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
       }`}
     >
       <div className="flex flex-col items-center absolute top-36 bg-white w-80 h-72 rounded-md">
-        <div className="relative h-56">
+        <div className="flex justify-center relative h-56">
           <div className="pointer-events-none">
             <Image
               src={frameSrc()}
@@ -80,6 +80,7 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
               onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
                 e.preventDefault()
               }
+              className="rounded-t-md"
             />
           </div>
           <div className="flex flex-col items-center absolute top-0 left-0 w-full">
