@@ -111,7 +111,7 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
         </div>
         <div className="w-full h-full flex justify-evenly items-center text-white font-bold text-center">
           <Link href="/">
-            <a className="w-36 py-2 cursor-pointer rounded bg-gray-300 hover:bg-gray-500">
+            <a className="w-36 py-2 cursor-pointer rounded bg-gray-300 sm:hover:bg-gray-500 active:bg-gray-500">
               ステージをえらぶ
             </a>
           </Link>
@@ -122,7 +122,7 @@ const Modal = ({ visible, nextStageNumber }: Props) => {
                 : messagePath
             }
           >
-            <a className="w-36 py-2 cursor-pointer rounded bg-green-400 hover:bg-green-500">
+            <a className="w-36 py-2 cursor-pointer rounded bg-green-400 sm:hover:bg-green-500 active:bg-green-500">
               次に進む
             </a>
           </Link>

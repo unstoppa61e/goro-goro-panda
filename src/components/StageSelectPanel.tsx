@@ -52,7 +52,7 @@ function StageSelectPanel({ panelNumber, stage }: Props) {
     return (
       <Link href={stagePath(stage)}>
         <a
-          className={`flex pt-3 pb-2 rounded-xl w-80 box-content hover:border-6 hover:border-focused ${backGroundColor(
+          className={`flex pt-3 pb-2 rounded-xl w-80 box-content sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused ${backGroundColor(
             stage,
           )} animate-pulse animate-infinite`}
           data-testid={panelTestId(stage)}

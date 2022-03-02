@@ -47,7 +47,7 @@ const ThankYouForPlaying = () => {
         />
       </div>
       <Link href="/">
-        <a className="font-bold text-white w-28 py-3 cursor-pointer rounded bg-gray-300 hover:bg-gray-500 text-center">
+        <a className="font-bold text-white w-28 py-3 cursor-pointer rounded bg-gray-300 sm:hover:bg-gray-500 active:bg-gray-500 text-center">
           もっと遊ぶ
         </a>
       </Link>
