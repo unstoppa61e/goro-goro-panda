@@ -2258,6 +2258,11 @@ next-seo@^5.1.0:
   resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-5.1.0.tgz#aa9fd6249a11bf93e6da06fa2a6bc89268936edf"
   integrity sha512-ampuQfNTOi1x+xtRIb6CZGunIo6rQXtMo2Tyu861d5GjJFIwfOXsA4lzCa4+e2rLkyXDyVpavNNUZWa3US9ELw==
 
+next-share@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/next-share/-/next-share-0.13.0.tgz#7b117d9237fac33064a06f34bfde04a454440d1b"
+  integrity sha512-CR9YsZp6MTdoEgKqMqn2DFUWN8Komzhm1eRUNqWAjAzf1KJxJefwjPFpKXFedskWX17WNgWOgdcDYLU/HdWq5A==
+
 next@^12.1.0:
   version "12.1.0"
   resolved "https://registry.yarnpkg.com/next/-/next-12.1.0.tgz#c33d753b644be92fc58e06e5a214f143da61dd5d"
