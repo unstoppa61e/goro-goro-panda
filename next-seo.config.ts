@@ -1,11 +1,11 @@
 export default {
   title: 'ゴロゴロ円周率',
-  description: 'ゲームとゴロ合わせで円周率を覚えよう！',
+  description: '語呂合わせのゲームで円周率を覚えよう！',
   canonical: 'https://gorogoropanda.com/',
   openGraph: {
     url: 'https://gorogoropanda.com',
     title: 'ゴロゴロ円周率',
-    description: 'ゲームとゴロ合わせで円周率を覚えよう！',
+    description: '語呂合わせのゲームで円周率を覚えよう！',
     images: [
       {
         url: 'https://gorogoropanda.com/ogp/pr_314.png',
