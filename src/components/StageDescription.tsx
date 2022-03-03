@@ -2,6 +2,13 @@ type Props = {
   stageNumber: string;
 };
 
+export const rangeEnds = (stageNumber: string): [number, number] => {
+  const start: number = 10 * (parseInt(stageNumber) - 1) + 1;
+  const end: number = start + 9;
+
+  return [start, end];
+};
+
 const StageDescription = ({ stageNumber }: Props) => {
   const displayStage = (stageNumber: string) => {
     const circledNumbers: { [key: string]: string } = {
@@ -19,9 +26,8 @@ const StageDescription = ({ stageNumber }: Props) => {
 
     return <div>ステージ{circledNumbers[stageNumber]}</div>;
   };
-  const displayDigitsRange = (stageNumber: number) => {
-    const startDigit: number = 10 * (stageNumber - 1) + 1;
-    const endDigit = startDigit + 9;
+  const displayDigitsRange = (stageNumber: string) => {
+    const [startDigit, endDigit] = rangeEnds(stageNumber);
 
     return (
       <div>
@@ -36,7 +42,7 @@ const StageDescription = ({ stageNumber }: Props) => {
     <h1 className="flex font-kosugi-maru">
       {displayStage(stageNumber)}
       <span className="ml-2" />
-      {displayDigitsRange(parseInt(stageNumber))}
+      {displayDigitsRange(stageNumber)}
     </h1>
   );
 };
