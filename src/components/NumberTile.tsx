@@ -43,19 +43,11 @@ const NumberTile = ({ tileNumber, isTarget, typeModeCount }: Props) => {
       } rounded text-black text-2xl font-bold relative`}
     >
       {tileNumber.isCorrectLast ? firework : null}
-      <div className="transition-all ease-in relative flex justify-center items-center font-sans">
-        <div
-          className={`absolute ${
-            tileNumber.isClosed ? 'rotate-y-90' : 'duration-200 rotate-y-0'
-          }`}
-        >
+      <div className="relative flex justify-center items-center font-sans">
+        <div className={`absolute ${tileNumber.isClosed ? 'invisible' : ''}`}>
           {tileNumber.value}
         </div>
-        <div
-          className={`pb-2 ${
-            tileNumber.isFocused ? 'duration-200 rotate-y-0' : 'rotate-y-90'
-          }`}
-        >
+        <div className={`pb-2 ${tileNumber.isFocused ? '' : 'invisible'}`}>
           _
         </div>
       </div>
