@@ -513,10 +513,6 @@ const Stage = ({ stageNumber }: Props) => {
     };
   }, [keyPress]);
 
-  const nextStageNumber = useCallback(() => {
-    return parseInt(stageNumber) + 1;
-  }, [mode]);
-
   const firstTargetNumber = useCallback((): string => {
     for (const tile of wordplayTiles) {
       if (tile.isTarget)
@@ -554,10 +550,7 @@ const Stage = ({ stageNumber }: Props) => {
   return (
     <>
       <NextSeo title={`ゴロゴロ円周率 | ステージ${stageNumber}`} />
-      <Modal
-        visible={mode === MODE.Clear}
-        nextStageNumber={nextStageNumber()}
-      />
+      <Modal visible={mode === MODE.Clear} stageNumber={stageNumber} />
       <div className="flex justify-center">
         <div className="w-80 py-4 flex flex-col items-center text-white">
           <div className="w-full flex justify-center">

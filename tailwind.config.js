@@ -22,6 +22,10 @@ module.exports = withAnimations({
       blur: {
         xs: '2px',
       },
+      borderWidth: {
+        6: '6px',
+        10: '10px',
+      },
       colors: {
         locked: '#b7d6e8',
         'stage-1': '#ff88bb',
@@ -43,9 +47,8 @@ module.exports = withAnimations({
         'kosugi-maru': ['Kosugi Maru'],
         'varela-round': ['Varela Round'],
       },
-      borderWidth: {
-        6: '6px',
-        10: '10px',
+      width: {
+        38: '152px',
       },
     },
   },
