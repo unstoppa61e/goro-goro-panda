@@ -29,7 +29,7 @@ export const backGroundColor = (stage: number): string => {
 export const stagePath = (stage: number): string => `/stages/${stage}`;
 
 function StageSelectPanel({ panelNumber, stage }: Props) {
-  const clearedStage = useClearedStage(0)[0];
+  const clearedStage = useClearedStage('0')[0];
 
   const isLocked = stage > parseInt(clearedStage) + 1;
 

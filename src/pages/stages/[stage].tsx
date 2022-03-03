@@ -101,7 +101,17 @@ const Stage = ({ stageNumber }: Props) => {
     number[][]
   >([]);
   const [typeModeCount, setTypeModeCount] = useState(0);
-  const [clearedStage, setClearedStage] = useClearedStage(0);
+  const [clearedStage, setClearedStage] = useClearedStage('0');
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (parseInt(stageNumber) > parseInt(clearedStage) + 1) {
+      router.push('/').catch((e) => {
+        console.log(e);
+      });
+    }
+  }, [router, stageNumber]);
 
   const initialWordplayTiles = useCallback(() => {
     const getStagePiNumber = () => {

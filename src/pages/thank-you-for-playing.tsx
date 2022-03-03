@@ -1,8 +1,21 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useClearedStage } from '../hooks/useClearedStage';
 
 const ThankYouForPlaying = () => {
+  const clearedStage = useClearedStage('0')[0];
+  const router = useRouter();
+
+  useEffect(() => {
+    if (parseInt(clearedStage) < 10) {
+      router.push('/').catch((e) => {
+        console.log(e);
+      });
+    }
+  }, [router, clearedStage]);
+
   const sentences = [
     'いっぱい遊んでくれて、ありがとう！',
     'ここまで来られたなんて、きみは本当に努力家だね。',
