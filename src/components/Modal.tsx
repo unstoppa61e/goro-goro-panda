@@ -121,9 +121,9 @@ const Modal = memo(function Modal({ visible, stageNumber }: Props) {
   const snsText = useCallback((): string => {
     const [rangeStart, rangeEnd] = rangeEnds(stageNumber);
     if (stageClearedCount < 1) {
-      return `【ゴロゴロ円周率】円周率${rangeStart}~${rangeEnd}桁のステージを初クリアしました！`;
+      return `【ゴロゴロ円周率】小数第${rangeStart}~${rangeEnd}位のステージを初クリアしました！`;
     } else {
-      return `【ゴロゴロ円周率】円周率${rangeStart}~${rangeEnd}桁のステージの習熟度が${
+      return `【ゴロゴロ円周率】小数第${rangeStart}~${rangeEnd}位のステージの習熟度が${
         stageClearedCount + 1
       }にUPしました！`;
     }
