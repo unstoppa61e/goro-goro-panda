@@ -10,7 +10,11 @@ import Wordplays from '../../components/Wordplays';
 import Instruction from '../../components/Instruction';
 import StartAnsweringButton from '../../components/StartAnsweringButton';
 import { piNumber } from '../index';
-import { useClearedStage } from '../../hooks/useClearedStage';
+import {
+  clearedStageDefaultValue,
+  localStorageClearedStageExists,
+  useClearedStage,
+} from '../../hooks/useClearedStage';
 import { useRouter } from 'next/router';
 import Keyboard from '../../components/Keyboard';
 import ReviewButton from '../../components/ReviewButton';
@@ -101,17 +105,25 @@ const Stage = ({ stageNumber }: Props) => {
     number[][]
   >([]);
   const [typeModeCount, setTypeModeCount] = useState(0);
-  const [clearedStage, setClearedStage] = useClearedStage('0');
+  const [clearedStage, setClearedStage] = useClearedStage(
+    clearedStageDefaultValue,
+  );
 
   const router = useRouter();
 
   useEffect(() => {
+    if (
+      clearedStage === clearedStageDefaultValue &&
+      localStorageClearedStageExists()
+    )
+      return;
+
     if (parseInt(stageNumber) > parseInt(clearedStage) + 1) {
       router.push('/').catch((e) => {
         console.log(e);
       });
     }
-  }, [router, stageNumber]);
+  }, [clearedStage, router, stageNumber]);
 
   const initialWordplayTiles = useCallback(() => {
     const getStagePiNumber = () => {

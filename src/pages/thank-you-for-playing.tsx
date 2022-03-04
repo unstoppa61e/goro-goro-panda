@@ -2,13 +2,23 @@ import Image from 'next/image';
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useClearedStage } from '../hooks/useClearedStage';
+import {
+  clearedStageDefaultValue,
+  localStorageClearedStageExists,
+  useClearedStage,
+} from '../hooks/useClearedStage';
 
 const ThankYouForPlaying = () => {
-  const clearedStage = useClearedStage('0')[0];
+  const clearedStage = useClearedStage(clearedStageDefaultValue)[0];
   const router = useRouter();
 
   useEffect(() => {
+    if (
+      clearedStage === clearedStageDefaultValue &&
+      localStorageClearedStageExists()
+    )
+      return;
+
     if (parseInt(clearedStage) < 10) {
       router.push('/').catch((e) => {
         console.log(e);
