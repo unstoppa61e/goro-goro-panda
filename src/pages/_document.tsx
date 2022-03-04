@@ -35,7 +35,6 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
             rel="stylesheet"
           />
-          <title>ゴロゴロ円周率</title>
         </Head>
         <body>
           <Main />
