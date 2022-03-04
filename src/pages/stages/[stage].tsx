@@ -84,6 +84,9 @@ const stagePiNumberLength = 10;
 const wordplayNumberCount = 2;
 const stageWordplayCount = stagePiNumberLength / wordplayNumberCount;
 
+export const STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT =
+  'gorogoropanda.com/stageClearCount/';
+
 type Props = {
   stageNumber: string;
 };
@@ -171,6 +174,14 @@ const Stage = ({ stageNumber }: Props) => {
     if (currentStageNumber > clearedStageNumber) {
       setClearedStage(stageNumber);
     }
+    const storageKeyStageClearCount =
+      STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT + stageNumber;
+    const stageClearCount = localStorage.getItem(storageKeyStageClearCount);
+    const incrementedStageClearCount =
+      stageClearCount === null
+        ? '1'
+        : (parseInt(stageClearCount) + 1).toString();
+    localStorage.setItem(storageKeyStageClearCount, incrementedStageClearCount);
   }, [mode]);
 
   const arrayEqual = useCallback((a: number[], b: number[]) => {
