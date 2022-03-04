@@ -31,9 +31,9 @@ const StageDescription = ({ stageNumber }: Props) => {
 
     return (
       <div>
-        円周率の{startDigit}
+        小数第{startDigit}
         <span className="font-mono">~</span>
-        {endDigit}ケタを覚えよう
+        {endDigit}位を覚えよう
       </div>
     );
   };
