@@ -1,17 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { memo, useCallback, useEffect, useState } from 'react';
-import {
-  FacebookShareButton,
-  FacebookIcon,
-  TwitterShareButton,
-  TwitterIcon,
-} from 'next-share';
 
 import { stagePath } from './StageSelectPanel';
-import { useRouter } from 'next/router';
 import { rangeEnds } from './StageDescription';
 import { STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT } from '../pages/stages/[stage]';
+import TwitterButton from './TwitterButton';
+import FacebookButton from './FacebookButton';
 
 type Props = {
   visible: boolean;
@@ -115,9 +110,6 @@ const Modal = memo(function Modal({ visible, stageNumber }: Props) {
     </div>
   );
 
-  const router = useRouter();
-  const currentUrl = 'https://gorogoropanda.com' + router.asPath;
-  const shareButtonSize = 40;
   const snsText = useCallback((): string => {
     const [rangeStart, rangeEnd] = rangeEnds(stageNumber);
     if (stageClearedCount < 1) {
@@ -128,31 +120,13 @@ const Modal = memo(function Modal({ visible, stageNumber }: Props) {
       }にUPしました！`;
     }
   }, [stageNumber, stageClearedCount]);
-  const facebookButton = (
-    <FacebookShareButton
-      url={currentUrl}
-      quote={snsText()}
-      hashtag={'#ゴロゴロ円周率'}
-    >
-      <FacebookIcon size={shareButtonSize} round />
-    </FacebookShareButton>
-  );
-  const twitterButton = (
-    <div className="mt-3">
-      <TwitterShareButton
-        url={currentUrl}
-        title={snsText()}
-        hashtags={['ゴロゴロ円周率', '円周率の日']}
-        related={['unstoppa61e']}
-      >
-        <TwitterIcon size={shareButtonSize} round />
-      </TwitterShareButton>
-    </div>
-  );
+
+  const shareButtonSize = 40;
+
   const snsButtons = (
-    <div className="flex flex-col">
-      {facebookButton}
-      {twitterButton}
+    <div className="flex flex-col gap-y-3">
+      <FacebookButton text={snsText()} size={shareButtonSize} />
+      <TwitterButton text={snsText()} size={shareButtonSize} />
     </div>
   );
   const linkButtonClass =
@@ -175,14 +149,14 @@ const Modal = memo(function Modal({ visible, stageNumber }: Props) {
       }
     >
       <a
-        className={`mt-3 ${linkButtonClass} bg-green-400 sm:hover:bg-green-500 active:bg-green-500`}
+        className={`${linkButtonClass} bg-green-400 sm:hover:bg-green-500 active:bg-green-500`}
       >
         次に進む
       </a>
     </Link>
   );
   const linkButtons = (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-y-3">
       {stageSelectButton}
       {moveToNextButton}
     </div>
