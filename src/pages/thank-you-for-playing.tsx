@@ -7,9 +7,25 @@ import {
   localStorageClearedStageExists,
   useClearedStage,
 } from '../hooks/useClearedStage';
+import { GetStaticProps } from 'next';
 
-const ThankYouForPlaying = () => {
-  const clearedStage = useClearedStage(clearedStageDefaultValue)[0];
+type Props = {
+  clearedStageValues: string[];
+};
+
+export const getStaticProps: GetStaticProps = () => {
+  return {
+    props: {
+      clearedStageValues: process.env.CLEARED_STAGE!.split(','),
+    },
+  };
+};
+
+const ThankYouForPlaying = ({ clearedStageValues }: Props) => {
+  const clearedStage = useClearedStage(
+    clearedStageDefaultValue,
+    clearedStageValues,
+  )[0];
   const router = useRouter();
 
   useEffect(() => {
@@ -19,7 +35,7 @@ const ThankYouForPlaying = () => {
     )
       return;
 
-    if (parseInt(clearedStage) < 10) {
+    if (clearedStage < 10) {
       router.push('/').catch((e) => {
         console.log(e);
       });

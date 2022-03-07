@@ -6,11 +6,24 @@ import React from 'react';
 import Footer from '../components/Footer';
 import FacebookButton from '../components/FacebookButton';
 import TwitterButton from '../components/TwitterButton';
+import { GetStaticProps } from 'next';
 
 export const piNumber =
   '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679';
 
-const Home: NextPage = () => {
+type Props = {
+  clearedStageValues: string[];
+};
+
+export const getStaticProps: GetStaticProps = () => {
+  return {
+    props: {
+      clearedStageValues: process.env.CLEARED_STAGE!.split(','),
+    },
+  };
+};
+
+const Home: NextPage<Props> = ({ clearedStageValues }: Props) => {
   const panelNumbers = piNumber.match(/.{10}/g)!;
 
   const shareButtonText = '【ゴロゴロ円周率】で語呂合わせのゲームをプレイ中！';
@@ -38,7 +51,11 @@ const Home: NextPage = () => {
           <ul className="flex flex-col items-center">
             {panelNumbers.map((panelNumber: string, index: number) => (
               <li key={index} className="flex justify-center items-center h-28">
-                <StageSelectPanel panelNumber={panelNumber} stage={index + 1} />
+                <StageSelectPanel
+                  panelNumber={panelNumber}
+                  stage={index + 1}
+                  clearedStageValues={clearedStageValues}
+                />
               </li>
             ))}
           </ul>

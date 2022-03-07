@@ -34,7 +34,13 @@ export const getStaticProps: GetStaticProps = (
   const params = context.params as Params;
   const stageNumber = params.stage;
 
-  return { props: { stageNumber } };
+  return {
+    props: {
+      stageNumber,
+      stageClearCountValues: process.env.STAGE_CLEAR_COUNT!.split(','),
+      clearedStageValues: process.env.CLEARED_STAGE!.split(','),
+    },
+  };
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -90,6 +96,8 @@ export const STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT =
 
 type Props = {
   stageNumber: string;
+  stageClearCountValues: string[];
+  clearedStageValues: string[];
 };
 
 const defaultNumberState = {
@@ -99,7 +107,11 @@ const defaultNumberState = {
   isCorrectLast: false,
 };
 
-const Stage = ({ stageNumber }: Props) => {
+const Stage = ({
+  stageNumber,
+  stageClearCountValues,
+  clearedStageValues,
+}: Props) => {
   const [score, setScore] = useState(0);
   const [mode, setMode] = useState<Mode>(MODE.Remember);
   const [condition, setCondition] = useState<Condition>(CONDITION.Normal);
@@ -111,6 +123,7 @@ const Stage = ({ stageNumber }: Props) => {
   const [typeModeCount, setTypeModeCount] = useState(0);
   const [clearedStage, setClearedStage] = useClearedStage(
     clearedStageDefaultValue,
+    clearedStageValues,
   );
 
   const router = useRouter();
@@ -122,7 +135,7 @@ const Stage = ({ stageNumber }: Props) => {
     )
       return;
 
-    if (parseInt(stageNumber) > parseInt(clearedStage) + 1) {
+    if (parseInt(stageNumber) > clearedStage + 1) {
       router.push('/').catch((e) => {
         console.log(e);
       });
@@ -171,18 +184,20 @@ const Stage = ({ stageNumber }: Props) => {
   useEffect(() => {
     if (mode !== MODE.Clear || typeof window === 'undefined') return;
     const currentStageNumber = parseInt(stageNumber);
-    const clearedStageNumber = parseInt(clearedStage);
-    if (currentStageNumber > clearedStageNumber) {
-      setClearedStage(stageNumber);
+    if (currentStageNumber > clearedStage) {
+      setClearedStage(parseInt(stageNumber));
     }
     const storageKeyStageClearCount =
       STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT + stageNumber;
     const stageClearCount = localStorage.getItem(storageKeyStageClearCount);
     const incrementedStageClearCount =
       stageClearCount === null
-        ? '1'
-        : (parseInt(stageClearCount) + 1).toString();
-    localStorage.setItem(storageKeyStageClearCount, incrementedStageClearCount);
+        ? 1
+        : stageClearCountValues.indexOf(stageClearCount) + 1;
+    localStorage.setItem(
+      storageKeyStageClearCount,
+      stageClearCountValues[incrementedStageClearCount],
+    );
   }, [mode]);
 
   const arrayEqual = useCallback((a: number[], b: number[]) => {
@@ -553,7 +568,11 @@ const Stage = ({ stageNumber }: Props) => {
   return (
     <>
       <NextSeo title={`ゴロゴロ円周率 | ステージ${stageNumber}`} />
-      <Modal visible={mode === MODE.Clear} stageNumber={stageNumber} />
+      <Modal
+        visible={mode === MODE.Clear}
+        stageNumber={stageNumber}
+        stageClearCountValues={stageClearCountValues}
+      />
       <div className="flex justify-center">
         <div className="w-80 py-4 flex flex-col items-center text-white">
           <div className="w-full flex justify-center">

@@ -11,19 +11,26 @@ import FacebookButton from './FacebookButton';
 type Props = {
   visible: boolean;
   stageNumber: string;
+  stageClearCountValues: string[];
 };
 
-const Modal = memo(function Modal({ visible, stageNumber }: Props) {
+const Modal = memo(function Modal({
+  visible,
+  stageNumber,
+  stageClearCountValues,
+}: Props) {
   const [stageClearedCount, setStageClearedCount] = useState(0);
 
   useEffect(() => {
-    const stageClearedCount = localStorage.getItem(
+    const stageClearedCountValue = localStorage.getItem(
       `${STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT}${stageNumber}`,
     );
     setStageClearedCount(
-      stageClearedCount === null ? 0 : parseInt(stageClearedCount),
+      stageClearedCountValue === null
+        ? 0
+        : stageClearCountValues.indexOf(stageClearedCountValue),
     );
-  }, [visible, stageNumber]);
+  }, [visible, stageNumber, stageClearCountValues]);
 
   const dice = (count: number): number => {
     return Math.floor(Math.random() * count);
