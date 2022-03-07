@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import StageSelectPanel from '../components/StageSelectPanel';
 import Image from 'next/image';
 import React from 'react';
+import Footer from '../components/Footer';
 
 export const piNumber =
   '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679';
@@ -38,6 +39,7 @@ const Home: NextPage = () => {
           </ul>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
