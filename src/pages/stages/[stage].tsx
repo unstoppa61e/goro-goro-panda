@@ -486,13 +486,15 @@ const Stage = ({ stageNumber }: Props) => {
 
   const keyPress = useCallback(
     (event: KeyboardEvent) => {
+      const code = event.code;
       switch (mode) {
-        case MODE.Remember:
-          if (event.code !== 'Enter') break;
+        case MODE.Remember: {
+          const enter = 'Enter';
+          if (code.slice(-enter.length) !== enter) break;
           handleOnClick();
           break;
+        }
         case MODE.Type: {
-          const code = event.code;
           const inputChar = code[code.length - 1];
           if (isNaN(Number(inputChar))) break;
           handleInputNumber(inputChar);
