@@ -79,6 +79,7 @@ export type wordplayTile = {
 };
 
 export const maxScore = 15;
+export const baseUrl = 'https://gorogoropanda.com';
 
 const stagePiNumberLength = 10;
 const wordplayNumberCount = 2;
