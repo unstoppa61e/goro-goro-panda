@@ -1,11 +1,15 @@
 import Link from 'next/link';
 
 import StageSelectPanelContent from './StageSelectPanelContent';
-import { useClearedStage } from '../hooks/useClearedStage';
+import {
+  clearedStageDefaultValue,
+  useClearedStage,
+} from '../hooks/useClearedStage';
 
 type Props = {
   panelNumber: string;
   stage: number;
+  clearedStageValues: string[];
 };
 
 export const backGroundColor = (stage: number): string => {
@@ -28,10 +32,13 @@ export const backGroundColor = (stage: number): string => {
 
 export const stagePath = (stage: number): string => `/stages/${stage}`;
 
-function StageSelectPanel({ panelNumber, stage }: Props) {
-  const clearedStage = useClearedStage('0')[0];
+function StageSelectPanel({ panelNumber, stage, clearedStageValues }: Props) {
+  const clearedStage = useClearedStage(
+    clearedStageDefaultValue,
+    clearedStageValues,
+  )[0];
 
-  const isLocked = stage > parseInt(clearedStage) + 1;
+  const isLocked = stage > clearedStage + 1;
 
   const panelTestId = (stage: number): string => `stage-select-panel-${stage}`;
   // Linkタグにhrefを指定しないとWarningが出るため、冗長ではあるが２パターンに書き分けている
