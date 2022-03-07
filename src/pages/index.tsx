@@ -4,12 +4,17 @@ import StageSelectPanel from '../components/StageSelectPanel';
 import Image from 'next/image';
 import React from 'react';
 import Footer from '../components/Footer';
+import FacebookButton from '../components/FacebookButton';
+import TwitterButton from '../components/TwitterButton';
 
 export const piNumber =
   '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679';
 
 const Home: NextPage = () => {
   const panelNumbers = piNumber.match(/.{10}/g)!;
+
+  const shareButtonText = '【ゴロゴロ円周率】で語呂合わせのゲームをプレイ中！';
+  const shareButtonSize = 40;
 
   return (
     <div>
@@ -37,6 +42,10 @@ const Home: NextPage = () => {
               </li>
             ))}
           </ul>
+          <div className="mt-2 flex gap-x-4">
+            <FacebookButton text={shareButtonText} size={shareButtonSize} />
+            <TwitterButton text={shareButtonText} size={shareButtonSize} />
+          </div>
         </div>
       </main>
       <Footer />
