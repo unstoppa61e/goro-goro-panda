@@ -188,7 +188,7 @@ const Modal = memo(function Modal({ visible, stageNumber }: Props) {
             </div>
           </div>
         </div>
-        <div className="mt-6 my-4 mr-2 flex justify-between w-56">
+        <div className="mt-6 my-4 mr-2 flex gap-x-8">
           {snsButtons}
           {linkButtons}
         </div>

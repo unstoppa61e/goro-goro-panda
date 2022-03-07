@@ -8,9 +8,9 @@ const Footer = () => {
 
   return (
     <footer className="flex justify-center items-center bg-black h-8 text-white">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center gap-x-3">
         <p className="text-xs">&copy; 2022 unstoppa61e</p>
-        <div className="ml-3 flex items-center">
+        <div className="flex items-center gap-x-3">
           <a
             href="https://note.com/unstoppa61e/n/nd3cdb84b41ad"
             className="flex justify-center items-center"
@@ -35,7 +35,6 @@ const Footer = () => {
             href="https://twitter.com/unstoppa61e"
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-3"
           >
             <IconContext.Provider value={{ size: `${iconSize}px` }}>
               <FaTwitter />
@@ -45,7 +44,6 @@ const Footer = () => {
             href="https://github.com/unstoppa61e/goro-goro-panda"
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-3"
           >
             <IconContext.Provider value={{ size: `${iconSize}px` }}>
               <FaGithub />
