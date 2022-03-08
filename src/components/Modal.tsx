@@ -47,6 +47,7 @@ const Modal = memo(function Modal({
     const messages = [
       'イエーイ！',
       'うわー！',
+      'ハレルヤ！',
       'ブラボー！',
       'やったね！',
       'ワンダフォー！',
