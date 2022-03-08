@@ -4,16 +4,19 @@ import { Mode } from '../pages/stages/[stage]';
 type Props = {
   handleInputNumber: (number: string) => void;
   mode: Mode;
+  numberKeysMistaken: boolean[];
 };
 
-const Keyboard = ({ handleInputNumber, mode }: Props) => {
-  const keyNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+export const keyNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+
+const Keyboard = ({ handleInputNumber, mode, numberKeysMistaken }: Props) => {
   const keys = keyNumbers.map((keyNumber: number) => (
     <NumberKey
       keyNumber={keyNumber}
       handleInputNumber={handleInputNumber}
       key={keyNumber}
       mode={mode}
+      isMistaken={numberKeysMistaken[keyNumber]}
     />
   ));
   const keyRows = [];

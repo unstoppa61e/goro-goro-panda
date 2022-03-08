@@ -16,7 +16,7 @@ import {
   useClearedStage,
 } from '../../hooks/useClearedStage';
 import { useRouter } from 'next/router';
-import Keyboard from '../../components/Keyboard';
+import Keyboard, { keyNumbers } from '../../components/Keyboard';
 import ReviewButton from '../../components/ReviewButton';
 import { Site } from '../../lib/site';
 
@@ -116,6 +116,7 @@ const Stage = ({
   const [mode, setMode] = useState<Mode>(MODE.Remember);
   const [condition, setCondition] = useState<Condition>(CONDITION.Normal);
   const [wordplayTiles, setWordplayTiles] = useState<wordplayTile[]>([]);
+  const [numberKeysMistaken, setNumberKeysMistaken] = useState<boolean[]>([]);
   const [level, setLevel] = useState(1);
   const [targetIndexesCombinations, setTargetIndexesCombinations] = useState<
     number[][]
@@ -141,6 +142,18 @@ const Stage = ({
       });
     }
   }, [clearedStage, router, stageNumber]);
+
+  const defaultNumberKeysState = new Array<boolean>(keyNumbers.length).fill(
+    false,
+  );
+
+  const resetNumberKeys = useCallback(() => {
+    setNumberKeysMistaken(defaultNumberKeysState);
+  }, [defaultNumberKeysState]);
+
+  useEffect(() => {
+    resetNumberKeys();
+  }, []);
 
   const initialWordplayTiles = useCallback(() => {
     const getStagePiNumber = () => {
@@ -179,7 +192,7 @@ const Stage = ({
     setWordplayTiles(initialWordplayTiles());
     setLevel(1);
     setTargetIndexesCombinations([]);
-  }, [dynamicRoute]);
+  }, [dynamicRoute, initialWordplayTiles]);
 
   useEffect(() => {
     if (mode !== MODE.Clear || typeof window === 'undefined') return;
@@ -198,7 +211,7 @@ const Stage = ({
       storageKeyStageClearCount,
       stageClearCountValues[incrementedStageClearCount],
     );
-  }, [mode]);
+  }, [clearedStage, mode, setClearedStage, stageClearCountValues, stageNumber]);
 
   const arrayEqual = useCallback((a: number[], b: number[]) => {
     if (!Array.isArray(a)) return false;
@@ -224,7 +237,7 @@ const Stage = ({
     [arrayEqual, targetIndexesCombinations],
   );
 
-  const getTargetTilesIndexes = (): number[] => {
+  const getTargetTilesIndexes = useCallback((): number[] => {
     const maxLevel = 5;
     const removeTimes = maxLevel - level;
     let indexes: number[];
@@ -247,9 +260,9 @@ const Stage = ({
     );
 
     return indexes;
-  };
+  }, [combinationAlreadyExists, level]);
 
-  const changeTargets = () => {
+  const changeTargets = useCallback(() => {
     const targetTilesIndexes = getTargetTilesIndexes();
     setWordplayTiles((prevWordPlayTiles: wordplayTile[]) => {
       return prevWordPlayTiles.map(
@@ -262,7 +275,7 @@ const Stage = ({
         },
       );
     });
-  };
+  }, [getTargetTilesIndexes]);
 
   const isLeveUpScore = (score: number): boolean => {
     const levelUpScores = [5, 8, 11, 14];
@@ -282,6 +295,7 @@ const Stage = ({
 
   useEffect(() => {
     if (level === 1) return;
+    resetNumberKeys();
     setTargetIndexesCombinations([]);
     changeTargets();
     setCondition(CONDITION.LeveledUp);
@@ -344,7 +358,7 @@ const Stage = ({
     });
   }, []);
 
-  const resetIsCorrectLast = () => {
+  const resetIsCorrectLast = useCallback(() => {
     setWordplayTiles((prevWordplayTiles: wordplayTile[]) => {
       return prevWordplayTiles.map((wordplayTile: wordplayTile) => {
         const numbers = wordplayTile.numbers.map((number: numberTileNumber) => {
@@ -354,7 +368,7 @@ const Stage = ({
         return { ...wordplayTile, numbers: numbers };
       });
     });
-  };
+  }, []);
 
   const handleOnClick = useCallback((): void => {
     if (mode !== MODE.Remember) return;
@@ -365,7 +379,7 @@ const Stage = ({
     setIsClosed();
     setTypeModeCount((prevTypeModeCount: number) => prevTypeModeCount + 1);
     focusFirstTargetNumber();
-  }, [mode]);
+  }, [focusFirstTargetNumber, mode, setIsClosed, setNotSolved]);
 
   const focusedNumber = useCallback((): string => {
     for (const wordplayTile of wordplayTiles) {
@@ -377,13 +391,13 @@ const Stage = ({
     return '';
   }, [wordplayTiles]);
 
-  const areAllSolved = (): boolean => {
+  const areAllSolved = useCallback((): boolean => {
     for (const wordplayTile of wordplayTiles) {
       if (!wordplayTile.isSolved) return false;
     }
 
     return true;
-  };
+  }, [wordplayTiles]);
 
   useEffect(() => {
     if (
@@ -396,9 +410,10 @@ const Stage = ({
     setScore((prevScore: number) => prevScore + 1);
     if (isLeveUpScore(score + 1)) return;
     setCondition(CONDITION.Normal);
+    resetNumberKeys();
   }, [score, wordplayTiles]);
 
-  const handleCorrectInput = () => {
+  const handleCorrectInput = useCallback(() => {
     setCondition(CONDITION.Success);
     resetIsCorrectLast();
     setWordplayTiles((prevWordplayTiles: wordplayTile[]) => {
@@ -435,9 +450,15 @@ const Stage = ({
         }
       });
     });
-  };
+    setNumberKeysMistaken(defaultNumberKeysState);
+  }, [defaultNumberKeysState]);
 
-  const handleWrongInput = () => {
+  const handleWrongInput = useCallback((inputChar: string) => {
+    setNumberKeysMistaken((prevNumberKeysMistaken: boolean[]) => {
+      prevNumberKeysMistaken[parseInt(inputChar)] = true;
+
+      return prevNumberKeysMistaken;
+    });
     setCondition(CONDITION.Failure);
     setWordplayTiles((prevWordplayTiles: wordplayTile[]) => {
       return prevWordplayTiles.map((wordplayTile: wordplayTile) => {
@@ -451,9 +472,10 @@ const Stage = ({
         return { ...wordplayTile, numbers: numbers };
       });
     });
-  };
+  }, []);
 
-  const handleReviewButtonClick = () => {
+  const handleReviewButtonClick = useCallback(() => {
+    resetNumberKeys();
     setCondition(CONDITION.Normal);
     setMode(MODE.Remember);
     setWordplayTiles((prevWordplayTiles: wordplayTile[]) => {
@@ -466,35 +488,38 @@ const Stage = ({
         return { ...wordplayTile, isSolved: true, numbers: numbers };
       });
     });
-  };
+  }, [resetNumberKeys]);
 
-  const isCorrectInput = (input: string) => {
-    const focused = focusedNumber();
-    const numberCombinations: { [key: string]: string[] } = {
-      '0': ['0', '０'],
-      '1': ['1', '１'],
-      '2': ['2', '２'],
-      '3': ['3', '３'],
-      '4': ['4', '４'],
-      '5': ['5', '５'],
-      '6': ['6', '６'],
-      '7': ['7', '７'],
-      '8': ['8', '８'],
-      '9': ['9', '９'],
-    };
+  const isCorrectInput = useCallback(
+    (input: string) => {
+      const focused = focusedNumber();
+      const numberCombinations: { [key: string]: string[] } = {
+        '0': ['0', '０'],
+        '1': ['1', '１'],
+        '2': ['2', '２'],
+        '3': ['3', '３'],
+        '4': ['4', '４'],
+        '5': ['5', '５'],
+        '6': ['6', '６'],
+        '7': ['7', '７'],
+        '8': ['8', '８'],
+        '9': ['9', '９'],
+      };
 
-    return numberCombinations[focused].includes(input);
-  };
+      return numberCombinations[focused].includes(input);
+    },
+    [focusedNumber],
+  );
 
   const handleInputNumber = useCallback(
     (inputChar: string) => {
       if (isCorrectInput(inputChar)) {
         handleCorrectInput();
       } else {
-        handleWrongInput();
+        handleWrongInput(inputChar);
       }
     },
-    [wordplayTiles],
+    [handleCorrectInput, handleWrongInput, isCorrectInput],
   );
 
   const keyPress = useCallback(
@@ -539,18 +564,22 @@ const Stage = ({
     return '';
   }, [wordplayTiles]);
 
-  const typingModeTools = () => {
+  const typingModeTools = useCallback(() => {
     return (
       <div className="mt-5 flex flex-col">
         <div className="flex justify-center">
-          <Keyboard handleInputNumber={handleInputNumber} mode={mode} />
+          <Keyboard
+            handleInputNumber={handleInputNumber}
+            mode={mode}
+            numberKeysMistaken={numberKeysMistaken}
+          />
         </div>
         <div className="mt-5 flex justify-center">
           <ReviewButton handleOnClick={handleReviewButtonClick} />
         </div>
       </div>
     );
-  };
+  }, [handleInputNumber, handleReviewButtonClick, mode, numberKeysMistaken]);
 
   // const toggleModal = useCallback(() => {
   //   setMode((prevMode) => {
