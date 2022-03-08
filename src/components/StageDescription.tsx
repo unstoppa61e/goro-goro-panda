@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 type Props = {
   stageNumber: string;
 };
@@ -10,7 +12,7 @@ export const rangeEnds = (stageNumber: string): [number, number] => {
 };
 
 const StageDescription = ({ stageNumber }: Props) => {
-  const displayStage = (stageNumber: string) => {
+  const displayStage = useCallback((stageNumber: string) => {
     const circledNumbers: { [key: string]: string } = {
       '1': '①',
       '2': '②',
@@ -25,8 +27,9 @@ const StageDescription = ({ stageNumber }: Props) => {
     };
 
     return <div>ステージ{circledNumbers[stageNumber]}</div>;
-  };
-  const displayDigitsRange = (stageNumber: string) => {
+  }, []);
+
+  const displayDigitsRange = useCallback((stageNumber: string) => {
     const [startDigit, endDigit] = rangeEnds(stageNumber);
 
     return (
@@ -36,7 +39,7 @@ const StageDescription = ({ stageNumber }: Props) => {
         {endDigit}位を覚えよう
       </div>
     );
-  };
+  }, []);
 
   return (
     <h1 className="flex font-kosugi-maru">

@@ -19,7 +19,7 @@ const StageClearCount = ({ stage, stageClearCountValues }: Props) => {
         ? 0
         : stageClearCountValues.indexOf(stageClearCountValue),
     );
-  }, []);
+  }, [stage, stageClearCountValues]);
 
   const marks = [];
   const crownBasis = 5;

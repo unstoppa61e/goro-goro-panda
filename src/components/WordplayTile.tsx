@@ -8,7 +8,7 @@ import {
   wordplayTile,
 } from '../pages/stages/[stage]';
 import { backGroundColor } from './StageSelectPanel';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 type Props = {
   mode: Mode;
@@ -18,13 +18,13 @@ type Props = {
 };
 
 const WordplayTile = ({ mode, tile, stageNumber, typeModeCount }: Props) => {
-  const wordplayImageSrc = () => {
+  const wordplayImageSrc = useCallback(() => {
     const str: string = tile.numbers
       .map((eachNumber: numberTileNumber) => eachNumber.value)
       .join('');
 
     return `/wordplays/${str}.png`;
-  };
+  }, [tile.numbers]);
 
   const numberTiles = tile.numbers.map(
     (numberTileNumber: numberTileNumber, index: number) => {

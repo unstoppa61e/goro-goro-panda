@@ -6,6 +6,7 @@ import {
   useClearedStage,
 } from '../hooks/useClearedStage';
 import StageClearCount from './StageClearCount';
+import { useCallback } from 'react';
 
 type Props = {
   panelNumber: string;
@@ -47,7 +48,10 @@ function StageSelectPanel({
 
   const isLocked = stage > clearedStage + 1;
 
-  const panelTestId = (stage: number): string => `stage-select-panel-${stage}`;
+  const panelTestId = useCallback(
+    (stage: number): string => `stage-select-panel-${stage}`,
+    [],
+  );
   // Linkタグにhrefを指定しないとWarningが出るため、冗長ではあるが２パターンに書き分けている
   if (isLocked) {
     return (

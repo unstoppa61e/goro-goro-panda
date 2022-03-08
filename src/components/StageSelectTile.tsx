@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 type Props = {
   tileNumber: string;
@@ -7,9 +7,9 @@ type Props = {
   firstTile: boolean;
 };
 function StageSelectTile({ tileNumber, isLocked, firstTile }: Props) {
-  const srcPath = (tileNumber: string): string => {
+  const srcPath = useCallback((tileNumber: string): string => {
     return `/wordplays/${tileNumber}.png`;
-  };
+  }, []);
 
   const piStartIndicator = <div className="absolute -ml-3">3.</div>;
 

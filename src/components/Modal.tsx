@@ -33,18 +33,18 @@ const Modal = memo(function Modal({
     );
   }, [visible, stageNumber, stageClearCountValues]);
 
-  const dice = (count: number): number => {
+  const dice = useCallback((count: number): number => {
     return Math.floor(Math.random() * count);
-  };
+  }, []);
 
-  const frameSrc = () => {
+  const frameSrc = useCallback(() => {
     const framesCount = 7;
     const frameNumber = dice(framesCount);
 
     return `/frames/modal_frame_${frameNumber}.png`;
-  };
+  }, [dice]);
 
-  const admirationHead = () => {
+  const admirationHead = useCallback(() => {
     const messages = [
       'イエーイ！',
       'うわー！',
@@ -56,9 +56,9 @@ const Modal = memo(function Modal({
     ];
 
     return <p>{messages[dice(messages.length)]}</p>;
-  };
+  }, [dice]);
 
-  const admirationBody = () => {
+  const admirationBody = useCallback(() => {
     const messages = [
       ['がんばっている', 'きみは', 'すてきだよ！'],
       ['がんばると', 'こんなことも', 'できるんだね！'],
@@ -78,7 +78,7 @@ const Modal = memo(function Modal({
     return message.map((phrase: string, index: number) => (
       <p key={index}>{phrase}</p>
     ));
-  };
+  }, [dice]);
 
   const lastStageNumber = 10;
   const messagePath = '/thank-you-for-playing';
