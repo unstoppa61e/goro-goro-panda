@@ -22,13 +22,13 @@ const Modal = memo(function Modal({
   const [stageClearedCount, setStageClearedCount] = useState(0);
 
   useEffect(() => {
-    const stageClearedCountValue = localStorage.getItem(
+    const stageClearCountValue = localStorage.getItem(
       `${STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT}${stageNumber}`,
     );
     setStageClearedCount(
-      stageClearedCountValue === null
+      stageClearCountValue === null
         ? 0
-        : stageClearCountValues.indexOf(stageClearedCountValue),
+        : stageClearCountValues.indexOf(stageClearCountValue),
     );
   }, [visible, stageNumber, stageClearCountValues]);
 
