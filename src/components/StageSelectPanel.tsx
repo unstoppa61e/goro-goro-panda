@@ -5,11 +5,13 @@ import {
   clearedStageDefaultValue,
   useClearedStage,
 } from '../hooks/useClearedStage';
+import StageClearCount from './StageClearCount';
 
 type Props = {
   panelNumber: string;
   stage: number;
   clearedStageValues: string[];
+  stageClearCountValues: string[];
 };
 
 export const backGroundColor = (stage: number): string => {
@@ -32,7 +34,12 @@ export const backGroundColor = (stage: number): string => {
 
 export const stagePath = (stage: number): string => `/stages/${stage}`;
 
-function StageSelectPanel({ panelNumber, stage, clearedStageValues }: Props) {
+function StageSelectPanel({
+  panelNumber,
+  stage,
+  clearedStageValues,
+  stageClearCountValues,
+}: Props) {
   const clearedStage = useClearedStage(
     clearedStageDefaultValue,
     clearedStageValues,
@@ -57,20 +64,28 @@ function StageSelectPanel({ panelNumber, stage, clearedStageValues }: Props) {
     );
   } else {
     return (
-      <Link href={stagePath(stage)}>
-        <a
-          className={`flex pt-3 pb-2 rounded-xl w-80 box-content sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused ${backGroundColor(
-            stage,
-          )} animate-pulse animate-infinite`}
-          data-testid={panelTestId(stage)}
-        >
-          <StageSelectPanelContent
-            panelNumber={panelNumber}
-            stage={stage}
-            isLocked={isLocked}
-          />
-        </a>
-      </Link>
+      <div className="flex flex-col">
+        <Link href={stagePath(stage)}>
+          <a
+            className={`flex pt-3 pb-2 rounded-xl w-80 box-content sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused ${backGroundColor(
+              stage,
+            )} animate-pulse animate-infinite relative`}
+            data-testid={panelTestId(stage)}
+          >
+            <div className="absolute -top-1 left-5">
+              <StageClearCount
+                stage={stage}
+                stageClearCountValues={stageClearCountValues}
+              />
+            </div>
+            <StageSelectPanelContent
+              panelNumber={panelNumber}
+              stage={stage}
+              isLocked={isLocked}
+            />
+          </a>
+        </Link>
+      </div>
     );
   }
 }

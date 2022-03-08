@@ -13,17 +13,22 @@ export const piNumber =
 
 type Props = {
   clearedStageValues: string[];
+  stageClearCountValues: string[];
 };
 
 export const getStaticProps: GetStaticProps = () => {
   return {
     props: {
       clearedStageValues: process.env.CLEARED_STAGE!.split(','),
+      stageClearCountValues: process.env.STAGE_CLEAR_COUNT!.split(','),
     },
   };
 };
 
-const Home: NextPage<Props> = ({ clearedStageValues }: Props) => {
+const Home: NextPage<Props> = ({
+  clearedStageValues,
+  stageClearCountValues,
+}: Props) => {
   const panelNumbers = piNumber.match(/.{10}/g)!;
 
   const shareButtonText = '【ゴロゴロ円周率】で語呂合わせのゲームをプレイ中！';
@@ -55,6 +60,7 @@ const Home: NextPage<Props> = ({ clearedStageValues }: Props) => {
                   panelNumber={panelNumber}
                   stage={index + 1}
                   clearedStageValues={clearedStageValues}
+                  stageClearCountValues={stageClearCountValues}
                 />
               </li>
             ))}
