@@ -439,19 +439,16 @@ const Stage = ({
 
   const handleWrongInput = () => {
     setCondition(CONDITION.Failure);
-    setMode(MODE.Remember);
     setWordplayTiles((prevWordplayTiles: wordplayTile[]) => {
       return prevWordplayTiles.map((wordplayTile: wordplayTile) => {
         if (!wordplayTile.isTarget) return wordplayTile;
         const numbers = wordplayTile.numbers.map((number: numberTileNumber) => {
-          if (number.isFocused) {
-            return { ...number, ...defaultNumberState, isMistaken: true };
-          } else {
-            return { ...number, ...defaultNumberState };
-          }
+          if (!number.isFocused) return number;
+
+          return { ...number, isMistaken: true };
         });
 
-        return { ...wordplayTile, isSolved: true, numbers: numbers };
+        return { ...wordplayTile, numbers: numbers };
       });
     });
   };
