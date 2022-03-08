@@ -8,6 +8,8 @@ import {
   useClearedStage,
 } from '../hooks/useClearedStage';
 import { GetStaticProps } from 'next';
+import FacebookButton from '../components/FacebookButton';
+import TwitterButton from '../components/TwitterButton';
 
 type Props = {
   clearedStageValues: string[];
@@ -52,6 +54,10 @@ const ThankYouForPlaying = ({ clearedStageValues }: Props) => {
     'ずっとおうえんしているよ！',
     'フレー、フレー、がんばりやさん！',
   ];
+
+  const shareButtonText = '【ゴロゴロ円周率】全ステージをクリアしました！';
+  const shareButtonSize = 50;
+
   const messageBody = sentences.map((sentence: string, index: number) => (
     <p className="mt-2" key={index}>
       {sentence}
@@ -85,11 +91,15 @@ const ThankYouForPlaying = ({ clearedStageValues }: Props) => {
           }
         />
       </div>
-      <Link href="/">
-        <a className="font-bold text-white w-28 py-3 cursor-pointer rounded bg-gray-300 sm:hover:bg-gray-500 active:bg-gray-500 text-center">
-          もっと遊ぶ
-        </a>
-      </Link>
+      <div className="flex gap-x-4">
+        <FacebookButton text={shareButtonText} size={shareButtonSize} />
+        <TwitterButton text={shareButtonText} size={shareButtonSize} />
+        <Link href="/">
+          <a className="font-bold text-white w-28 py-3 cursor-pointer rounded bg-ok text-center">
+            もっと遊ぶ
+          </a>
+        </Link>
+      </div>
     </div>
   );
 };
