@@ -2,7 +2,7 @@ import { FacebookShareButton, FacebookIcon } from 'next-share';
 
 import React from 'react';
 import { useRouter } from 'next/router';
-import { baseUrl } from '../pages/stages/[stage]';
+import { Site } from '../lib/site';
 
 type Props = {
   text: string;
@@ -11,13 +11,13 @@ type Props = {
 
 const TwitterButton = ({ text, size }: Props) => {
   const router = useRouter();
-  const currentUrl = baseUrl + router.asPath;
+  const currentUrl = Site.origin + router.asPath;
 
   return (
     <FacebookShareButton
       url={currentUrl}
       quote={text}
-      hashtag={'#ゴロゴロ円周率'}
+      hashtag={`#${Site.title}`}
     >
       <FacebookIcon size={size} round />
     </FacebookShareButton>

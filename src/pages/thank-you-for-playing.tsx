@@ -10,6 +10,7 @@ import {
 import { GetStaticProps } from 'next';
 import FacebookButton from '../components/FacebookButton';
 import TwitterButton from '../components/TwitterButton';
+import { Site } from '../lib/site';
 
 type Props = {
   clearedStageValues: string[];
@@ -55,7 +56,7 @@ const ThankYouForPlaying = ({ clearedStageValues }: Props) => {
     'フレー、フレー、がんばりやさん！',
   ];
 
-  const shareButtonText = '【ゴロゴロ円周率】全ステージをクリアしました！';
+  const shareButtonText = `【${Site.title}】全ステージをクリアしました！`;
   const shareButtonSize = 50;
 
   const messageBody = sentences.map((sentence: string, index: number) => (
