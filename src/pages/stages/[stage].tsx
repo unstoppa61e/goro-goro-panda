@@ -18,6 +18,7 @@ import {
 import { useRouter } from 'next/router';
 import Keyboard from '../../components/Keyboard';
 import ReviewButton from '../../components/ReviewButton';
+import { Site } from '../../lib/lib';
 
 const Modal = dynamic(() => import('../../components/Modal'), { ssr: false });
 
@@ -564,7 +565,26 @@ const Stage = ({
 
   return (
     <>
-      <NextSeo title={`ゴロゴロ円周率 | ステージ${stageNumber}`} />
+      <NextSeo
+        title={`${Site.title} | ステージ${stageNumber}`}
+        openGraph={{
+          url: `${Site.origin}${router.asPath}`,
+          title: `${Site.title} | ステージ${stageNumber}`,
+          description: `${Site.description}`,
+          images: [
+            {
+              url: `https://${process.env
+                .VERCEL_URL!}/ogp/stage_${stageNumber}.png`,
+              width: 1200,
+              height: 630,
+              alt: 'Og Image',
+              type: 'image/png',
+            },
+          ],
+          site_name: `${Site.title}`,
+          type: 'website',
+        }}
+      />
       <Modal
         visible={mode === MODE.Clear}
         stageNumber={stageNumber}
