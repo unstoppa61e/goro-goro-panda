@@ -10,7 +10,12 @@ const Score = ({ score }: Props) => {
   };
 
   const marks = [];
-  for (let i = 0; i < maxScore; i++) {
+  marks.push(
+    <li key={0}>
+      <Star isBright={true} />
+    </li>,
+  );
+  for (let i = 1; i < maxScore; i++) {
     marks.push(
       <li key={i}>
         <Star isBright={isBright(i)} />

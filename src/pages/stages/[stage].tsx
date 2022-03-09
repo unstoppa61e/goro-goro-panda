@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next';
 import { NextSeo } from 'next-seo';
@@ -18,6 +18,7 @@ import {
 import { useRouter } from 'next/router';
 import Keyboard from '../../components/Keyboard';
 import ReviewButton from '../../components/ReviewButton';
+import Image from 'next/image';
 
 const Modal = dynamic(() => import('../../components/Modal'), { ssr: false });
 
@@ -565,45 +566,63 @@ const Stage = ({
   return (
     <>
       <NextSeo title={`ゴロゴロ円周率 | ステージ${stageNumber}`} />
-      <Modal
-        visible={mode === MODE.Clear}
-        stageNumber={stageNumber}
-        stageClearCountValues={stageClearCountValues}
-      />
-      <div className="flex justify-center">
-        <div className="w-80 py-4 flex flex-col items-center text-white">
-          <div className="w-full flex justify-center">
-            <StageDescription stageNumber={stageNumber} />
-          </div>
-          <div className="mt-2 w-full flex justify-center">
-            <Score score={score} />
-          </div>
-          <div className="mt-2 w-full flex justify-center">
-            <Wordplays
-              mode={mode}
-              tiles={wordplayTiles}
-              stageNumber={stageNumber}
-              typeModeCount={typeModeCount}
-            />
-          </div>
-          <div className="mt-5 w-full flex justify-center">
-            <Instruction
-              condition={condition}
-              mode={mode}
-              level={level}
-              firstTargetNumber={firstTargetNumber()}
-            />
-          </div>
-          {mode === MODE.Remember ? (
-            <div className="mt-20 w-full flex justify-center">
-              <StartAnsweringButton handleOnClick={handleOnClick} />
+      <div className="flex justify-evenly">
+        <div className="justify-center mt-12">
+          <Image
+            src="/logo_4x.png"
+            alt="site logo"
+            width={220}
+            height={230}
+            objectFit="contain"
+            onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
+              e.preventDefault()
+            }
+            onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
+              e.preventDefault()
+            }
+          />
+        </div>
+
+        <Modal
+          visible={mode === MODE.Clear}
+          stageNumber={stageNumber}
+          stageClearCountValues={stageClearCountValues}
+        />
+        <div className="flex justify-center mt-0.5">
+          <div className="w-80 py-4 flex flex-col items-center text-white">
+            <div className="w-full flex justify-center">
+              <StageDescription stageNumber={stageNumber} />
             </div>
-          ) : (
-            typingModeTools()
-          )}
-          {/*<button onClick={toggleModal} className="mt-8 border-2 p-2 text-xl">*/}
-          {/*  toggle modal for debug*/}
-          {/*</button>*/}
+            <div className="mt-2 w-full flex justify-center">
+              <Score score={score} />
+            </div>
+            <div className="mt-2 w-full flex justify-center">
+              <Wordplays
+                mode={mode}
+                tiles={wordplayTiles}
+                stageNumber={stageNumber}
+                typeModeCount={typeModeCount}
+              />
+            </div>
+            <div className="mt-5 w-full flex justify-center">
+              <Instruction
+                condition={condition}
+                mode={mode}
+                level={level}
+                firstTargetNumber={firstTargetNumber()}
+              />
+            </div>
+            {mode === MODE.Remember ? (
+              <div className="mt-20 w-full flex justify-center">
+                <StartAnsweringButton handleOnClick={handleOnClick} />
+              </div>
+            ) : (
+              typingModeTools()
+            )}
+            {/*<button onClick={toggleModal} className="mt-8 border-2 p-2 text-xl">*/}
+            {/*  toggle modal for debug*/}
+            {/*</button>*/}
+          </div>
         </div>
       </div>
     </>
