@@ -7,6 +7,7 @@ import { rangeEnds } from './StageDescription';
 import { STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT } from '../pages/stages/[stage]';
 import TwitterButton from './TwitterButton';
 import FacebookButton from './FacebookButton';
+import { Site } from '../lib/site';
 
 type Props = {
   visible: boolean;
@@ -121,9 +122,11 @@ const Modal = memo(function Modal({
   const snsText = useCallback((): string => {
     const [rangeStart, rangeEnd] = rangeEnds(stageNumber);
     if (stageClearedCount < 1) {
-      return `【ゴロゴロ円周率】小数第${rangeStart}~${rangeEnd}位のステージを初クリアしました！`;
+      return `【${Site.title}】小数第${rangeStart}~${rangeEnd}位のステージを初クリアしました！`;
     } else {
-      return `【ゴロゴロ円周率】小数第${rangeStart}~${rangeEnd}位のステージの習熟度が${
+      return `【${
+        Site.title
+      }】小数第${rangeStart}~${rangeEnd}位のステージの習熟度が${
         stageClearedCount + 1
       }にUPしました！`;
     }

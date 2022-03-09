@@ -2,6 +2,7 @@ import { IconContext } from 'react-icons';
 import { FaGithub, FaTwitter } from 'react-icons/fa';
 import Image from 'next/image';
 import React from 'react';
+import { Site } from '../lib/site';
 
 const Footer = () => {
   const iconSize = 16;
@@ -9,10 +10,10 @@ const Footer = () => {
   return (
     <footer className="flex justify-center items-center bg-black h-8 text-white">
       <div className="flex items-center gap-x-3">
-        <p className="text-xs">&copy; 2022 unstoppa61e</p>
+        <p className="text-xs">&copy; 2022 {Site.developer}</p>
         <div className="flex items-center gap-x-3">
           <a
-            href="https://note.com/unstoppa61e/n/nd3cdb84b41ad"
+            href={Site.note}
             className="flex justify-center items-center"
             target="_blank"
             rel="noopener noreferrer"
@@ -31,20 +32,12 @@ const Footer = () => {
               }
             />
           </a>
-          <a
-            href="https://twitter.com/unstoppa61e"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={Site.twitter} target="_blank" rel="noopener noreferrer">
             <IconContext.Provider value={{ size: `${iconSize}px` }}>
               <FaTwitter />
             </IconContext.Provider>
           </a>
-          <a
-            href="https://github.com/unstoppa61e/goro-goro-panda"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={Site.github} target="_blank" rel="noopener noreferrer">
             <IconContext.Provider value={{ size: `${iconSize}px` }}>
               <FaGithub />
             </IconContext.Provider>

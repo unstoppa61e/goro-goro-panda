@@ -1,21 +1,23 @@
+import { Site } from './src/lib/site';
+
 export default {
-  title: 'ゴロゴロ円周率',
-  description: '語呂合わせのゲームで円周率を覚えよう！',
-  canonical: 'https://gorogoropanda.com/',
+  title: Site.title,
+  description: Site.description,
+  canonical: `${Site.origin}/`,
   openGraph: {
-    url: 'https://gorogoropanda.com',
-    title: 'ゴロゴロ円周率',
-    description: '語呂合わせのゲームで円周率を覚えよう！',
+    url: Site.origin,
+    title: Site.title,
+    description: Site.description,
     images: [
       {
-        url: 'https://gorogoropanda.com/ogp/pr_314.png',
+        url: `${Site.origin}/ogp/pr_314.png`,
         width: 1200,
         height: 630,
         alt: 'Og Image Alt',
         type: 'image/png',
       },
     ],
-    site_name: 'ゴロゴロ円周率',
+    site_name: Site.title,
     type: 'website',
   },
   twitter: {

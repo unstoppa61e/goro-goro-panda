@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import FacebookButton from '../components/FacebookButton';
 import TwitterButton from '../components/TwitterButton';
 import { GetStaticProps } from 'next';
+import { Site } from '../lib/site';
 
 export const piNumber =
   '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679';
@@ -31,7 +32,7 @@ const Home: NextPage<Props> = ({
 }: Props) => {
   const panelNumbers = piNumber.match(/.{10}/g)!;
 
-  const shareButtonText = '【ゴロゴロ円周率】で語呂合わせのゲームをプレイ中！';
+  const shareButtonText = `【${Site.title}】で語呂合わせのゲームをプレイ中！`;
   const shareButtonSize = 40;
 
   return (

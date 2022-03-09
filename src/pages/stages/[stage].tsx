@@ -18,7 +18,7 @@ import {
 import { useRouter } from 'next/router';
 import Keyboard from '../../components/Keyboard';
 import ReviewButton from '../../components/ReviewButton';
-import { Site } from '../../lib/lib';
+import { Site } from '../../lib/site';
 
 const Modal = dynamic(() => import('../../components/Modal'), { ssr: false });
 
@@ -86,7 +86,6 @@ export type wordplayTile = {
 };
 
 export const maxScore = 15;
-export const baseUrl = 'https://gorogoropanda.com';
 
 const stagePiNumberLength = 10;
 const wordplayNumberCount = 2;
@@ -570,7 +569,7 @@ const Stage = ({
         openGraph={{
           url: `${Site.origin}${router.asPath}`,
           title: `${Site.title} | ステージ${stageNumber}`,
-          description: `${Site.description}`,
+          description: Site.description,
           images: [
             {
               url: `https://${process.env
@@ -581,7 +580,7 @@ const Stage = ({
               type: 'image/png',
             },
           ],
-          site_name: `${Site.title}`,
+          site_name: Site.title,
           type: 'website',
         }}
       />
