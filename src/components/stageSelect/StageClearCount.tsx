@@ -47,18 +47,20 @@ const StageClearCount = ({ stage, stageClearCountValues }: Props) => {
   const crownRedImage = scoreImage('crown_red.png');
   const crownRedBasis = 20;
   for (let i = crownRedBasis; i < clearCount; i += crownRedBasis) {
-    redCrowns.push(crownRedImage);
+    redCrowns.push(<div key={`crown-red-${i}`}>{crownRedImage}</div>);
   }
   const crowns = [];
   let remainingClearCount = clearCount % crownRedBasis;
   const crownBasis = 5;
   for (let i = 0; (i + 1) * crownBasis < remainingClearCount; i++) {
-    crowns.unshift(scoreImage(`crown_${i}.png`));
+    crowns.unshift(
+      <div key={`crown-${i}`}>{scoreImage(`crown_${i}.png`)}</div>,
+    );
   }
   const stars = [];
   remainingClearCount %= crownBasis;
   for (let i = 0; i < remainingClearCount; i++) {
-    stars.push(scoreImage(`star_${i}.png`));
+    stars.push(<div key={`star-${i}`}>{scoreImage(`star_${i}.png`)}</div>);
   }
 
   return (
