@@ -33,12 +33,12 @@ const Home: NextPage<Props> = ({
   const panelNumbers = piNumber.match(/.{10}/g)!;
 
   const shareButtonText = `【${Site.title}】で語呂合わせのゲームをプレイ中！`;
-  const shareButtonSize = 40;
+  const shareButtonSize = 60;
 
   return (
     <div>
       <main className="flex justify-center">
-        <div className="w-80 py-4 flex flex-col items-center">
+        <div className="w-80 pt-4 pb-6 flex flex-col items-center">
           <div className="pointer-events-none">
             <Image
               src="/logo_4x.png"
@@ -66,7 +66,7 @@ const Home: NextPage<Props> = ({
               </li>
             ))}
           </ul>
-          <div className="mt-2 flex gap-x-4">
+          <div className="mt-4 flex gap-x-8">
             <FacebookButton text={shareButtonText} size={shareButtonSize} />
             <TwitterButton text={shareButtonText} size={shareButtonSize} />
           </div>
