@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 
-import StageSelectPanel from '../components/StageSelectPanel';
+import StageSelectPanel from '../features/stageSelect/components/StageSelectPanel';
 import Image from 'next/image';
 import React from 'react';
-import Footer from '../components/Footer';
-import FacebookButton from '../components/FacebookButton';
-import TwitterButton from '../components/TwitterButton';
+import Footer from '../features/stageSelect/components/Footer';
+import FacebookButton from '../features/sns/components/FacebookButton';
+import TwitterButton from '../features/sns/components/TwitterButton';
 import { GetStaticProps } from 'next';
 import { Site } from '../lib/site';
 

@@ -1,8 +1,7 @@
-import { FacebookShareButton, FacebookIcon } from 'next-share';
-
+import { TwitterShareButton, TwitterIcon } from 'next-share';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Site } from '../lib/site';
+import { Site } from '../../../lib/site';
 
 type Props = {
   text: string;
@@ -14,13 +13,14 @@ const TwitterButton = ({ text, size }: Props) => {
   const currentUrl = Site.origin + router.asPath;
 
   return (
-    <FacebookShareButton
+    <TwitterShareButton
       url={currentUrl}
-      quote={text}
-      hashtag={`#${Site.title}`}
+      title={text}
+      hashtags={[Site.title, '円周率の日']}
+      related={[Site.developer]}
     >
-      <FacebookIcon size={size} round />
-    </FacebookShareButton>
+      <TwitterIcon size={size} round />
+    </TwitterShareButton>
   );
 };
 

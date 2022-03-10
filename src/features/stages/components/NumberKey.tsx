@@ -1,4 +1,4 @@
-import { MODE, Mode } from '../pages/stages/[stage]';
+import { MODE, Mode } from '../../../pages/stages/[stage]';
 import { useCallback } from 'react';
 
 type Props = {
