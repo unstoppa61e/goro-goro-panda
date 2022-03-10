@@ -1,5 +1,5 @@
 import WordplayTile from './WordplayTile';
-import { Mode, wordplayTile } from '../types';
+import { Mode, wordplayTile } from '../../types';
 
 type Props = {
   mode: Mode;

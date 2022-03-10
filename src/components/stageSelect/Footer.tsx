@@ -2,7 +2,7 @@ import { IconContext } from 'react-icons';
 import { FaGithub, FaTwitter } from 'react-icons/fa';
 import Image from 'next/image';
 import React from 'react';
-import { Site } from '../../../lib/site';
+import { Site } from '../../lib/site';
 
 const Footer = () => {
   const iconSize = 16;

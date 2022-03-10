@@ -1,4 +1,4 @@
-import { numberTileNumber } from '../types';
+import { numberTileNumber } from '../../types';
 import FireworkAnimation from './FireworkAnimation';
 
 type Props = {

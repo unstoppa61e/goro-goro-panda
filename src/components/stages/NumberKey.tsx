@@ -1,4 +1,4 @@
-import { MODE, Mode } from '../types';
+import { MODE, Mode } from '../../types';
 import { useCallback } from 'react';
 
 type Props = {

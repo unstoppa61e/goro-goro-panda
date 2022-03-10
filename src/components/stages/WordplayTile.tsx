@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import NumberTile from './NumberTile';
 
-import { MODE, Mode, numberTileNumber, wordplayTile } from '../types';
-import { backGroundColor } from '../../stageSelect/components/StageSelectPanel';
+import { MODE, Mode, numberTileNumber, wordplayTile } from '../../types';
+import { backGroundColor } from '../stageSelect/StageSelectPanel';
 import React, { useCallback } from 'react';
 
 type Props = {
