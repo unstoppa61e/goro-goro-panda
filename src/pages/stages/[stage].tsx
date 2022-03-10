@@ -462,14 +462,7 @@ const Stage = ({
     setCondition(CONDITION.Failure);
     setWordplayTiles((prevWordplayTiles: wordplayTile[]) => {
       return prevWordplayTiles.map((wordplayTile: wordplayTile) => {
-        if (!wordplayTile.isTarget) return wordplayTile;
-        const numbers = wordplayTile.numbers.map((number: numberTileNumber) => {
-          if (!number.isFocused) return number;
-
-          return { ...number, isMistaken: true };
-        });
-
-        return { ...wordplayTile, numbers: numbers };
+        return wordplayTile;
       });
     });
   }, []);

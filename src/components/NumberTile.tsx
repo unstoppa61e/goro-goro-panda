@@ -33,11 +33,7 @@ const NumberTile = ({ tileNumber, isTarget, typeModeCount }: Props) => {
   return (
     <div
       className={`flex justify-center items-center w-6 h-7 ${
-        tileNumber.isFocused
-          ? 'duration-500 bg-focused'
-          : tileNumber.isMistaken
-          ? 'duration-500 bg-mistaken'
-          : 'bg-white'
+        tileNumber.isFocused ? 'duration-500 bg-focused' : 'bg-white'
       } ${
         tileNumber.isCorrectLast ? animationSrc : ''
       } rounded text-black text-2xl font-bold relative`}
