@@ -6,8 +6,8 @@ import {
   Mode,
   numberTileNumber,
   wordplayTile,
-} from '../pages/stages/[stage]';
-import { backGroundColor } from './StageSelectPanel';
+} from '../../../pages/stages/[stage]';
+import { backGroundColor } from '../../stageSelect/components/StageSelectPanel';
 import React, { useCallback } from 'react';
 
 type Props = {

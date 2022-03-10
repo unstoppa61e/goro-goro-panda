@@ -1,4 +1,4 @@
-import { maxScore } from '../pages/stages/[stage]';
+import { maxScore } from '../../../pages/stages/[stage]';
 import Star from './Star';
 import { useCallback } from 'react';
 
