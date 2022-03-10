@@ -28,7 +28,9 @@ const NumberKey = ({
         className={`w-14 h-14 rounded-2xl border-4 border-black ${
           isMistaken ? 'bg-ng opacity-20' : 'bg-white cursor-pointer'
         } text-4xl text-black font-bold flex justify-center items-center active:scale-90 active:bg-gray-500 ${
-          mode === MODE.Clear ? '' : 'animate-pulse animate-infinite'
+          mode === MODE.Clear || isMistaken
+            ? ''
+            : 'animate-pulse animate-infinite'
         }`}
       >
         {keyNumber}
