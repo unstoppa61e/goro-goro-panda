@@ -68,28 +68,26 @@ function StageSelectPanel({
     );
   } else {
     return (
-      <div className="flex flex-col">
-        <Link href={stagePath(stage)}>
-          <a
-            className={`flex pt-3 pb-2 rounded-xl w-80 box-content sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused ${backGroundColor(
-              stage,
-            )} animate-pulse animate-infinite relative`}
-            data-testid={panelTestId(stage)}
-          >
-            <div className="absolute -top-1 left-5">
-              <StageClearCount
-                stage={stage}
-                stageClearCountValues={stageClearCountValues}
-              />
-            </div>
-            <StageSelectPanelContent
-              panelNumber={panelNumber}
+      <Link href={stagePath(stage)}>
+        <a
+          className={`flex pt-3 pb-2 rounded-xl w-80 box-content sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused ${backGroundColor(
+            stage,
+          )} animate-pulse animate-infinite relative`}
+          data-testid={panelTestId(stage)}
+        >
+          <div className="absolute -top-1 left-5">
+            <StageClearCount
               stage={stage}
-              isLocked={isLocked}
+              stageClearCountValues={stageClearCountValues}
             />
-          </a>
-        </Link>
-      </div>
+          </div>
+          <StageSelectPanelContent
+            panelNumber={panelNumber}
+            stage={stage}
+            isLocked={isLocked}
+          />
+        </a>
+      </Link>
     );
   }
 }
