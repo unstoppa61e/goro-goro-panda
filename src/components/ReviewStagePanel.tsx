@@ -1,12 +1,32 @@
 import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
+import {
+  clearedReviewDefaultValue,
+  useClearedReview,
+} from '../hooks/useClearedReview';
+import StageClearCount from './StageClearCount';
 
-const ReviewStagePanel = () => {
-  const bossStageNumber = 1;
-  const stagePath = `/bosses/${bossStageNumber}`;
-  const isLocked = false;
-  const testId = `boss-stage-select-panel-${bossStageNumber}`;
+type Props = {
+  reviewNumber: number;
+  clearedReviewValues: string[];
+  stageClearCountValues: string[];
+};
+
+const ReviewStagePanel = ({
+  reviewNumber,
+  clearedReviewValues,
+  stageClearCountValues,
+}: Props) => {
+  const clearedReview = useClearedReview(
+    clearedReviewDefaultValue,
+    clearedReviewValues,
+  )[0];
+
+  const isLocked = reviewNumber > clearedReview + 1;
+
+  const testId = `review-select-panel-${reviewNumber}`;
+  const stagePath = `/reviews/${reviewNumber}`;
 
   const className =
     'flex justify-center items-center rounded-xl w-80 h-24 bg-gradient-to-r from-blue-300 via-green-200 to-yellow-300';
@@ -35,9 +55,15 @@ const ReviewStagePanel = () => {
   const unlocked = (
     <Link href={stagePath}>
       <a
-        className={`${className} sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused animate-pulse animate-infinite cursor-pointer`}
+        className={`${className} sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused animate-pulse animate-infinite cursor-pointer relative`}
         data-testid={testId}
       >
+        <div className="absolute -top-1 left-5">
+          <StageClearCount
+            stage={reviewNumber}
+            stageClearCountValues={stageClearCountValues}
+          />
+        </div>
         <div className="flex items-center mr-2.5 pointer-events-none">
           <Image
             src="/pandas/panda_happy_1.png"

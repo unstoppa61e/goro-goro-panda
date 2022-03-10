@@ -15,6 +15,7 @@ export const piNumber =
 
 type Props = {
   clearedStageValues: string[];
+  clearedReviewValues: string[];
   stageClearCountValues: string[];
 };
 
@@ -22,6 +23,7 @@ export const getStaticProps: GetStaticProps = () => {
   return {
     props: {
       clearedStageValues: process.env.CLEARED_STAGE!.split(','),
+      clearedReviewValues: process.env.CLEARED_REVIEW!.split(','),
       stageClearCountValues: process.env.STAGE_CLEAR_COUNT!.split(','),
     },
   };
@@ -29,6 +31,7 @@ export const getStaticProps: GetStaticProps = () => {
 
 const Home: NextPage<Props> = ({
   clearedStageValues,
+  clearedReviewValues,
   stageClearCountValues,
 }: Props) => {
   const panelNumbers = piNumber.match(/.{10}/g)!;
@@ -68,7 +71,11 @@ const Home: NextPage<Props> = ({
             ))}
           </ul>
           <div className="mt-2">
-            <ReviewStagePanel />
+            <ReviewStagePanel
+              reviewNumber={1}
+              clearedReviewValues={clearedReviewValues}
+              stageClearCountValues={stageClearCountValues}
+            />
           </div>
           <div className="mt-4 flex gap-x-8">
             <FacebookButton text={shareButtonText} size={shareButtonSize} />
