@@ -70,7 +70,7 @@ const Home: NextPage<Props> = ({
               </li>
             ))}
           </ul>
-          <div className="mt-2">
+          <div className="flex justify-center items-center h-28">
             <ReviewStagePanel
               reviewNumber={1}
               clearedReviewValues={clearedReviewValues}

@@ -29,7 +29,7 @@ const ReviewStagePanel = ({
   const stagePath = `/reviews/${reviewNumber}`;
 
   const className =
-    'flex justify-center items-center rounded-xl w-80 h-24 bg-gradient-to-r from-blue-300 via-green-200 to-yellow-300';
+    'flex justify-center items-center rounded-xl w-80 h-24 box-content bg-gradient-to-r from-blue-300 via-green-200 to-yellow-300';
 
   const locked = (
     <div
