@@ -75,7 +75,6 @@ export type numberTileNumber = {
   value: string;
   isClosed: boolean;
   isFocused: boolean;
-  isMistaken: boolean;
   isCorrectLast: boolean;
 };
 
@@ -103,7 +102,6 @@ type Props = {
 const defaultNumberState = {
   isClosed: false,
   isFocused: false,
-  isMistaken: false,
   isCorrectLast: false,
 };
 
