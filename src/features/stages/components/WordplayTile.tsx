@@ -1,12 +1,7 @@
 import Image from 'next/image';
 import NumberTile from './NumberTile';
 
-import {
-  MODE,
-  Mode,
-  numberTileNumber,
-  wordplayTile,
-} from '../../../pages/stages/[stage]';
+import { MODE, Mode, numberTileNumber, wordplayTile } from '../types';
 import { backGroundColor } from '../../stageSelect/components/StageSelectPanel';
 import React, { useCallback } from 'react';
 
