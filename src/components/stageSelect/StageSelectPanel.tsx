@@ -4,7 +4,7 @@ import StageSelectPanelContent from './StageSelectPanelContent';
 import {
   clearedStageDefaultValue,
   useClearedStage,
-} from '../../../hooks/useClearedStage';
+} from '../../hooks/useClearedStage';
 import StageClearCount from './StageClearCount';
 import { useCallback } from 'react';
 

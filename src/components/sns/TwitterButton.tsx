@@ -1,7 +1,7 @@
 import { TwitterShareButton, TwitterIcon } from 'next-share';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Site } from '../../../lib/site';
+import { Site } from '../../lib/site';
 
 type Props = {
   text: string;

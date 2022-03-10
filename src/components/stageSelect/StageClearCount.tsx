@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT } from '../../../pages/stages/[stage]';
+import { STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT } from '../../pages/stages/[stage]';
 import Image from 'next/image';
 
 type Props = {

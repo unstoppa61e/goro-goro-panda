@@ -8,8 +8,8 @@ import {
   useClearedStage,
 } from '../hooks/useClearedStage';
 import { GetStaticProps } from 'next';
-import FacebookButton from '../features/sns/components/FacebookButton';
-import TwitterButton from '../features/sns/components/TwitterButton';
+import FacebookButton from '../components/sns/FacebookButton';
+import TwitterButton from '../components/sns/TwitterButton';
 import { Site } from '../lib/site';
 import { NextSeo } from 'next-seo';
 

@@ -2,12 +2,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { memo, useCallback, useEffect, useState } from 'react';
 
-import { stagePath } from '../../stageSelect/components/StageSelectPanel';
+import { stagePath } from '../stageSelect/StageSelectPanel';
 import { rangeEnds } from './StageDescription';
-import { STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT } from '../../../pages/stages/[stage]';
-import TwitterButton from '../../sns/components/TwitterButton';
-import FacebookButton from '../../sns/components/FacebookButton';
-import { Site } from '../../../lib/site';
+import { STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT } from '../../pages/stages/[stage]';
+import TwitterButton from '../sns/TwitterButton';
+import FacebookButton from '../sns/FacebookButton';
+import { Site } from '../../lib/site';
 
 type Props = {
   visible: boolean;

@@ -4,11 +4,11 @@ import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next';
 import { NextSeo } from 'next-seo';
 import dynamic from 'next/dynamic';
 
-import StageDescription from '../../features/stages/components/StageDescription';
-import Score from '../../features/stages/components/Score';
-import Wordplays from '../../features/stages/components/Wordplays';
-import Instruction from '../../features/stages/components/Instruction';
-import StartAnsweringButton from '../../features/stages/components/StartAnsweringButton';
+import StageDescription from '../../components/stages/StageDescription';
+import Score from '../../components/stages/Score';
+import Wordplays from '../../components/stages/Wordplays';
+import Instruction from '../../components/stages/Instruction';
+import StartAnsweringButton from '../../components/stages/StartAnsweringButton';
 import { piNumber } from '../index';
 import {
   clearedStageDefaultValue,
@@ -16,10 +16,8 @@ import {
   useClearedStage,
 } from '../../hooks/useClearedStage';
 import { useRouter } from 'next/router';
-import Keyboard, {
-  keyNumbers,
-} from '../../features/stages/components/Keyboard';
-import ReviewButton from '../../features/stages/components/ReviewButton';
+import Keyboard, { keyNumbers } from '../../components/stages/Keyboard';
+import ReviewButton from '../../components/stages/ReviewButton';
 import { Site } from '../../lib/site';
 import {
   CONDITION,
@@ -28,9 +26,9 @@ import {
   Mode,
   numberTileNumber,
   wordplayTile,
-} from '../../features/stages/types';
+} from '../../types';
 
-const Modal = dynamic(() => import('../../features/stages/components/Modal'), {
+const Modal = dynamic(() => import('../../components/stages/Modal'), {
   ssr: false,
 });
 

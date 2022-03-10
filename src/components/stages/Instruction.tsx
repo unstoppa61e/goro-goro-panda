@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import Image from 'next/image';
-import { CONDITION, Condition, MODE, Mode } from '../types';
+import { CONDITION, Condition, MODE, Mode } from '../../types';
 
 type Props = {
   condition: Condition;
