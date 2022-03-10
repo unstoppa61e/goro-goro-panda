@@ -11,7 +11,7 @@ const Star = ({ isBright }: Props) => {
       <div className="flex justify-center items-center relative pointer-events-none">
         <div className="absolute flex justify-center items-center">
           <Image
-            src="/star_yellow.png"
+            src="/star_0.png"
             width={21}
             height={21}
             objectFit="contain"

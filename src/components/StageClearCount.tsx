@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT } from '../pages/stages/[stage]';
 import Image from 'next/image';
 
@@ -21,14 +21,13 @@ const StageClearCount = ({ stage, stageClearCountValues }: Props) => {
     );
   }, [stage, stageClearCountValues]);
 
-  const marks = [];
-  const crownBasis = 5;
   const imageSize = 12;
-  for (let i = crownBasis; i < clearCount; i += crownBasis) {
-    marks.push(
+
+  const scoreImage = useCallback((filename: string) => {
+    return (
       <div className="pointer-events-none">
         <Image
-          src="/crown.png"
+          src={`/${filename}`}
           width={imageSize}
           height={imageSize}
           objectFit="contain"
@@ -40,31 +39,35 @@ const StageClearCount = ({ stage, stageClearCountValues }: Props) => {
             e.preventDefault()
           }
         />
-      </div>,
+      </div>
     );
+  }, []);
+
+  const redCrowns = [];
+  const crownRedImage = scoreImage('crown_red.png');
+  const crownRedBasis = 20;
+  for (let i = crownRedBasis; i < clearCount; i += crownRedBasis) {
+    redCrowns.push(crownRedImage);
   }
-  const starCount = clearCount % crownBasis;
-  for (let i = 0; i < starCount; i++) {
-    marks.push(
-      <div className="pointer-events-none">
-        <Image
-          src="/star_yellow.png"
-          width={imageSize}
-          height={imageSize}
-          objectFit="contain"
-          alt="crown"
-          onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
-            e.preventDefault()
-          }
-          onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
-            e.preventDefault()
-          }
-        />
-      </div>,
-    );
+  const crowns = [];
+  let remainingClearCount = clearCount % crownRedBasis;
+  const crownBasis = 5;
+  for (let i = 0; (i + 1) * crownBasis < remainingClearCount; i++) {
+    crowns.unshift(scoreImage(`crown_${i}.png`));
+  }
+  const stars = [];
+  remainingClearCount %= crownBasis;
+  for (let i = 0; i < remainingClearCount; i++) {
+    stars.push(scoreImage(`star_${i}.png`));
   }
 
-  return <div className="flex gap-x-0.5 w-72 justify-end">{marks}</div>;
+  return (
+    <div className="flex gap-x-0.5 w-72 justify-end">
+      {redCrowns}
+      {crowns}
+      {stars}
+    </div>
+  );
 };
 
 export default StageClearCount;
