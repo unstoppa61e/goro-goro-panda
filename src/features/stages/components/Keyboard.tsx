@@ -1,5 +1,5 @@
 import NumberKey from './NumberKey';
-import { Mode } from '../../../pages/stages/[stage]';
+import { Mode } from '../types';
 
 type Props = {
   handleInputNumber: (number: string) => void;

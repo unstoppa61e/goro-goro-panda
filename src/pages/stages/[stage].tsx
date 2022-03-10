@@ -21,6 +21,14 @@ import Keyboard, {
 } from '../../features/stages/components/Keyboard';
 import ReviewButton from '../../features/stages/components/ReviewButton';
 import { Site } from '../../lib/site';
+import {
+  CONDITION,
+  Condition,
+  MODE,
+  Mode,
+  numberTileNumber,
+  wordplayTile,
+} from '../../features/stages/types';
 
 const Modal = dynamic(() => import('../../features/stages/components/Modal'), {
   ssr: false,
@@ -58,34 +66,6 @@ export const getStaticPaths: GetStaticPaths = () => {
   }));
 
   return { paths, fallback: false };
-};
-
-export const MODE = {
-  Remember: 'remember',
-  Type: 'type',
-  Clear: 'clear',
-} as const;
-export type Mode = typeof MODE[keyof typeof MODE];
-
-export const CONDITION = {
-  Normal: 'normal',
-  Success: 'success',
-  Failure: 'failure',
-  LeveledUp: 'leveled up',
-} as const;
-export type Condition = typeof CONDITION[keyof typeof CONDITION];
-
-export type numberTileNumber = {
-  value: string;
-  isClosed: boolean;
-  isFocused: boolean;
-  isCorrectLast: boolean;
-};
-
-export type wordplayTile = {
-  isTarget: boolean;
-  isSolved: boolean;
-  numbers: numberTileNumber[];
 };
 
 export const maxScore = 15;
