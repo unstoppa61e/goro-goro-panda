@@ -6,6 +6,7 @@ import {
   useClearedReview,
 } from '../../hooks/useClearedReview';
 import StageClearCount from './StageClearCount';
+import { STAGE } from '../../types';
 
 type Props = {
   reviewNumber: number;
@@ -69,6 +70,7 @@ const ReviewStagePanel = ({
           <StageClearCount
             stage={reviewNumber}
             stageClearCountValues={stageClearCountValues}
+            stageType={STAGE.Review}
           />
         </div>
         <div className="flex items-center mr-2.5 pointer-events-none">

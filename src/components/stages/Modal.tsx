@@ -4,7 +4,7 @@ import React, { memo, useCallback, useEffect, useState } from 'react';
 
 import { stagePath } from '../stageSelect/StageSelectPanel';
 import { rangeEnds } from '../../lib/rangeEnds';
-import { STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT } from '../../pages/stages/[stage]';
+import { STORAGE_KEY_CLEAR_COUNT_ROOT } from '../../pages/stages/[stage]';
 import TwitterButton from '../sns/TwitterButton';
 import FacebookButton from '../sns/FacebookButton';
 import { Site } from '../../lib/site';
@@ -27,7 +27,7 @@ const Modal = memo(function Modal({
 
   useEffect(() => {
     const stageClearCountValue = localStorage.getItem(
-      `${STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT}${stageNumber}`,
+      `${STORAGE_KEY_CLEAR_COUNT_ROOT}${stageNumber}`,
     );
     setStageClearedCount(
       stageClearCountValue === null
