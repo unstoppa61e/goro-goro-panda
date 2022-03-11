@@ -1,17 +1,13 @@
 import { useCallback } from 'react';
+import { STAGE, StageType } from '../../types';
+import { rangeEnds } from '../../lib/rangeEnds';
 
 type Props = {
   stageNumber: string;
+  stageType: StageType;
 };
 
-export const rangeEnds = (stageNumber: string): [number, number] => {
-  const start: number = 10 * (parseInt(stageNumber) - 1) + 1;
-  const end: number = start + 9;
-
-  return [start, end];
-};
-
-const StageDescription = ({ stageNumber }: Props) => {
+const StageDescription = ({ stageNumber, stageType }: Props) => {
   const displayStage = useCallback((stageNumber: string) => {
     const circledNumbers: { [key: string]: string } = {
       '1': '①',
@@ -26,11 +22,18 @@ const StageDescription = ({ stageNumber }: Props) => {
       '10': '⑩',
     };
 
-    return <div>ステージ{circledNumbers[stageNumber]}</div>;
+    const stageName = stageType === STAGE.Normal ? 'ステージ' : 'まとめ';
+
+    return (
+      <div>
+        {stageName}
+        {circledNumbers[stageNumber]}
+      </div>
+    );
   }, []);
 
   const displayDigitsRange = useCallback((stageNumber: string) => {
-    const [startDigit, endDigit] = rangeEnds(stageNumber);
+    const [startDigit, endDigit] = rangeEnds(stageNumber, stageType);
 
     return (
       <div>

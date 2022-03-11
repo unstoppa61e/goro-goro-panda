@@ -25,6 +25,7 @@ import {
   MODE,
   Mode,
   numberTileNumber,
+  STAGE,
   wordplayTile,
 } from '../../types';
 
@@ -107,6 +108,7 @@ const Stage = ({
     clearedStageValues,
   );
 
+  const stageType = STAGE.Normal;
   const router = useRouter();
 
   useEffect(() => {
@@ -589,11 +591,12 @@ const Stage = ({
         visible={mode === MODE.Clear}
         stageNumber={stageNumber}
         stageClearCountValues={stageClearCountValues}
+        stageType={stageType}
       />
       <div className="flex justify-center">
         <div className="w-80 py-4 flex flex-col items-center text-white">
           <div className="w-full flex justify-center">
-            <StageDescription stageNumber={stageNumber} />
+            <StageDescription stageNumber={stageNumber} stageType={stageType} />
           </div>
           <div className="mt-2 w-full flex justify-center">
             <Score score={score} maxScore={maxScore} />
