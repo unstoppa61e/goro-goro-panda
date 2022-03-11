@@ -66,7 +66,7 @@ export const getStaticPaths: GetStaticPaths = () => {
   return { paths, fallback: false };
 };
 
-export const maxScore = 15;
+export const maxScore = 10;
 
 const stagePiNumberLength = 10;
 const wordplayNumberCount = 2;
@@ -98,7 +98,7 @@ const Stage = ({
   const [condition, setCondition] = useState<Condition>(CONDITION.Normal);
   const [wordplayTiles, setWordplayTiles] = useState<wordplayTile[]>([]);
   const [numberKeysMistaken, setNumberKeysMistaken] = useState<boolean[]>([]);
-  const [level, setLevel] = useState(1);
+  const level = 5;
   const [targetIndexesCombinations, setTargetIndexesCombinations] = useState<
     number[][]
   >([]);
@@ -136,33 +136,36 @@ const Stage = ({
     resetNumberKeys();
   }, []);
 
-  const initialWordplayTiles = useCallback(() => {
-    const getStagePiNumber = () => {
-      const startIndex = stagePiNumberLength * (parseInt(stageNumber) - 1);
+  const initialWordplayTiles = useCallback(
+    (score: number) => {
+      const getStagePiNumber = () => {
+        const startIndex = stagePiNumberLength * score;
 
-      return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
-    };
-    const piNumberChars = getStagePiNumber().split('');
+        return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
+      };
+      const piNumberChars = getStagePiNumber().split('');
 
-    return Array.from(
-      { length: stageWordplayCount },
-      (_: unknown, index: number) => {
-        const startIndex = wordplayNumberCount * index;
-        const numbers = piNumberChars
-          .slice(startIndex, startIndex + wordplayNumberCount)
-          .map((number: string) => ({
-            ...defaultNumberState,
-            value: number,
-          }));
+      return Array.from(
+        { length: stageWordplayCount },
+        (_: unknown, index: number) => {
+          const startIndex = wordplayNumberCount * index;
+          const numbers = piNumberChars
+            .slice(startIndex, startIndex + wordplayNumberCount)
+            .map((number: string) => ({
+              ...defaultNumberState,
+              value: number,
+            }));
 
-        return {
-          isTarget: false,
-          isSolved: true,
-          numbers: numbers,
-        };
-      },
-    );
-  }, [stageNumber]);
+          return {
+            isTarget: false,
+            isSolved: true,
+            numbers: numbers,
+          };
+        },
+      );
+    },
+    [stageNumber],
+  );
 
   const dynamicRoute = useRouter().asPath;
 
@@ -170,8 +173,7 @@ const Stage = ({
     setScore(0);
     setMode(MODE.Remember);
     setCondition(CONDITION.Normal);
-    setWordplayTiles(initialWordplayTiles());
-    setLevel(1);
+    setWordplayTiles(initialWordplayTiles(score));
     setTargetIndexesCombinations([]);
   }, [dynamicRoute, initialWordplayTiles]);
 
@@ -219,6 +221,7 @@ const Stage = ({
   );
 
   const getTargetTilesIndexes = useCallback((): number[] => {
+    if (level === 5) return [0, 1, 2, 3, 4];
     const maxLevel = 5;
     const removeTimes = maxLevel - level;
     let indexes: number[];
@@ -258,16 +261,9 @@ const Stage = ({
     });
   }, [getTargetTilesIndexes]);
 
-  const isLeveUpScore = (score: number): boolean => {
-    const levelUpScores = [5, 8, 11, 14];
-
-    return levelUpScores.includes(score);
-  };
-
   useEffect(() => {
-    if (isLeveUpScore(score)) {
-      setLevel((prevLevel: number) => prevLevel + 1);
-    } else if (score < maxScore) {
+    setWordplayTiles(initialWordplayTiles(score));
+    if (score < maxScore) {
       changeTargets();
     } else {
       setMode(MODE.Clear);
@@ -275,11 +271,9 @@ const Stage = ({
   }, [score]);
 
   useEffect(() => {
-    if (level === 1) return;
     resetNumberKeys();
     setTargetIndexesCombinations([]);
     changeTargets();
-    setCondition(CONDITION.LeveledUp);
   }, [level]);
 
   const setNotSolved = useCallback(() => {
@@ -389,7 +383,6 @@ const Stage = ({
       return;
     setMode(MODE.Remember);
     setScore((prevScore: number) => prevScore + 1);
-    if (isLeveUpScore(score + 1)) return;
     setCondition(CONDITION.Normal);
     resetNumberKeys();
   }, [score, wordplayTiles]);
@@ -597,13 +590,13 @@ const Stage = ({
             <StageDescription stageNumber={stageNumber} />
           </div>
           <div className="mt-2 w-full flex justify-center">
-            <Score score={score} />
+            <Score score={score} maxScore={maxScore} />
           </div>
           <div className="mt-2 w-full flex justify-center">
             <Wordplays
               mode={mode}
               tiles={wordplayTiles}
-              stageNumber={stageNumber}
+              stageNumber={(score + 1).toString()}
               typeModeCount={typeModeCount}
             />
           </div>

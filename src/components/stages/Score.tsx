@@ -1,11 +1,11 @@
-import { maxScore } from '../../pages/stages/[stage]';
 import Star from './Star';
 import { useCallback } from 'react';
 
 type Props = {
   score: number;
+  maxScore: number;
 };
-const Score = ({ score }: Props) => {
+const Score = ({ score, maxScore }: Props) => {
   const isBright = useCallback(
     (index: number) => {
       return index < score;
@@ -22,7 +22,7 @@ const Score = ({ score }: Props) => {
     );
   }
 
-  return <ul className="flex">{marks}</ul>;
+  return <ul className="flex w-full justify-between">{marks}</ul>;
 };
 
 export default Score;

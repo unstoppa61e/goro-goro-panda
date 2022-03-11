@@ -596,7 +596,7 @@ const Stage = ({
             <StageDescription stageNumber={stageNumber} />
           </div>
           <div className="mt-2 w-full flex justify-center">
-            <Score score={score} />
+            <Score score={score} maxScore={maxScore} />
           </div>
           <div className="mt-2 w-full flex justify-center">
             <Wordplays
