@@ -34,6 +34,7 @@ import {
   useClearedStage,
 } from '../../hooks/useClearedStage';
 import Image from 'next/image';
+import { useBodyStyling } from '../../hooks/useBodyStyling';
 
 const Modal = dynamic(() => import('../../components/stages/Modal'), {
   ssr: false,
@@ -107,7 +108,7 @@ const Stage = ({
   const [condition, setCondition] = useState<Condition>(CONDITION.Normal);
   const [wordplayTiles, setWordplayTiles] = useState<wordplayTile[]>([]);
   const [numberKeysMistaken, setNumberKeysMistaken] = useState<boolean[]>([]);
-  const level = 5;
+  const level = 2;
   const [targetIndexesCombinations, setTargetIndexesCombinations] = useState<
     number[][]
   >([]);
@@ -123,6 +124,13 @@ const Stage = ({
 
   const stageType = STAGE.Review;
   const router = useRouter();
+
+  useBodyStyling([
+    'bg-gradient-to-l',
+    'from-blue-300',
+    'via-green-200',
+    'to-yellow-300',
+  ]);
 
   useEffect(() => {
     if (
@@ -156,17 +164,21 @@ const Stage = ({
   }, []);
 
   const initialWordplayTiles = useCallback((score: number) => {
-    const getStagePiNumber = () => {
-      const startIndex = stagePiNumberLength * score;
-
-      return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
-    };
-    const piNumberChars = getStagePiNumber().split('');
+    if (score) {
+      console.log(score);
+    }
+    // const getStagePiNumber = () => {
+    //   const startIndex = stagePiNumberLength * score;
+    //
+    //   return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
+    // };
+    // const piNumberChars = getStagePiNumber().split('');
+    const piNumberChars = piNumber.split('');
 
     return Array.from(
       { length: stageWordplayCount },
       (_: unknown, index: number) => {
-        const startIndex = wordplayNumberCount * index;
+        const startIndex = wordplayNumberCount * index + 22 * index;
         const numbers = piNumberChars
           .slice(startIndex, startIndex + wordplayNumberCount)
           .map((number: string) => ({
@@ -234,7 +246,7 @@ const Stage = ({
   );
 
   const getTargetTilesIndexes = useCallback((): number[] => {
-    if (level === 5) return [0, 1, 2, 3, 4];
+    // if (level === 5) return [0, 1, 2, 3, 4];
     const maxLevel = 5;
     const removeTimes = maxLevel - level;
     let indexes: number[];

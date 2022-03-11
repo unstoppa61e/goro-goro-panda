@@ -10,12 +10,14 @@ type Props = {
 
 const Wordplays = ({ mode, tiles, stageNumber, typeModeCount }: Props) => {
   const wordplayTiles = tiles.map((tile: wordplayTile, index: number) => {
+    const currentStageNumber = (parseInt(stageNumber) + 2 * index).toString();
+
     return (
       <li key={index}>
         <WordplayTile
           mode={mode}
           tile={tile}
-          stageNumber={stageNumber}
+          stageNumber={currentStageNumber}
           typeModeCount={typeModeCount}
         />
       </li>

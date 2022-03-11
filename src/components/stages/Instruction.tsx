@@ -8,7 +8,6 @@ import {
   STAGE,
   StageType,
 } from '../../types';
-import { rangeEnds } from '../../lib/rangeEnds';
 
 type Props = {
   condition: Condition;
@@ -166,15 +165,9 @@ const Instruction = ({
 
     const rememberModeMessage = () => {
       if (stageType === STAGE.Review) {
-        const [start, end] = rangeEnds((score + 1).toString(), STAGE.Normal);
+        // const [start, end] = rangeEnds((score + 1).toString(), STAGE.Normal);
 
-        return (
-          <p className="text-black">
-            小数第{start}〜{end}位を
-            <br />
-            覚えよう！
-          </p>
-        );
+        return <p className="text-black">一緒に楽しく覚えよう！</p>;
       }
       if (level > 1)
         return <p className="text-black">黄色の部分を覚えよう！</p>;

@@ -553,15 +553,15 @@ const Stage = ({
     );
   }, [handleInputNumber, handleReviewButtonClick, mode, numberKeysMistaken]);
 
-  // const toggleModal = useCallback(() => {
-  //   setMode((prevMode) => {
-  //     if (prevMode === MODE.Clear) {
-  //       return MODE.Remember;
-  //     } else {
-  //       return MODE.Clear;
-  //     }
-  //   });
-  // }, []);
+  const toggleModal = useCallback(() => {
+    setMode((prevMode) => {
+      if (prevMode === MODE.Clear) {
+        return MODE.Remember;
+      } else {
+        return MODE.Clear;
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -622,9 +622,9 @@ const Stage = ({
           ) : (
             typingModeTools()
           )}
-          {/*<button onClick={toggleModal} className="mt-8 border-2 p-2 text-xl">*/}
-          {/*  toggle modal for debug*/}
-          {/*</button>*/}
+          <button onClick={toggleModal} className="mt-8 border-2 p-2 text-xl">
+            toggle modal for debug
+          </button>
         </div>
       </div>
     </>
