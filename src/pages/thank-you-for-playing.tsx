@@ -12,6 +12,7 @@ import FacebookButton from '../components/sns/FacebookButton';
 import TwitterButton from '../components/sns/TwitterButton';
 import { Site } from '../lib/site';
 import { NextSeo } from 'next-seo';
+import { useBodyStyling } from '../hooks/useBodyStyling';
 
 type Props = {
   clearedStageValues: string[];
@@ -45,6 +46,14 @@ const ThankYouForPlaying = ({ clearedStageValues }: Props) => {
       });
     }
   }, [router, clearedStage]);
+
+  const hyperColorSonora = [
+    'bg-gradient-to-r',
+    'from-yellow-200',
+    'to-yellow-500',
+  ];
+
+  useBodyStyling(hyperColorSonora);
 
   const sentences = [
     'いっぱい遊んでくれて、ありがとう！',

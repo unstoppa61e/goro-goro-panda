@@ -13,6 +13,13 @@ type Props = {
   stageClearCountValues: string[];
 };
 
+const hyperColorParadise = [
+  'bg-gradient-to-r',
+  'from-blue-300',
+  'via-green-200',
+  'to-yellow-300',
+];
+
 const ReviewStagePanel = ({
   reviewNumber,
   clearedReviewValues,
@@ -27,9 +34,9 @@ const ReviewStagePanel = ({
 
   const testId = `review-select-panel-${reviewNumber}`;
   const stagePath = `/reviews/${reviewNumber}`;
-
-  const className =
-    'flex justify-center items-center rounded-xl w-80 h-24 box-content bg-gradient-to-r from-blue-300 via-green-200 to-yellow-300';
+  const className = `flex justify-center items-center rounded-xl w-80 h-24 box-content ${hyperColorParadise.join(
+    ' ',
+  )}`;
 
   const locked = (
     <div
