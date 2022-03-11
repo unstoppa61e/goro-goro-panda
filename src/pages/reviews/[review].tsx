@@ -19,6 +19,14 @@ import { useRouter } from 'next/router';
 import Keyboard, { keyNumbers } from '../../components/stages/Keyboard';
 import ReviewButton from '../../components/stages/ReviewButton';
 import { Site } from '../../lib/site';
+import {
+  CONDITION,
+  Condition,
+  MODE,
+  Mode,
+  numberTileNumber,
+  wordplayTile,
+} from '../../types';
 
 const Modal = dynamic(() => import('../../components/stages/Modal'), {
   ssr: false,
@@ -56,35 +64,6 @@ export const getStaticPaths: GetStaticPaths = () => {
   }));
 
   return { paths, fallback: false };
-};
-
-export const MODE = {
-  Remember: 'remember',
-  Type: 'type',
-  Clear: 'clear',
-} as const;
-export type Mode = typeof MODE[keyof typeof MODE];
-
-export const CONDITION = {
-  Normal: 'normal',
-  Success: 'success',
-  Failure: 'failure',
-  LeveledUp: 'leveled up',
-} as const;
-export type Condition = typeof CONDITION[keyof typeof CONDITION];
-
-export type numberTileNumber = {
-  value: string;
-  isClosed: boolean;
-  isFocused: boolean;
-  isMistaken: boolean;
-  isCorrectLast: boolean;
-};
-
-export type wordplayTile = {
-  isTarget: boolean;
-  isSolved: boolean;
-  numbers: numberTileNumber[];
 };
 
 export const maxScore = 15;
