@@ -18,10 +18,10 @@ const animations = [
 ];
 
 const NumberTile = ({ tileNumber, isTarget, typeModeCount }: Props) => {
-  const mask = (
-    <div className="bg-black bg-opacity-50 rounded absolute w-full h-full" />
-  );
-
+  // const mask = (
+  //   <div className="bg-black bg-opacity-50 rounded absolute w-full h-full" />
+  // );
+  //
   const firework = (
     <div className="absolute">
       <FireworkAnimation />
@@ -47,7 +47,7 @@ const NumberTile = ({ tileNumber, isTarget, typeModeCount }: Props) => {
           _
         </div>
       </div>
-      {isTarget ? null : mask}
+      {isTarget ? null : null}
     </div>
   );
 };

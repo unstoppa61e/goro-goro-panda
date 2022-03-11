@@ -33,6 +33,7 @@ import {
   clearedStageLocalStorageExists,
   useClearedStage,
 } from '../../hooks/useClearedStage';
+import Image from 'next/image';
 
 const Modal = dynamic(() => import('../../components/stages/Modal'), {
   ssr: false,
@@ -591,48 +592,104 @@ const Stage = ({
           type: 'website',
         }}
       />
-      <Modal
-        visible={mode === MODE.Clear}
-        stageNumber={stageNumber}
-        clearCountValues={clearCountValues}
-        stageType={stageType}
-      />
-      <div className="flex justify-center">
-        <div className="w-80 py-4 flex flex-col items-center text-white">
-          <div className="w-full flex justify-center">
-            <StageDescription stageNumber={stageNumber} stageType={stageType} />
-          </div>
-          <div className="mt-2 w-full flex justify-center">
-            <Score score={score} maxScore={maxScore} />
-          </div>
-          <div className="mt-2 w-full flex justify-center">
-            <Wordplays
-              mode={mode}
-              tiles={wordplayTiles}
-              stageNumber={(score + 1).toString()}
-              typeModeCount={typeModeCount}
-            />
-          </div>
-          <div className="mt-5 w-full flex justify-center">
-            <Instruction
-              condition={condition}
-              mode={mode}
-              level={level}
-              firstTargetNumber={firstTargetNumber()}
-              stageType={stageType}
-              score={score}
-            />
-          </div>
-          {mode === MODE.Remember ? (
-            <div className="mt-20 w-full flex justify-center">
-              <StartAnsweringButton handleOnClick={handleOnClick} />
+      {/*<Modal*/}
+      {/*  visible={mode === MODE.Clear}*/}
+      {/*  stageNumber={stageNumber}*/}
+      {/*  clearCountValues={clearCountValues}*/}
+      {/*  stageType={stageType}*/}
+      {/*/>*/}
+      {/*<div className="flex justify-center">*/}
+      {/*  <div className="w-80 py-4 flex flex-col items-center text-white">*/}
+      {/*    <div className="w-full flex justify-center">*/}
+      {/*      <StageDescription stageNumber={stageNumber} stageType={stageType} />*/}
+      {/*    </div>*/}
+      {/*    <div className="mt-2 w-full flex justify-center">*/}
+      {/*      <Score score={score} maxScore={maxScore} />*/}
+      {/*    </div>*/}
+      {/*    <div className="mt-2 w-full flex justify-center">*/}
+      {/*      <Wordplays*/}
+      {/*        mode={mode}*/}
+      {/*        tiles={wordplayTiles}*/}
+      {/*        stageNumber={(score + 1).toString()}*/}
+      {/*        typeModeCount={typeModeCount}*/}
+      {/*      />*/}
+      {/*    </div>*/}
+      {/*    <div className="mt-5 w-full flex justify-center">*/}
+      {/*      <Instruction*/}
+      {/*        condition={condition}*/}
+      {/*        mode={mode}*/}
+      {/*        level={level}*/}
+      {/*        firstTargetNumber={firstTargetNumber()}*/}
+      {/*        stageType={stageType}*/}
+      {/*        score={score}*/}
+      {/*      />*/}
+      {/*    </div>*/}
+      {/*    {mode === MODE.Remember ? (*/}
+      {/*      <div className="mt-20 w-full flex justify-center">*/}
+      {/*        <StartAnsweringButton handleOnClick={handleOnClick} />*/}
+      <div className="flex justify-evenly">
+        <div className="justify-center mt-12">
+          <Image
+            src="/logo_4x.png"
+            alt="site logo"
+            width={220}
+            height={230}
+            objectFit="contain"
+            onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
+              e.preventDefault()
+            }
+            onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
+              e.preventDefault()
+            }
+          />
+        </div>
+
+        <Modal
+          visible={mode === MODE.Clear}
+          stageNumber={stageNumber}
+          clearCountValues={clearCountValues}
+          stageType={stageType}
+        />
+        <div className="flex justify-center mt-0.5">
+          <div className="w-80 py-4 flex flex-col items-center text-white">
+            <div className="w-full flex justify-center">
+              <StageDescription
+                stageNumber={stageNumber}
+                stageType={stageType}
+              />
             </div>
-          ) : (
-            typingModeTools()
-          )}
-          {/*<button onClick={toggleModal} className="mt-8 border-2 p-2 text-xl">*/}
-          {/*  toggle modal for debug*/}
-          {/*</button>*/}
+            <div className="mt-2 w-full flex justify-center">
+              <Score score={score} maxScore={maxScore} />
+            </div>
+            <div className="mt-2 w-full flex justify-center">
+              <Wordplays
+                mode={mode}
+                tiles={wordplayTiles}
+                stageNumber={stageNumber}
+                typeModeCount={typeModeCount}
+              />
+            </div>
+            <div className="mt-5 w-full flex justify-center">
+              <Instruction
+                condition={condition}
+                mode={mode}
+                level={level}
+                firstTargetNumber={firstTargetNumber()}
+                stageType={stageType}
+                score={score}
+              />
+            </div>
+            {mode === MODE.Remember ? (
+              <div className="mt-20 w-full flex justify-center">
+                <StartAnsweringButton handleOnClick={handleOnClick} />
+              </div>
+            ) : (
+              typingModeTools()
+            )}
+            {/*<button onClick={toggleModal} className="mt-8 border-2 p-2 text-xl">*/}
+            {/*  toggle modal for debug*/}
+            {/*</button>*/}
+          </div>
         </div>
       </div>
     </>

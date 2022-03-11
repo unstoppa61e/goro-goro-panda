@@ -93,9 +93,9 @@ const Instruction = ({
     return (
       <div className="pointer-events-none w-20">
         <Image
-          src={imgSrc(condition)}
+          src="/pandas/panda_happy_1.png"
           objectFit="contain"
-          width={75}
+          width={71}
           height={88}
           alt="panda"
           onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>

@@ -38,7 +38,7 @@ const WordplayTile = ({ mode, tile, stageNumber, typeModeCount }: Props) => {
   const mask = (
     <div
       className={`${
-        tile.isTarget ? '' : 'bg-black'
+        tile.isTarget ? '' : ''
       } bg-opacity-50 rounded absolute w-full h-full transition-all ease-in duration-500`}
     />
   );
