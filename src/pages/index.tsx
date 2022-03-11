@@ -8,7 +8,7 @@ import FacebookButton from '../components/sns/FacebookButton';
 import TwitterButton from '../components/sns/TwitterButton';
 import { GetStaticProps } from 'next';
 import { Site } from '../lib/site';
-import ReviewStagePanel from '../components/ReviewStagePanel';
+import ReviewStagePanel from '../components/stageSelect/ReviewStagePanel';
 
 export const piNumber =
   '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679';

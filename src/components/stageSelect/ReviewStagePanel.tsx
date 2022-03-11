@@ -4,7 +4,7 @@ import Image from 'next/image';
 import {
   clearedReviewDefaultValue,
   useClearedReview,
-} from '../hooks/useClearedReview';
+} from '../../hooks/useClearedReview';
 import StageClearCount from './StageClearCount';
 
 type Props = {
