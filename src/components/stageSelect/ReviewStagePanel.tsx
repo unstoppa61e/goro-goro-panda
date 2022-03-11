@@ -51,23 +51,22 @@ const ReviewStagePanel = ({
   )}`;
 
   const locked = (
-    <div
-      className={`${className} justify-center cursor-not-allowed pointer-events-none`}
-      data-testid={testId}
-    >
-      <Image
-        src="/lock.png"
-        alt="lock"
-        width={120}
-        height={72}
-        objectFit="contain"
-        onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
-          e.preventDefault()
-        }
-        onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
-          e.preventDefault()
-        }
-      />
+    <div className={`${className} cursor-not-allowed`} data-testid={testId}>
+      <div className="flex justify-center items-center pointer-events-none">
+        <Image
+          src="/lock.png"
+          alt="lock"
+          width={120}
+          height={72}
+          objectFit="contain"
+          onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
+            e.preventDefault()
+          }
+          onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
+            e.preventDefault()
+          }
+        />
+      </div>
     </div>
   );
 
