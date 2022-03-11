@@ -3,7 +3,6 @@ import Link from 'next/link';
 import React, { memo, useCallback, useEffect, useState } from 'react';
 
 import { stagePath } from '../stageSelect/StageSelectPanel';
-import { rangeEnds } from '../../lib/rangeEnds';
 import { STAGE_CLEAR_COUNT_STORAGE_KEY_ROOT } from '../../pages/stages/[stage]';
 import TwitterButton from '../sns/TwitterButton';
 import FacebookButton from '../sns/FacebookButton';
@@ -120,14 +119,13 @@ const Modal = memo(function Modal({
   );
 
   const snsText = useCallback((): string => {
-    const [rangeStart, rangeEnd] = rangeEnds(stageNumber, stageType);
-    const stageName = stageType === STAGE.Normal ? 'ステージ' : 'まとめ';
+    const heading = `【${Site.title}】`;
+    const stageName =
+      stageType === STAGE.Normal ? 'ステージ' : 'まとめステージ';
     if (clearCount < 1) {
-      return `【${Site.title}】小数第${rangeStart}~${rangeEnd}位の${stageName}を初クリアしました！`;
+      return `${heading}${stageName}${stageNumber}を初クリアしました！`;
     } else {
-      return `【${
-        Site.title
-      }】小数第${rangeStart}~${rangeEnd}位の${stageName}の習熟度が${
+      return `${heading}${stageName}${stageNumber}の習熟度が${
         clearCount + 1
       }にUPしました！`;
     }

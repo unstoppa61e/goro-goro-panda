@@ -573,10 +573,10 @@ const Stage = ({
   return (
     <>
       <NextSeo
-        title={`${Site.title} | ステージ${stageNumber}`}
+        title={`${Site.title} | まとめステージ${stageNumber}`}
         openGraph={{
           url: `${Site.origin}${router.asPath}`,
-          title: `${Site.title} | ステージ${stageNumber}`,
+          title: `${Site.title} | まとめステージ${stageNumber}`,
           description: Site.description,
           images: [
             {
