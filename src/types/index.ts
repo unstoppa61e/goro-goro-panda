@@ -25,3 +25,9 @@ export type wordplayTile = {
   isSolved: boolean;
   numbers: numberTileNumber[];
 };
+
+export const STAGE = {
+  Normal: 'normal',
+  Review: 'review',
+} as const;
+export type StageType = typeof STAGE[keyof typeof STAGE];

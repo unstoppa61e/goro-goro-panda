@@ -3,22 +3,25 @@ import Link from 'next/link';
 import React, { memo, useCallback, useEffect, useState } from 'react';
 
 import { stagePath } from '../stageSelect/StageSelectPanel';
-import { rangeEnds } from './StageDescription';
+import { rangeEnds } from '../../lib/rangeEnds';
 import { STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT } from '../../pages/stages/[stage]';
 import TwitterButton from '../sns/TwitterButton';
 import FacebookButton from '../sns/FacebookButton';
 import { Site } from '../../lib/site';
+import { STAGE, StageType } from '../../types';
 
 type Props = {
   visible: boolean;
   stageNumber: string;
   stageClearCountValues: string[];
+  stageType: StageType;
 };
 
 const Modal = memo(function Modal({
   visible,
   stageNumber,
   stageClearCountValues,
+  stageType,
 }: Props) {
   const [stageClearedCount, setStageClearedCount] = useState(0);
 
@@ -120,13 +123,14 @@ const Modal = memo(function Modal({
   );
 
   const snsText = useCallback((): string => {
-    const [rangeStart, rangeEnd] = rangeEnds(stageNumber);
+    const [rangeStart, rangeEnd] = rangeEnds(stageNumber, stageType);
+    const stageName = stageType === STAGE.Normal ? 'ステージ' : 'まとめ';
     if (stageClearedCount < 1) {
-      return `【${Site.title}】小数第${rangeStart}~${rangeEnd}位のステージを初クリアしました！`;
+      return `【${Site.title}】小数第${rangeStart}~${rangeEnd}位の${stageName}を初クリアしました！`;
     } else {
       return `【${
         Site.title
-      }】小数第${rangeStart}~${rangeEnd}位のステージの習熟度が${
+      }】小数第${rangeStart}~${rangeEnd}位の${stageName}の習熟度が${
         stageClearedCount + 1
       }にUPしました！`;
     }
