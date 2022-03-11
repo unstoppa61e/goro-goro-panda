@@ -12,7 +12,7 @@ import StartAnsweringButton from '../../components/stages/StartAnsweringButton';
 import { piNumber } from '../index';
 import {
   clearedStageDefaultValue,
-  localStorageClearedStageExists,
+  clearedStageLocalStorageExists,
   useClearedStage,
 } from '../../hooks/useClearedStage';
 import { useRouter } from 'next/router';
@@ -114,7 +114,7 @@ const Stage = ({
   useEffect(() => {
     if (
       clearedStage === clearedStageDefaultValue &&
-      localStorageClearedStageExists()
+      clearedStageLocalStorageExists()
     )
       return;
 

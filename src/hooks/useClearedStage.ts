@@ -4,7 +4,7 @@ const STORAGE_KEY_CLEARED_STAGE = 'gorogoropanda.com/clearedStage';
 
 export const clearedStageDefaultValue = 0;
 
-export const localStorageClearedStageExists = () => {
+export const clearedStageLocalStorageExists = () => {
   return localStorage.getItem(STORAGE_KEY_CLEARED_STAGE) !== null;
 };
 

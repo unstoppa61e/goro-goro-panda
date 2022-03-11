@@ -4,7 +4,7 @@ const STORAGE_KEY_CLEARED_REVIEW = 'gorogoropanda.com/clearedReview';
 
 export const clearedReviewDefaultValue = 0;
 
-export const localStorageClearedReviewExists = () => {
+export const clearedReviewLocalStorageExists = () => {
   return localStorage.getItem(STORAGE_KEY_CLEARED_REVIEW) !== null;
 };
 

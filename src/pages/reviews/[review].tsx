@@ -12,7 +12,7 @@ import StartAnsweringButton from '../../components/stages/StartAnsweringButton';
 import { piNumber } from '../index';
 import {
   clearedReviewDefaultValue,
-  localStorageClearedReviewExists,
+  clearedReviewLocalStorageExists,
   useClearedReview,
 } from '../../hooks/useClearedReview';
 import { useRouter } from 'next/router';
@@ -28,6 +28,11 @@ import {
   STAGE,
   wordplayTile,
 } from '../../types';
+import {
+  clearedStageDefaultValue,
+  clearedStageLocalStorageExists,
+  useClearedStage,
+} from '../../hooks/useClearedStage';
 
 const Modal = dynamic(() => import('../../components/stages/Modal'), {
   ssr: false,
@@ -50,6 +55,7 @@ export const getStaticProps: GetStaticProps = (
     props: {
       stageNumber,
       clearCountValues: process.env.CLEAR_COUNT!.split(','),
+      clearedStageValues: process.env.CLEARED_STAGE!.split(','),
       clearedReviewValues: process.env.CLEARED_STAGE!.split(','),
     },
   };
@@ -79,6 +85,7 @@ export const REVIEW_CLEAR_COUNT_STORAGE_KEY_ROOT =
 type Props = {
   stageNumber: string;
   clearCountValues: string[];
+  clearedStageValues: string[];
   clearedReviewValues: string[];
 };
 
@@ -91,6 +98,7 @@ const defaultNumberState = {
 const Stage = ({
   stageNumber,
   clearCountValues,
+  clearedStageValues,
   clearedReviewValues,
 }: Props) => {
   const [score, setScore] = useState(0);
@@ -103,6 +111,10 @@ const Stage = ({
     number[][]
   >([]);
   const [typeModeCount, setTypeModeCount] = useState(0);
+  const clearedStage = useClearedStage(
+    clearedStageDefaultValue,
+    clearedStageValues,
+  )[0];
   const [clearedReview, setClearedReview] = useClearedReview(
     clearedReviewDefaultValue,
     clearedReviewValues,
@@ -113,17 +125,22 @@ const Stage = ({
 
   useEffect(() => {
     if (
+      clearedStage === clearedStageDefaultValue &&
+      clearedStageLocalStorageExists()
+    )
+      return;
+    if (
       clearedReview === clearedReviewDefaultValue &&
-      localStorageClearedReviewExists()
+      clearedReviewLocalStorageExists()
     )
       return;
 
-    if (parseInt(stageNumber) > clearedReview + 1) {
+    if (clearedStage < 10 || parseInt(stageNumber) > clearedReview + 1) {
       router.push('/').catch((e) => {
         console.log(e);
       });
     }
-  }, [clearedReview, router, stageNumber]);
+  }, [clearedStage, clearedReview, router, stageNumber]);
 
   const defaultNumberKeysState = new Array<boolean>(keyNumbers.length).fill(
     false,

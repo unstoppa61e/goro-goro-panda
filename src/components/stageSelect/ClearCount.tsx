@@ -24,7 +24,7 @@ const ClearCount = ({ stage, clearCountValues, stageType }: Props) => {
     setClearCount(
       clearCountValue === null ? 0 : clearCountValues.indexOf(clearCountValue),
     );
-  }, [stage, clearCountValues]);
+  }, [stage, stageType, clearCountValues]);
 
   const imageSize = 12;
 
