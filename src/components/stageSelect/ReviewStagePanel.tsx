@@ -5,13 +5,13 @@ import {
   clearedReviewDefaultValue,
   useClearedReview,
 } from '../../hooks/useClearedReview';
-import StageClearCount from './StageClearCount';
+import ClearCount from './ClearCount';
 import { STAGE } from '../../types';
 
 type Props = {
   reviewNumber: number;
   clearedReviewValues: string[];
-  stageClearCountValues: string[];
+  clearCountValues: string[];
 };
 
 const hyperColorParadise = [
@@ -24,7 +24,7 @@ const hyperColorParadise = [
 const ReviewStagePanel = ({
   reviewNumber,
   clearedReviewValues,
-  stageClearCountValues,
+  clearCountValues,
 }: Props) => {
   const clearedReview = useClearedReview(
     clearedReviewDefaultValue,
@@ -67,9 +67,9 @@ const ReviewStagePanel = ({
         data-testid={testId}
       >
         <div className="absolute -top-1 left-5">
-          <StageClearCount
+          <ClearCount
             stage={reviewNumber}
-            stageClearCountValues={stageClearCountValues}
+            clearCountValues={clearCountValues}
             stageType={STAGE.Review}
           />
         </div>

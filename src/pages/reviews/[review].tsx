@@ -73,12 +73,12 @@ const stagePiNumberLength = 10;
 const wordplayNumberCount = 2;
 const stageWordplayCount = stagePiNumberLength / wordplayNumberCount;
 
-export const STORAGE_KEY_REVIEW_CLEAR_COUNT_ROOT =
+export const REVIEW_CLEAR_COUNT_STORAGE_KEY_ROOT =
   'gorogoropanda.com/reviewClearCount/';
 
 type Props = {
   stageNumber: string;
-  stageClearCountValues: string[];
+  clearCountValues: string[];
   clearedReviewValues: string[];
 };
 
@@ -90,7 +90,7 @@ const defaultNumberState = {
 
 const Stage = ({
   stageNumber,
-  stageClearCountValues,
+  clearCountValues,
   clearedReviewValues,
 }: Props) => {
   const [score, setScore] = useState(0);
@@ -181,24 +181,15 @@ const Stage = ({
     if (currentStageNumber > clearedReview) {
       setClearedReview(parseInt(stageNumber));
     }
-    const storageKeyReviewClearCount =
-      STORAGE_KEY_REVIEW_CLEAR_COUNT_ROOT + stageNumber;
-    const reviewClearCount = localStorage.getItem(storageKeyReviewClearCount);
-    const incrementedReviewClearCount =
-      reviewClearCount === null
-        ? 1
-        : stageClearCountValues.indexOf(reviewClearCount) + 1;
+    const clearCountStorageKey = `${REVIEW_CLEAR_COUNT_STORAGE_KEY_ROOT}${stageNumber}`;
+    const clearCount = localStorage.getItem(clearCountStorageKey);
+    const incrementedClearCount =
+      clearCount === null ? 1 : clearCountValues.indexOf(clearCount) + 1;
     localStorage.setItem(
-      storageKeyReviewClearCount,
-      stageClearCountValues[incrementedReviewClearCount],
+      clearCountStorageKey,
+      clearCountValues[incrementedClearCount],
     );
-  }, [
-    clearedReview,
-    mode,
-    setClearedReview,
-    stageClearCountValues,
-    stageNumber,
-  ]);
+  }, [clearedReview, mode, setClearedReview, clearCountValues, stageNumber]);
 
   const arrayEqual = useCallback((a: number[], b: number[]) => {
     if (!Array.isArray(a)) return false;
@@ -586,7 +577,7 @@ const Stage = ({
       <Modal
         visible={mode === MODE.Clear}
         stageNumber={stageNumber}
-        stageClearCountValues={stageClearCountValues}
+        clearCountValues={clearCountValues}
         stageType={stageType}
       />
       <div className="flex justify-center">

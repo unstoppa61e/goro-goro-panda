@@ -5,7 +5,7 @@ import {
   clearedStageDefaultValue,
   useClearedStage,
 } from '../../hooks/useClearedStage';
-import StageClearCount from './StageClearCount';
+import ClearCount from './ClearCount';
 import { useCallback } from 'react';
 import { STAGE } from '../../types';
 
@@ -13,7 +13,7 @@ type Props = {
   panelNumber: string;
   stage: number;
   clearedStageValues: string[];
-  stageClearCountValues: string[];
+  clearCountValues: string[];
 };
 
 export const backGroundColor = (stage: number): string => {
@@ -40,7 +40,7 @@ function StageSelectPanel({
   panelNumber,
   stage,
   clearedStageValues,
-  stageClearCountValues,
+  clearCountValues,
 }: Props) {
   const clearedStage = useClearedStage(
     clearedStageDefaultValue,
@@ -77,9 +77,9 @@ function StageSelectPanel({
           data-testid={panelTestId(stage)}
         >
           <div className="absolute -top-1 left-5">
-            <StageClearCount
+            <ClearCount
               stage={stage}
-              stageClearCountValues={stageClearCountValues}
+              clearCountValues={clearCountValues}
               stageType={STAGE.Normal}
             />
           </div>
