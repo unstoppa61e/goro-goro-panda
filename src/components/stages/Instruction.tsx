@@ -196,7 +196,7 @@ const Instruction = ({
       default:
         break;
     }
-  }, [level, mode, firstTargetNumber]);
+  }, [level, mode, firstTargetNumber, score, stageType]);
 
   return (
     <div className="flex justify-between w-full">

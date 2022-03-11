@@ -8,41 +8,47 @@ type Props = {
 };
 
 const StageDescription = ({ stageNumber, stageType }: Props) => {
-  const displayStage = useCallback((stageNumber: string) => {
-    const circledNumbers: { [key: string]: string } = {
-      '1': '①',
-      '2': '②',
-      '3': '③',
-      '4': '④',
-      '5': '⑤',
-      '6': '⑥',
-      '7': '⑦',
-      '8': '⑧',
-      '9': '⑨',
-      '10': '⑩',
-    };
+  const displayStage = useCallback(
+    (stageNumber: string) => {
+      const circledNumbers: { [key: string]: string } = {
+        '1': '①',
+        '2': '②',
+        '3': '③',
+        '4': '④',
+        '5': '⑤',
+        '6': '⑥',
+        '7': '⑦',
+        '8': '⑧',
+        '9': '⑨',
+        '10': '⑩',
+      };
 
-    const stageName = stageType === STAGE.Normal ? 'ステージ' : 'まとめ';
+      const stageName = stageType === STAGE.Normal ? 'ステージ' : 'まとめ';
 
-    return (
-      <div>
-        {stageName}
-        {circledNumbers[stageNumber]}
-      </div>
-    );
-  }, []);
+      return (
+        <div>
+          {stageName}
+          {circledNumbers[stageNumber]}
+        </div>
+      );
+    },
+    [stageType],
+  );
 
-  const displayDigitsRange = useCallback((stageNumber: string) => {
-    const [startDigit, endDigit] = rangeEnds(stageNumber, stageType);
+  const displayDigitsRange = useCallback(
+    (stageNumber: string) => {
+      const [startDigit, endDigit] = rangeEnds(stageNumber, stageType);
 
-    return (
-      <div>
-        小数第{startDigit}
-        <span className="font-mono">~</span>
-        {endDigit}位を覚えよう
-      </div>
-    );
-  }, []);
+      return (
+        <div>
+          小数第{startDigit}
+          <span className="font-mono">~</span>
+          {endDigit}位を覚えよう
+        </div>
+      );
+    },
+    [stageType],
+  );
 
   return (
     <h1 className="flex font-kosugi-maru">

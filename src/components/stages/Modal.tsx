@@ -83,7 +83,6 @@ const Modal = memo(function Modal({
     ));
   }, [dice]);
 
-  const lastStageNumber = 10;
   const messagePath = '/thank-you-for-playing';
 
   const frame = (
@@ -134,7 +133,7 @@ const Modal = memo(function Modal({
         stageClearedCount + 1
       }にUPしました！`;
     }
-  }, [stageNumber, stageClearedCount]);
+  }, [stageClearedCount, stageNumber, stageType]);
 
   const shareButtonSize = 40;
 
@@ -155,14 +154,17 @@ const Modal = memo(function Modal({
       </a>
     </Link>
   );
+
+  const nextStagePath = useCallback(() => {
+    if (stageType === STAGE.Review) return messagePath;
+    if (parseInt(stageNumber) % 10 === 0)
+      return `/reviews/${parseInt(stageNumber) / 10}`;
+
+    return stagePath(parseInt(stageNumber) + 1);
+  }, [stageNumber, stageType]);
+
   const moveToNextButton = (
-    <Link
-      href={
-        parseInt(stageNumber) < lastStageNumber
-          ? stagePath(parseInt(stageNumber) + 1)
-          : messagePath
-      }
-    >
+    <Link href={nextStagePath()}>
       <a
         className={`${linkButtonClass} bg-green-400 sm:hover:bg-green-500 active:bg-green-500`}
       >
