@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
   clearedStageDefaultValue,
-  localStorageClearedStageExists,
+  clearedStageLocalStorageExists,
   useClearedStage,
 } from '../hooks/useClearedStage';
 import { GetStaticProps } from 'next';
@@ -13,39 +13,60 @@ import TwitterButton from '../components/sns/TwitterButton';
 import { Site } from '../lib/site';
 import { NextSeo } from 'next-seo';
 import { useBodyStyling } from '../hooks/useBodyStyling';
+import {
+  clearedReviewDefaultValue,
+  clearedReviewLocalStorageExists,
+  useClearedReview,
+} from '../hooks/useClearedReview';
 
 type Props = {
   clearedStageValues: string[];
+  clearedReviewValues: string[];
 };
 
 export const getStaticProps: GetStaticProps = () => {
   return {
     props: {
       clearedStageValues: process.env.CLEARED_STAGE!.split(','),
+      clearedReviewValues: process.env.CLEARED_REVIEW!.split(','),
     },
   };
 };
 
-const ThankYouForPlaying = ({ clearedStageValues }: Props) => {
+const ThankYouForPlaying = ({
+  clearedStageValues,
+  clearedReviewValues,
+}: Props) => {
   const clearedStage = useClearedStage(
     clearedStageDefaultValue,
     clearedStageValues,
   )[0];
+
+  const clearedReview = useClearedReview(
+    clearedReviewDefaultValue,
+    clearedReviewValues,
+  )[0];
+
   const router = useRouter();
 
   useEffect(() => {
     if (
       clearedStage === clearedStageDefaultValue &&
-      localStorageClearedStageExists()
+      clearedStageLocalStorageExists()
+    )
+      return;
+    if (
+      clearedReview === clearedReviewDefaultValue &&
+      clearedReviewLocalStorageExists()
     )
       return;
 
-    if (clearedStage < 10) {
+    if (clearedStage < 10 || clearedReview < 1) {
       router.push('/').catch((e) => {
         console.log(e);
       });
     }
-  }, [router, clearedStage]);
+  }, [router, clearedStage, clearedReview]);
 
   const hyperColorSonora = [
     'bg-gradient-to-r',
