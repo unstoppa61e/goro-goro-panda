@@ -4,7 +4,7 @@ import React, { memo, useCallback, useEffect, useState } from 'react';
 
 import { stagePath } from '../stageSelect/StageSelectPanel';
 import { rangeEnds } from '../../lib/rangeEnds';
-import { STORAGE_KEY_CLEAR_COUNT_ROOT } from '../../pages/stages/[stage]';
+import { STAGE_CLEAR_COUNT_STORAGE_KEY_ROOT } from '../../pages/stages/[stage]';
 import TwitterButton from '../sns/TwitterButton';
 import FacebookButton from '../sns/FacebookButton';
 import { Site } from '../../lib/site';
@@ -13,28 +13,26 @@ import { STAGE, StageType } from '../../types';
 type Props = {
   visible: boolean;
   stageNumber: string;
-  stageClearCountValues: string[];
+  clearCountValues: string[];
   stageType: StageType;
 };
 
 const Modal = memo(function Modal({
   visible,
   stageNumber,
-  stageClearCountValues,
+  clearCountValues,
   stageType,
 }: Props) {
-  const [stageClearedCount, setStageClearedCount] = useState(0);
+  const [clearCount, setClearCount] = useState(0);
 
   useEffect(() => {
-    const stageClearCountValue = localStorage.getItem(
-      `${STORAGE_KEY_CLEAR_COUNT_ROOT}${stageNumber}`,
+    const clearCountValue = localStorage.getItem(
+      `${STAGE_CLEAR_COUNT_STORAGE_KEY_ROOT}${stageNumber}`,
     );
-    setStageClearedCount(
-      stageClearCountValue === null
-        ? 0
-        : stageClearCountValues.indexOf(stageClearCountValue),
+    setClearCount(
+      clearCountValue === null ? 0 : clearCountValues.indexOf(clearCountValue),
     );
-  }, [visible, stageNumber, stageClearCountValues]);
+  }, [visible, stageNumber, clearCountValues]);
 
   const dice = useCallback((count: number): number => {
     return Math.floor(Math.random() * count);
@@ -124,16 +122,16 @@ const Modal = memo(function Modal({
   const snsText = useCallback((): string => {
     const [rangeStart, rangeEnd] = rangeEnds(stageNumber, stageType);
     const stageName = stageType === STAGE.Normal ? 'ステージ' : 'まとめ';
-    if (stageClearedCount < 1) {
+    if (clearCount < 1) {
       return `【${Site.title}】小数第${rangeStart}~${rangeEnd}位の${stageName}を初クリアしました！`;
     } else {
       return `【${
         Site.title
       }】小数第${rangeStart}~${rangeEnd}位の${stageName}の習熟度が${
-        stageClearedCount + 1
+        clearCount + 1
       }にUPしました！`;
     }
-  }, [stageClearedCount, stageNumber, stageType]);
+  }, [clearCount, stageNumber, stageType]);
 
   const shareButtonSize = 40;
 

@@ -16,7 +16,7 @@ export const piNumber =
 type Props = {
   clearedStageValues: string[];
   clearedReviewValues: string[];
-  stageClearCountValues: string[];
+  clearCountValues: string[];
 };
 
 export const getStaticProps: GetStaticProps = () => {
@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps = () => {
 const Home: NextPage<Props> = ({
   clearedStageValues,
   clearedReviewValues,
-  stageClearCountValues,
+  clearCountValues: clearCountValues,
 }: Props) => {
   const panelNumbers = piNumber.match(/.{10}/g)!;
 
@@ -65,7 +65,7 @@ const Home: NextPage<Props> = ({
                   panelNumber={panelNumber}
                   stage={index + 1}
                   clearedStageValues={clearedStageValues}
-                  stageClearCountValues={stageClearCountValues}
+                  clearCountValues={clearCountValues}
                 />
               </li>
             ))}
@@ -74,7 +74,7 @@ const Home: NextPage<Props> = ({
             <ReviewStagePanel
               reviewNumber={1}
               clearedReviewValues={clearedReviewValues}
-              stageClearCountValues={stageClearCountValues}
+              clearCountValues={clearCountValues}
             />
           </div>
           <div className="mt-4 flex gap-x-8">
