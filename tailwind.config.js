@@ -27,6 +27,7 @@ module.exports = withAnimations({
         10: '10px',
       },
       colors: {
+        theme: '#3bcaff',
         locked: '#b7d6e8',
         'stage-1': '#ff88bb',
         'stage-2': '#bbeeff',
