@@ -1,12 +1,22 @@
 import React, { useCallback } from 'react';
 import Image from 'next/image';
-import { CONDITION, Condition, MODE, Mode } from '../../types';
+import {
+  CONDITION,
+  Condition,
+  MODE,
+  Mode,
+  STAGE,
+  StageType,
+} from '../../types';
+import { rangeEnds } from '../../lib/rangeEnds';
 
 type Props = {
   condition: Condition;
   mode: Mode;
   level: number;
   firstTargetNumber: string;
+  stageType: StageType;
+  score: number;
 };
 
 const wordplays: { [key: string]: { word: string; applicableLength: number } } =
@@ -56,7 +66,14 @@ const wordplays: { [key: string]: { word: string; applicableLength: number } } =
     '99': { word: '救急車', applicableLength: 2 },
   };
 
-const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
+const Instruction = ({
+  condition,
+  mode,
+  level,
+  firstTargetNumber,
+  stageType,
+  score,
+}: Props) => {
   const imgSrc = useCallback((condition: Condition): string => {
     switch (condition) {
       case CONDITION.Normal:
@@ -148,6 +165,17 @@ const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
     };
 
     const rememberModeMessage = () => {
+      if (stageType === STAGE.Review) {
+        const [start, end] = rangeEnds((score + 1).toString(), STAGE.Normal);
+
+        return (
+          <p className="text-black">
+            小数第{start}〜{end}位を
+            <br />
+            覚えよう！
+          </p>
+        );
+      }
       if (level > 1)
         return <p className="text-black">黄色の部分を覚えよう！</p>;
 
@@ -181,6 +209,10 @@ const Instruction = ({ condition, mode, level, firstTargetNumber }: Props) => {
       </div>
     </div>
   );
+};
+
+Instruction.defaultProps = {
+  score: 0,
 };
 
 export default Instruction;
