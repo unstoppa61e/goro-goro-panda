@@ -36,7 +36,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body>
+        <body className="bg-theme">
           <Main />
           <NextScript />
         </body>
