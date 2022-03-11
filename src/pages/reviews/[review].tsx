@@ -609,6 +609,8 @@ const Stage = ({
               mode={mode}
               level={level}
               firstTargetNumber={firstTargetNumber()}
+              stageType={stageType}
+              score={score}
             />
           </div>
           {mode === MODE.Remember ? (

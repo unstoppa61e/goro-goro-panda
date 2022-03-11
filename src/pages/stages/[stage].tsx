@@ -615,6 +615,7 @@ const Stage = ({
               mode={mode}
               level={level}
               firstTargetNumber={firstTargetNumber()}
+              stageType={stageType}
             />
           </div>
           {mode === MODE.Remember ? (
