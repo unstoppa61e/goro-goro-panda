@@ -138,36 +138,33 @@ const Stage = ({
     resetNumberKeys();
   }, []);
 
-  const initialWordplayTiles = useCallback(
-    (score: number) => {
-      const getStagePiNumber = () => {
-        const startIndex = stagePiNumberLength * score;
+  const initialWordplayTiles = useCallback((score: number) => {
+    const getStagePiNumber = () => {
+      const startIndex = stagePiNumberLength * score;
 
-        return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
-      };
-      const piNumberChars = getStagePiNumber().split('');
+      return piNumber.substring(startIndex, startIndex + stagePiNumberLength);
+    };
+    const piNumberChars = getStagePiNumber().split('');
 
-      return Array.from(
-        { length: stageWordplayCount },
-        (_: unknown, index: number) => {
-          const startIndex = wordplayNumberCount * index;
-          const numbers = piNumberChars
-            .slice(startIndex, startIndex + wordplayNumberCount)
-            .map((number: string) => ({
-              ...defaultNumberState,
-              value: number,
-            }));
+    return Array.from(
+      { length: stageWordplayCount },
+      (_: unknown, index: number) => {
+        const startIndex = wordplayNumberCount * index;
+        const numbers = piNumberChars
+          .slice(startIndex, startIndex + wordplayNumberCount)
+          .map((number: string) => ({
+            ...defaultNumberState,
+            value: number,
+          }));
 
-          return {
-            isTarget: false,
-            isSolved: true,
-            numbers: numbers,
-          };
-        },
-      );
-    },
-    [stageNumber],
-  );
+        return {
+          isTarget: false,
+          isSolved: true,
+          numbers: numbers,
+        };
+      },
+    );
+  }, []);
 
   const dynamicRoute = useRouter().asPath;
 
