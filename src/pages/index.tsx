@@ -24,7 +24,7 @@ export const getStaticProps: GetStaticProps = () => {
     props: {
       clearedStageValues: process.env.CLEARED_STAGE!.split(','),
       clearedReviewValues: process.env.CLEARED_REVIEW!.split(','),
-      stageClearCountValues: process.env.STAGE_CLEAR_COUNT!.split(','),
+      clearCountValues: process.env.CLEAR_COUNT!.split(','),
     },
   };
 };

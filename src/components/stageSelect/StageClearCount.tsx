@@ -1,18 +1,29 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT } from '../../pages/stages/[stage]';
+import { STORAGE_KEY_CLEAR_COUNT_ROOT } from '../../pages/stages/[stage]';
 import Image from 'next/image';
+import { STAGE, StageType } from '../../types';
+import { STORAGE_KEY_REVIEW_CLEAR_COUNT_ROOT } from '../../pages/reviews/[review]';
 
 type Props = {
   stage: number;
   stageClearCountValues: string[];
+  stageType: StageType;
 };
 
-const StageClearCount = ({ stage, stageClearCountValues }: Props) => {
+const StageClearCount = ({
+  stage,
+  stageClearCountValues,
+  stageType,
+}: Props) => {
   const [clearCount, setClearCount] = useState(0);
 
   useEffect(() => {
+    const storageKeyClearCountRoot =
+      stageType === STAGE.Normal
+        ? STORAGE_KEY_CLEAR_COUNT_ROOT
+        : STORAGE_KEY_REVIEW_CLEAR_COUNT_ROOT;
     const stageClearCountValue = localStorage.getItem(
-      `${STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT}${stage}`,
+      `${storageKeyClearCountRoot}${stage}`,
     );
     setClearCount(
       stageClearCountValue === null

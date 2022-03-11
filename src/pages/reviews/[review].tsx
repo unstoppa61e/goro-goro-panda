@@ -11,10 +11,10 @@ import Instruction from '../../components/stages/Instruction';
 import StartAnsweringButton from '../../components/stages/StartAnsweringButton';
 import { piNumber } from '../index';
 import {
-  clearedStageDefaultValue,
-  localStorageClearedStageExists,
-  useClearedStage,
-} from '../../hooks/useClearedStage';
+  clearedReviewDefaultValue,
+  localStorageClearedReviewExists,
+  useClearedReview,
+} from '../../hooks/useClearedReview';
 import { useRouter } from 'next/router';
 import Keyboard, { keyNumbers } from '../../components/stages/Keyboard';
 import ReviewButton from '../../components/stages/ReviewButton';
@@ -49,8 +49,8 @@ export const getStaticProps: GetStaticProps = (
   return {
     props: {
       stageNumber,
-      stageClearCountValues: process.env.STAGE_CLEAR_COUNT!.split(','),
-      clearedStageValues: process.env.CLEARED_STAGE!.split(','),
+      clearCountValues: process.env.CLEAR_COUNT!.split(','),
+      clearedReviewValues: process.env.CLEARED_STAGE!.split(','),
     },
   };
 };
@@ -73,26 +73,25 @@ const stagePiNumberLength = 10;
 const wordplayNumberCount = 2;
 const stageWordplayCount = stagePiNumberLength / wordplayNumberCount;
 
-export const STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT =
-  'gorogoropanda.com/stageClearCount/';
+export const STORAGE_KEY_REVIEW_CLEAR_COUNT_ROOT =
+  'gorogoropanda.com/reviewClearCount/';
 
 type Props = {
   stageNumber: string;
   stageClearCountValues: string[];
-  clearedStageValues: string[];
+  clearedReviewValues: string[];
 };
 
 const defaultNumberState = {
   isClosed: false,
   isFocused: false,
-  isMistaken: false,
   isCorrectLast: false,
 };
 
 const Stage = ({
   stageNumber,
   stageClearCountValues,
-  clearedStageValues,
+  clearedReviewValues,
 }: Props) => {
   const [score, setScore] = useState(0);
   const [mode, setMode] = useState<Mode>(MODE.Remember);
@@ -104,27 +103,27 @@ const Stage = ({
     number[][]
   >([]);
   const [typeModeCount, setTypeModeCount] = useState(0);
-  const [clearedStage, setClearedStage] = useClearedStage(
-    clearedStageDefaultValue,
-    clearedStageValues,
+  const [clearedReview, setClearedReview] = useClearedReview(
+    clearedReviewDefaultValue,
+    clearedReviewValues,
   );
 
-  const router = useRouter();
   const stageType = STAGE.Review;
+  const router = useRouter();
 
   useEffect(() => {
     if (
-      clearedStage === clearedStageDefaultValue &&
-      localStorageClearedStageExists()
+      clearedReview === clearedReviewDefaultValue &&
+      localStorageClearedReviewExists()
     )
       return;
 
-    if (parseInt(stageNumber) > clearedStage + 1) {
+    if (parseInt(stageNumber) > clearedReview + 1) {
       router.push('/').catch((e) => {
         console.log(e);
       });
     }
-  }, [clearedStage, router, stageNumber]);
+  }, [clearedReview, router, stageNumber]);
 
   const defaultNumberKeysState = new Array<boolean>(keyNumbers.length).fill(
     false,
@@ -179,21 +178,27 @@ const Stage = ({
   useEffect(() => {
     if (mode !== MODE.Clear || typeof window === 'undefined') return;
     const currentStageNumber = parseInt(stageNumber);
-    if (currentStageNumber > clearedStage) {
-      setClearedStage(parseInt(stageNumber));
+    if (currentStageNumber > clearedReview) {
+      setClearedReview(parseInt(stageNumber));
     }
-    const storageKeyStageClearCount =
-      STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT + stageNumber;
-    const stageClearCount = localStorage.getItem(storageKeyStageClearCount);
-    const incrementedStageClearCount =
-      stageClearCount === null
+    const storageKeyReviewClearCount =
+      STORAGE_KEY_REVIEW_CLEAR_COUNT_ROOT + stageNumber;
+    const reviewClearCount = localStorage.getItem(storageKeyReviewClearCount);
+    const incrementedReviewClearCount =
+      reviewClearCount === null
         ? 1
-        : stageClearCountValues.indexOf(stageClearCount) + 1;
+        : stageClearCountValues.indexOf(reviewClearCount) + 1;
     localStorage.setItem(
-      storageKeyStageClearCount,
-      stageClearCountValues[incrementedStageClearCount],
+      storageKeyReviewClearCount,
+      stageClearCountValues[incrementedReviewClearCount],
     );
-  }, [clearedStage, mode, setClearedStage, stageClearCountValues, stageNumber]);
+  }, [
+    clearedReview,
+    mode,
+    setClearedReview,
+    stageClearCountValues,
+    stageNumber,
+  ]);
 
   const arrayEqual = useCallback((a: number[], b: number[]) => {
     if (!Array.isArray(a)) return false;

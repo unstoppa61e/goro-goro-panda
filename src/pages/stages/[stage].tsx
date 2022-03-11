@@ -49,7 +49,7 @@ export const getStaticProps: GetStaticProps = (
   return {
     props: {
       stageNumber,
-      stageClearCountValues: process.env.STAGE_CLEAR_COUNT!.split(','),
+      clearCountValues: process.env.CLEAR_COUNT!.split(','),
       clearedStageValues: process.env.CLEARED_STAGE!.split(','),
     },
   };
@@ -73,7 +73,7 @@ const stagePiNumberLength = 10;
 const wordplayNumberCount = 2;
 const stageWordplayCount = stagePiNumberLength / wordplayNumberCount;
 
-export const STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT =
+export const STORAGE_KEY_CLEAR_COUNT_ROOT =
   'gorogoropanda.com/stageClearCount/';
 
 type Props = {
@@ -183,7 +183,7 @@ const Stage = ({
       setClearedStage(parseInt(stageNumber));
     }
     const storageKeyStageClearCount =
-      STORAGE_KEY_STAGE_CLEAR_COUNT_ROOT + stageNumber;
+      STORAGE_KEY_CLEAR_COUNT_ROOT + stageNumber;
     const stageClearCount = localStorage.getItem(storageKeyStageClearCount);
     const incrementedStageClearCount =
       stageClearCount === null

@@ -7,6 +7,7 @@ import {
 } from '../../hooks/useClearedStage';
 import StageClearCount from './StageClearCount';
 import { useCallback } from 'react';
+import { STAGE } from '../../types';
 
 type Props = {
   panelNumber: string;
@@ -79,6 +80,7 @@ function StageSelectPanel({
             <StageClearCount
               stage={stage}
               stageClearCountValues={stageClearCountValues}
+              stageType={STAGE.Normal}
             />
           </div>
           <StageSelectPanelContent
