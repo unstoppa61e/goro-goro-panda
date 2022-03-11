@@ -73,6 +73,7 @@ const Home: NextPage<Props> = ({
           <div className="flex justify-center items-center h-28">
             <ReviewStagePanel
               reviewNumber={1}
+              clearedStageValues={clearedStageValues}
               clearedReviewValues={clearedReviewValues}
               clearCountValues={clearCountValues}
             />

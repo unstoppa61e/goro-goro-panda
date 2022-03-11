@@ -7,9 +7,14 @@ import {
 } from '../../hooks/useClearedReview';
 import ClearCount from './ClearCount';
 import { STAGE } from '../../types';
+import {
+  clearedStageDefaultValue,
+  useClearedStage,
+} from '../../hooks/useClearedStage';
 
 type Props = {
   reviewNumber: number;
+  clearedStageValues: string[];
   clearedReviewValues: string[];
   clearCountValues: string[];
 };
@@ -23,15 +28,21 @@ const hyperColorParadise = [
 
 const ReviewStagePanel = ({
   reviewNumber,
+  clearedStageValues,
   clearedReviewValues,
   clearCountValues,
 }: Props) => {
+  const clearedStage = useClearedStage(
+    clearedStageDefaultValue,
+    clearedStageValues,
+  )[0];
   const clearedReview = useClearedReview(
     clearedReviewDefaultValue,
     clearedReviewValues,
   )[0];
 
-  const isLocked = reviewNumber > clearedReview + 1;
+  console.log(clearedStage);
+  const isLocked = clearedStage < 10 || reviewNumber > clearedReview + 1;
 
   const testId = `review-select-panel-${reviewNumber}`;
   const stagePath = `/reviews/${reviewNumber}`;
