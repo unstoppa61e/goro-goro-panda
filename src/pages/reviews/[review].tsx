@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps = (
 
 export const getStaticPaths: GetStaticPaths = () => {
   const stages: number[] = Array.from(
-    { length: 10 },
+    { length: 1 },
     (_: unknown, i: number) => i + 1,
   );
   const paths = stages.map((review: number) => ({
