@@ -4,11 +4,11 @@ import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next';
 import { NextSeo } from 'next-seo';
 import dynamic from 'next/dynamic';
 
-import StageDescription from '../../components/StageDescription';
-import Score from '../../components/Score';
-import Wordplays from '../../components/Wordplays';
-import Instruction from '../../components/Instruction';
-import StartAnsweringButton from '../../components/StartAnsweringButton';
+import StageDescription from '../../components/stages/StageDescription';
+import Score from '../../components/stages/Score';
+import Wordplays from '../../components/stages/Wordplays';
+import Instruction from '../../components/stages/Instruction';
+import StartAnsweringButton from '../../components/stages/StartAnsweringButton';
 import { piNumber } from '../index';
 import {
   clearedStageDefaultValue,
@@ -16,11 +16,13 @@ import {
   useClearedStage,
 } from '../../hooks/useClearedStage';
 import { useRouter } from 'next/router';
-import Keyboard, { keyNumbers } from '../../components/Keyboard';
-import ReviewButton from '../../components/ReviewButton';
+import Keyboard, { keyNumbers } from '../../components/stages/Keyboard';
+import ReviewButton from '../../components/stages/ReviewButton';
 import { Site } from '../../lib/site';
 
-const Modal = dynamic(() => import('../../components/Modal'), { ssr: false });
+const Modal = dynamic(() => import('../../components/stages/Modal'), {
+  ssr: false,
+});
 
 interface Params extends ParsedUrlQuery {
   review: string;
