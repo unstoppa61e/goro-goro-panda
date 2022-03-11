@@ -189,7 +189,7 @@ const Stage = ({
       clearCountStorageKey,
       clearCountValues[incrementedClearCount],
     );
-  }, [clearedReview, mode, setClearedReview, clearCountValues, stageNumber]);
+  }, [mode]);
 
   const arrayEqual = useCallback((a: number[], b: number[]) => {
     if (!Array.isArray(a)) return false;
