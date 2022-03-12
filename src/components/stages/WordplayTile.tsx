@@ -29,6 +29,7 @@ const WordplayTile = ({ mode, tile, stageNumber, typeModeCount }: Props) => {
             tileNumber={numberTileNumber}
             isTarget={tile.isTarget}
             typeModeCount={typeModeCount}
+            mode={mode}
           />
         </li>
       );

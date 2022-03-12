@@ -1,10 +1,11 @@
-import { numberTileNumber } from '../../types';
+import { MODE, Mode, numberTileNumber } from '../../types';
 import FireworkAnimation from './FireworkAnimation';
 
 type Props = {
   tileNumber: numberTileNumber;
   isTarget: boolean;
   typeModeCount: number;
+  mode: Mode;
 };
 
 const animations = [
@@ -17,7 +18,7 @@ const animations = [
   'animate-wobble',
 ];
 
-const NumberTile = ({ tileNumber, isTarget, typeModeCount }: Props) => {
+const NumberTile = ({ tileNumber, isTarget, typeModeCount, mode }: Props) => {
   const mask = (
     <div className="bg-black bg-opacity-50 rounded absolute w-full h-full" />
   );
@@ -35,7 +36,7 @@ const NumberTile = ({ tileNumber, isTarget, typeModeCount }: Props) => {
       className={`flex justify-center items-center w-6 h-7 ${
         tileNumber.isFocused ? 'duration-500 bg-focused' : 'bg-white'
       } ${
-        tileNumber.isCorrectLast ? animationSrc : ''
+        tileNumber.isCorrectLast && mode !== MODE.Clear ? animationSrc : ''
       } rounded text-black text-2xl font-bold relative`}
     >
       {tileNumber.isCorrectLast ? firework : null}
