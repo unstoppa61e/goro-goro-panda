@@ -497,17 +497,22 @@ const Stage = ({
   const keyPress = useCallback(
     (event: KeyboardEvent) => {
       const code = event.code;
+      const enter = 'Enter';
+      const isEnter = code.slice(-enter.length) === enter;
       switch (mode) {
         case MODE.Remember: {
-          const enter = 'Enter';
-          if (code.slice(-enter.length) !== enter) break;
+          if (!isEnter) break;
           handleOnClick();
           break;
         }
         case MODE.Type: {
-          const inputChar = code[code.length - 1];
-          if (isNaN(Number(inputChar))) break;
-          handleInputNumber(inputChar);
+          if (isEnter) {
+            handleReviewButtonClick();
+          } else {
+            const inputChar = code[code.length - 1];
+            if (isNaN(Number(inputChar))) break;
+            handleInputNumber(inputChar);
+          }
           break;
         }
         default:
