@@ -23,12 +23,12 @@ const StageDescription = ({ stageNumber, stageType }: Props) => {
         '10': '⑩',
       };
 
-      const stageName = stageType === STAGE.Normal ? 'ステージ' : 'まとめ';
+      const stageName = stageType === STAGE.Normal ? 'ステージ' : '【まとめ】';
 
       return (
         <div>
           {stageName}
-          {circledNumbers[stageNumber]}
+          {stageType === STAGE.Normal ? circledNumbers[stageNumber] : ''}
         </div>
       );
     },
