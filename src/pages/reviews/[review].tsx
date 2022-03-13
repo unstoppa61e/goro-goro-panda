@@ -95,7 +95,7 @@ const defaultNumberState = {
   isCorrectLast: false,
 };
 
-const Stage = ({
+const Review = ({
   stageNumber,
   clearCountValues,
   clearedStageValues,
@@ -644,4 +644,4 @@ const Stage = ({
   );
 };
 
-export default Stage;
+export default Review;
