@@ -123,11 +123,13 @@ const Modal = memo(function Modal({
     const stageName =
       stageType === STAGE.Normal ? 'ステージ' : 'まとめステージ';
     if (clearCount < 1) {
-      return `${heading}${stageName}${stageNumber}を初クリアしました！`;
+      return `${heading}${stageName}${
+        stageType === STAGE.Normal ? stageNumber : ''
+      }を初クリアしました！`;
     } else {
-      return `${heading}${stageName}${stageNumber}の習熟度が${
-        clearCount + 1
-      }にUPしました！`;
+      return `${heading}${stageName}${
+        stageType === STAGE.Normal ? stageNumber : ''
+      }の習熟度が${clearCount + 1}にUPしました！`;
     }
   }, [clearCount, stageNumber, stageType]);
 
