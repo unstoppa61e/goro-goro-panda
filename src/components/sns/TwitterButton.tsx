@@ -16,7 +16,7 @@ const TwitterButton = ({ text, size }: Props) => {
     <TwitterShareButton
       url={currentUrl}
       title={text}
-      hashtags={[Site.title, '円周率の日']}
+      hashtags={[Site.title]}
       related={[Site.developer]}
     >
       <TwitterIcon size={size} round />
