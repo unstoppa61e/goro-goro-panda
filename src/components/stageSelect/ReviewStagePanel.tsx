@@ -41,7 +41,6 @@ const ReviewStagePanel = ({
     clearedReviewValues,
   )[0];
 
-  console.log(clearedStage);
   const isLocked = clearedStage < 10 || reviewNumber > clearedReview + 1;
 
   const testId = `review-select-panel-${reviewNumber}`;
