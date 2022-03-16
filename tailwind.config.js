@@ -19,6 +19,9 @@ module.exports = withAnimations({
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        theme: "url('/main-body-background.png')",
+      },
       blur: {
         xs: '2px',
       },
