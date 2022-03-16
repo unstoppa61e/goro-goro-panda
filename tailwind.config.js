@@ -47,8 +47,13 @@ module.exports = withAnimations({
         locked: '#b7d6e8',
         mistaken: '#ffb5f0',
         ribbon: '#135acb',
-        ok: '#46d2aa',
         ng: '#ff3978',
+        'navy-darkest': '#47b4c6',
+        'navy-darker': '#43c3d4',
+        'navy-lighter': '#25cfdf',
+        'navy-lightest': '#2fdeee',
+        'ok-dark': '#04bc88',
+        'ok-light': '#59e7bf',
       },
       fontFamily: {
         'kosugi-maru': ['Kosugi Maru'],
@@ -56,6 +61,10 @@ module.exports = withAnimations({
       },
       width: {
         38: '152px',
+        42: '168px',
+      },
+      height: {
+        5.5: '22px',
       },
     },
   },
