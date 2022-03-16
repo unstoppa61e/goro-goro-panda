@@ -10,25 +10,24 @@ type Props = {
 const StageDescription = ({ stageNumber, stageType }: Props) => {
   const displayStage = useCallback(
     (stageNumber: string) => {
-      const circledNumbers: { [key: string]: string } = {
-        '1': '①',
-        '2': '②',
-        '3': '③',
-        '4': '④',
-        '5': '⑤',
-        '6': '⑥',
-        '7': '⑦',
-        '8': '⑧',
-        '9': '⑨',
-        '10': '⑩',
-      };
-
-      const stageName = stageType === STAGE.Normal ? 'ステージ' : '【まとめ】';
+      const stageName = stageType === STAGE.Normal ? 'ステージ' : 'まとめ';
 
       return (
-        <div>
-          {stageName}
-          {stageType === STAGE.Normal ? circledNumbers[stageNumber] : ''}
+        <div className="absolute h-9 left-2 top-0 w-14 px-3 text-center bg-ribbon flex-col justify-center items-center z-10 after:absolute after:left-0 after:top-full after:h-0 after:w-0 after:border-l-ribbon after:border-r-ribbon after:border-l-28 after:border-r-28 after:border-b-8 after:border-b-transparent ">
+          <div
+            className={`w-14 -ml-3 text-sm scale-75 ${
+              stageType === STAGE.Review ? 'mt-2.5' : ''
+            }`}
+          >
+            {stageName}
+          </div>
+          {stageType === STAGE.Normal ? (
+            <div className="-mt-1.5 flex justify-center font-bold">
+              {stageNumber}
+            </div>
+          ) : (
+            ''
+          )}
         </div>
       );
     },
@@ -40,7 +39,7 @@ const StageDescription = ({ stageNumber, stageType }: Props) => {
       const [startDigit, endDigit] = rangeEnds(stageNumber, stageType);
 
       return (
-        <div>
+        <div className="w-64 flex justify-center">
           小数第{startDigit}
           <span className="font-mono">~</span>
           {endDigit}位を覚えよう
@@ -51,9 +50,9 @@ const StageDescription = ({ stageNumber, stageType }: Props) => {
   );
 
   return (
-    <h1 className="flex font-kosugi-maru">
+    <h1 className="flex items-center font-kosugi-maru border-2 w-full bg-description rounded-lg border-white relative h-12">
       {displayStage(stageNumber)}
-      <span className="ml-2" />
+      <span className="ml-14" />
       {displayDigitsRange(stageNumber)}
     </h1>
   );
