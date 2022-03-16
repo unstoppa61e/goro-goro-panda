@@ -47,6 +47,7 @@ module.exports = withAnimations({
         locked: '#b7d6e8',
         mistaken: '#ffb5f0',
         ribbon: '#135acb',
+        ok: '#46d2aa',
         ng: '#ff3978',
         'navy-darkest': '#47b4c6',
         'navy-darker': '#43c3d4',
