@@ -136,18 +136,24 @@ const Modal = memo(function Modal({
   const shareButtonSize = 40;
 
   const snsButtons = (
-    <div className="flex flex-col gap-y-3">
+    <div className="flex justify-center gap-x-8 mt-2">
       <FacebookButton text={snsText()} size={shareButtonSize} />
       <TwitterButton text={snsText()} size={shareButtonSize} />
     </div>
   );
   const linkButtonClass =
-    'w-38 py-2 cursor-pointer rounded text-white font-bold text-center';
+    'relative w-48 py-3 cursor-pointer rounded-full text-white font-bold text-center border-4 border-white shadow-lg shadow-black/25';
+
+  const buttonLight = (
+    <span className="absolute top-1.5 left-3 w-40 h-5 bg-white opacity-30 rounded-full" />
+  );
+
   const stageSelectButton = (
     <Link href="/">
       <a
-        className={`${linkButtonClass} bg-gray-300 sm:hover:bg-gray-500 active:bg-gray-500`}
+        className={`${linkButtonClass} bg-gradient-to-b from-navy-darkest to-navy-darker sm:hover:bg-gray-500 active:bg-gray-500`}
       >
+        {buttonLight}
         ステージをえらぶ
       </a>
     </Link>
@@ -164,14 +170,15 @@ const Modal = memo(function Modal({
   const moveToNextButton = (
     <Link href={nextStagePath()}>
       <a
-        className={`${linkButtonClass} bg-green-400 sm:hover:bg-green-500 active:bg-green-500`}
+        className={`${linkButtonClass} bg-gradient-to-b from-ok-dark to-ok-light sm:hover:bg-green-500 active:bg-green-500`}
       >
+        {buttonLight}
         次に進む
       </a>
     </Link>
   );
   const linkButtons = (
-    <div className="flex flex-col gap-y-3">
+    <div className="flex flex-col items-center gap-y-3">
       {stageSelectButton}
       {moveToNextButton}
     </div>
@@ -184,7 +191,7 @@ const Modal = memo(function Modal({
       }`}
     >
       <div
-        className={`flex flex-col items-center absolute top-20 bg-white w-80 rounded-md ${
+        className={`flex flex-col items-center absolute top-24 bg-white w-80 rounded-md ${
           visible ? 'transition-all duration-200 scale-110' : 'scale-0'
         }`}
       >
@@ -203,9 +210,15 @@ const Modal = memo(function Modal({
             </div>
           </div>
         </div>
-        <div className="mt-6 my-4 mr-2 flex gap-x-8">
-          {snsButtons}
+        <div className="pt-3 pb-4 flex flex-col w-full items-center">
           {linkButtons}
+          <div className="flex flex-col text-xs mt-6">
+            <div className="flex flex-col text-gray-500">
+              <p>ステージクリア、おめでとう！</p>
+              <p>今の気持ちを友達とシェアしよう！</p>
+            </div>
+            {snsButtons}
+          </div>
         </div>
       </div>
     </div>
