@@ -42,7 +42,7 @@ const Home: NextPage<Props> = ({
   return (
     <div>
       <main className="flex justify-center">
-        <div className="w-80 pt-4 pb-6 flex flex-col items-center">
+        <div className="w-80 pt-4 flex flex-col items-center">
           <div className="pointer-events-none">
             <Image
               src="/logo_4x.png"
@@ -78,7 +78,7 @@ const Home: NextPage<Props> = ({
               clearCountValues={clearCountValues}
             />
           </div>
-          <div className="mt-4 flex gap-x-8">
+          <div className="mt-8 mb-2 flex gap-x-8">
             <FacebookButton text={shareButtonText} size={shareButtonSize} />
             <TwitterButton text={shareButtonText} size={shareButtonSize} />
           </div>
