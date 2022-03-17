@@ -5,9 +5,7 @@ import {
   clearedStageDefaultValue,
   useClearedStage,
 } from '../../hooks/useClearedStage';
-import ClearCount from './ClearCount';
 import { useCallback } from 'react';
-import { STAGE } from '../../types';
 
 type Props = {
   panelNumber: string;
@@ -64,6 +62,7 @@ function StageSelectPanel({
           panelNumber={panelNumber}
           stage={stage}
           isLocked={isLocked}
+          clearCountValues={clearCountValues}
         />
       </div>
     );
@@ -71,22 +70,16 @@ function StageSelectPanel({
     return (
       <Link href={stagePath(stage)}>
         <a
-          className={`flex pt-3 pb-2 rounded-xl w-80 box-content sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused ${backGroundColor(
+          className={`flex rounded-xl w-80 box-content sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused ${backGroundColor(
             stage,
           )} animate-pulse animate-infinite relative`}
           data-testid={panelTestId(stage)}
         >
-          <div className="absolute -top-1 left-5">
-            <ClearCount
-              stage={stage}
-              clearCountValues={clearCountValues}
-              stageType={STAGE.Normal}
-            />
-          </div>
           <StageSelectPanelContent
             panelNumber={panelNumber}
             stage={stage}
             isLocked={isLocked}
+            clearCountValues={clearCountValues}
           />
         </a>
       </Link>

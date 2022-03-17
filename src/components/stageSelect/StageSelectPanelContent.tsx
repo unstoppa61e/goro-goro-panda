@@ -1,17 +1,44 @@
 import StageSelectTile from './StageSelectTile';
+import { STAGE } from '../../types';
+import ClearCount from './ClearCount';
 
 type Props = {
   panelNumber: string;
   stage: number;
   isLocked: boolean;
+  clearCountValues: string[];
 };
-const StageSelectPanelContent = ({ panelNumber, stage, isLocked }: Props) => {
+const StageSelectPanelContent = ({
+  panelNumber,
+  stage,
+  isLocked,
+  clearCountValues,
+}: Props) => {
   const tileNumbers = panelNumber.match(/.{2}/g)!;
 
+  const circleColor = isLocked
+    ? 'bg-locked-dark'
+    : {
+        1: 'bg-stage-1-dark',
+        2: 'bg-stage-2-dark',
+        3: 'bg-stage-3-dark',
+        4: 'bg-stage-4-dark',
+        5: 'bg-stage-5-dark',
+        6: 'bg-stage-6-dark',
+        7: 'bg-stage-7-dark',
+        8: 'bg-stage-8-dark',
+        9: 'bg-stage-9-dark',
+        10: 'bg-stage-10-dark',
+      }[stage];
+
   const stageIndicator = (
-    <div className="w-16 mb-4 flex flex-col items-center">
-      <p className="text-white text-xs scale-75">ステージ</p>
-      <div className="h-9 w-9 flex justify-center items-center text-black text-2xl font-varela-round bg-white rounded-full">
+    <div className="flex items-center gap-x-1 text-white">
+      <p className="text-sm font-mono font-bold">ステージ</p>
+      <div
+        className={`h-6 w-6 flex justify-center items-center text-sm font-varela-round ${
+          circleColor ? circleColor : ''
+        } bg-opacity-70 rounded-full`}
+      >
         {stage}
       </div>
     </div>
@@ -32,8 +59,16 @@ const StageSelectPanelContent = ({ panelNumber, stage, isLocked }: Props) => {
   );
 
   return (
-    <div className="w-full flex items-center pl-2 pr-3">
-      {stageIndicator}
+    <div className="w-full flex flex-col">
+      <div className="flex justify-between items-center ml-3.5 mr-2.5 mt-1.5">
+        {stageIndicator}
+        <ClearCount
+          stage={stage}
+          clearCountValues={clearCountValues}
+          stageType={STAGE.Normal}
+        />
+      </div>
+      <hr className="border-dashed mt-1 mb-2" />
       {tiles}
     </div>
   );

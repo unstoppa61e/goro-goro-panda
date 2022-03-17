@@ -26,7 +26,7 @@ const ClearCount = ({ stage, clearCountValues, stageType }: Props) => {
     );
   }, [stage, stageType, clearCountValues]);
 
-  const imageSize = 12;
+  const imageSize = 20;
 
   const scoreImage = useCallback((filename: string) => {
     return (
@@ -69,7 +69,7 @@ const ClearCount = ({ stage, clearCountValues, stageType }: Props) => {
   }
 
   return (
-    <div className="flex gap-x-0.5 w-72 justify-end">
+    <div className="flex gap-x-0.5 -mb-1">
       {redCrowns}
       {crowns}
       {stars}
