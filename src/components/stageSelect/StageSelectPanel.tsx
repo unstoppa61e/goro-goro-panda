@@ -6,12 +6,14 @@ import {
   useClearedStage,
 } from '../../hooks/useClearedStage';
 import { useCallback } from 'react';
+import { STAGE, StageType } from '../../types';
 
 type Props = {
   panelNumber: string;
   stage: number;
   clearedStageValues: string[];
   clearCountValues: string[];
+  stageType: StageType;
 };
 
 export const backGroundColor = (stage: number): string => {
@@ -32,6 +34,9 @@ export const backGroundColor = (stage: number): string => {
   return colors[stage];
 };
 
+const reviewPanelColor =
+  'bg-gradient-to-r from-blue-300 via-green-200 to-yellow-300';
+
 export const stagePath = (stage: number): string => `/stages/${stage}`;
 
 function StageSelectPanel({
@@ -39,13 +44,17 @@ function StageSelectPanel({
   stage,
   clearedStageValues,
   clearCountValues,
+  stageType,
 }: Props) {
   const clearedStage = useClearedStage(
     clearedStageDefaultValue,
     clearedStageValues,
   )[0];
 
-  const isLocked = stage > clearedStage + 1;
+  const isLocked =
+    stageType === STAGE.Normal
+      ? stage > clearedStage + 1
+      : stage > clearedStage / 10;
 
   const panelTestId = useCallback(
     (stage: number): string => `stage-select-panel-${stage}`,
@@ -66,16 +75,19 @@ function StageSelectPanel({
           stage={stage}
           isLocked={isLocked}
           clearCountValues={clearCountValues}
+          stageType={stageType}
         />
       </div>
     );
   } else {
     return (
-      <Link href={stagePath(stage)}>
+      <Link href={stageType === STAGE.Normal ? stagePath(stage) : '/reviews/1'}>
         <a
-          className={`${panelStyling} sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused ${backGroundColor(
-            stage,
-          )} animate-pulse animate-infinite relative`}
+          className={`${panelStyling} sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused ${
+            stageType === STAGE.Normal
+              ? backGroundColor(stage)
+              : reviewPanelColor
+          } animate-pulse animate-infinite relative`}
           data-testid={panelTestId(stage)}
         >
           <StageSelectPanelContent
@@ -83,11 +95,16 @@ function StageSelectPanel({
             stage={stage}
             isLocked={isLocked}
             clearCountValues={clearCountValues}
+            stageType={stageType}
           />
         </a>
       </Link>
     );
   }
 }
+
+StageSelectPanel.defaultProps = {
+  panelNumber: '',
+};
 
 export default StageSelectPanel;

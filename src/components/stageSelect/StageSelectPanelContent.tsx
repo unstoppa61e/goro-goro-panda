@@ -1,18 +1,22 @@
 import StageSelectTile from './StageSelectTile';
-import { STAGE } from '../../types';
+import { STAGE, StageType } from '../../types';
 import ClearCount from './ClearCount';
+import Image from 'next/image';
+import React from 'react';
 
 type Props = {
   panelNumber: string;
   stage: number;
   isLocked: boolean;
   clearCountValues: string[];
+  stageType: StageType;
 };
 const StageSelectPanelContent = ({
   panelNumber,
   stage,
   isLocked,
   clearCountValues,
+  stageType,
 }: Props) => {
   const tileNumbers = panelNumber.match(/.{2}/g)!;
 
@@ -44,32 +48,59 @@ const StageSelectPanelContent = ({
     </div>
   );
 
-  const tiles = (
-    <ul className="w-full flex justify-between px-4">
-      {tileNumbers.map((tileNumber: string, index: number) => (
-        <li key={index}>
-          <StageSelectTile
-            tileNumber={tileNumber}
-            isLocked={isLocked}
-            firstTile={stage === 1 && index === 0}
-          />
-        </li>
-      ))}
-    </ul>
+  const reviewIndicator = (
+    <p className="text-white text-sm font-mono font-bold">スペシャルステージ</p>
   );
+
+  const image = (
+    <div
+      className={`${
+        isLocked ? 'brightness-0 invert blur-xs' : ''
+      } flex justify-center items-center mr-2.5 pointer-events-none h-[78px]`}
+    >
+      <Image
+        src="/pandas/panda_happy_1.png"
+        alt="happy panda"
+        width={80}
+        height={68}
+        objectFit="contain"
+        onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
+          e.preventDefault()
+        }
+        onMouseDown={(e: React.MouseEvent<HTMLImageElement>) =>
+          e.preventDefault()
+        }
+      />
+    </div>
+  );
+
+  const tiles =
+    stageType === STAGE.Review ? null : (
+      <ul className="w-full flex justify-between px-4">
+        {tileNumbers.map((tileNumber: string, index: number) => (
+          <li key={index}>
+            <StageSelectTile
+              tileNumber={tileNumber}
+              isLocked={isLocked}
+              firstTile={stage === 1 && index === 0}
+            />
+          </li>
+        ))}
+      </ul>
+    );
 
   return (
     <div className="w-full flex flex-col">
       <div className="flex justify-between items-center ml-3.5 mr-2.5">
-        {stageIndicator}
+        {stageType === STAGE.Normal ? stageIndicator : reviewIndicator}
         <ClearCount
           stage={stage}
           clearCountValues={clearCountValues}
-          stageType={STAGE.Normal}
+          stageType={stageType}
         />
       </div>
       <hr className="border-dashed mt-1 mb-2" />
-      {tiles}
+      {stageType === STAGE.Normal ? tiles : image}
     </div>
   );
 };
