@@ -226,7 +226,7 @@ const Instruction = ({
   return (
     <div className="flex justify-between w-full">
       {imageOnCondition()}
-      <div className="flex flex-col justify-center items-center bg-white rounded-lg py-1 px-3 w-60 mr-1 font-kosugi-maru relative before:absolute before:-left-4 before:top-7 before:border-8 before:border-transparent before:border-r-8 before:border-r-white">
+      <div className="flex flex-col justify-center items-center bg-white rounded-lg px-2 w-58 mr-1 font-kosugi-maru relative before:absolute before:-left-4 before:top-7 before:border-8 before:border-transparent before:border-r-8 before:border-r-white">
         <div>
           {messageOnCondition()}
           {messageOnMode()}
