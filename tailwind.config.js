@@ -70,6 +70,7 @@ module.exports = withAnimations({
         6.5: '26px',
         38: '152px',
         42: '168px',
+        58: '232px',
       },
       height: {
         5.5: '22px',
