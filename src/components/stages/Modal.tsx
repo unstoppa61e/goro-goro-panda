@@ -142,10 +142,10 @@ const Modal = memo(function Modal({
     </div>
   );
   const linkButtonClass =
-    'relative w-48 py-3 cursor-pointer rounded-full text-white font-bold text-center border-4 border-white shadow-lg shadow-black/25';
+    'relative text-sm w-44 py-2.5 cursor-pointer rounded-full text-white font-bold text-center border-4 border-white shadow-lg shadow-black/25';
 
   const buttonLight = (
-    <span className="absolute top-1.5 left-3 w-40 h-5 bg-white opacity-30 rounded-full" />
+    <span className="absolute top-1.5 left-3 w-36 h-4 bg-white opacity-30 rounded-full" />
   );
 
   const stageSelectButton = (
