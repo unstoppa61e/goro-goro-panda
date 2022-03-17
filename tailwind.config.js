@@ -61,6 +61,7 @@ module.exports = withAnimations({
         'varela-round': ['Varela Round'],
       },
       width: {
+        6.5: '26px',
         38: '152px',
         42: '168px',
       },
