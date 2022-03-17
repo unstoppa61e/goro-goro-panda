@@ -45,7 +45,7 @@ const StageSelectPanelContent = ({
   );
 
   const tiles = (
-    <ul className="w-full flex justify-between ml-1">
+    <ul className="w-full flex justify-between px-4">
       {tileNumbers.map((tileNumber: string, index: number) => (
         <li key={index}>
           <StageSelectTile
@@ -60,7 +60,7 @@ const StageSelectPanelContent = ({
 
   return (
     <div className="w-full flex flex-col">
-      <div className="flex justify-between items-center ml-3.5 mr-2.5 mt-1.5">
+      <div className="flex justify-between items-center ml-3.5 mr-2.5">
         {stageIndicator}
         <ClearCount
           stage={stage}

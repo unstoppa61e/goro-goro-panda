@@ -51,11 +51,14 @@ function StageSelectPanel({
     (stage: number): string => `stage-select-panel-${stage}`,
     [],
   );
+
+  const panelStyling = 'pt-1.5 pb-1 flex rounded-xl w-80 box-content';
+
   // Linkタグにhrefを指定しないとWarningが出るため、冗長ではあるが２パターンに書き分けている
   if (isLocked) {
     return (
       <div
-        className="flex pt-3 pb-2 rounded-xl w-80 box-content bg-locked cursor-not-allowed"
+        className={`${panelStyling} bg-locked cursor-not-allowed`}
         data-testid={panelTestId(stage)}
       >
         <StageSelectPanelContent
@@ -70,7 +73,7 @@ function StageSelectPanel({
     return (
       <Link href={stagePath(stage)}>
         <a
-          className={`flex rounded-xl w-80 box-content sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused ${backGroundColor(
+          className={`${panelStyling} sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused ${backGroundColor(
             stage,
           )} animate-pulse animate-infinite relative`}
           data-testid={panelTestId(stage)}
