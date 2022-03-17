@@ -543,7 +543,7 @@ const Stage = ({
 
   const typingModeTools = useCallback(() => {
     return (
-      <div className="mt-5 flex flex-col">
+      <div className="mt-4 flex flex-col">
         <div className="flex justify-center">
           <Keyboard
             handleInputNumber={handleInputNumber}
@@ -551,7 +551,7 @@ const Stage = ({
             numberKeysMistaken={numberKeysMistaken}
           />
         </div>
-        <div className="mt-5 flex justify-center">
+        <div className="mt-4 flex justify-center">
           <ReviewButton handleOnClick={handleReviewButtonClick} />
         </div>
       </div>
@@ -595,8 +595,8 @@ const Stage = ({
         clearCountValues={clearCountValues}
         stageType={stageType}
       />
-      <div className="flex justify-center">
-        <div className="w-80 py-4 flex flex-col items-center text-white">
+      <div className="h-screen flex justify-center items-center">
+        <div className="w-80 h-[508px] flex flex-col items-center text-white">
           <div className="w-full flex justify-center">
             <StageDescription stageNumber={stageNumber} stageType={stageType} />
           </div>
@@ -611,7 +611,7 @@ const Stage = ({
               typeModeCount={typeModeCount}
             />
           </div>
-          <div className="mt-5 w-full flex justify-center">
+          <div className="mt-4 w-full flex justify-center">
             <Instruction
               condition={condition}
               mode={mode}
