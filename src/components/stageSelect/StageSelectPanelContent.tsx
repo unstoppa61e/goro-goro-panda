@@ -18,7 +18,7 @@ const StageSelectPanelContent = ({ panelNumber, stage, isLocked }: Props) => {
   );
 
   const tiles = (
-    <ul className="w-full flex justify-between relative ml-1">
+    <ul className="w-full flex justify-between ml-1">
       {tileNumbers.map((tileNumber: string, index: number) => (
         <li key={index}>
           <StageSelectTile
@@ -32,7 +32,7 @@ const StageSelectPanelContent = ({ panelNumber, stage, isLocked }: Props) => {
   );
 
   return (
-    <div className="w-full flex items-center pl-2 pr-3 relative">
+    <div className="w-full flex items-center pl-2 pr-3">
       {stageIndicator}
       {tiles}
     </div>
