@@ -191,7 +191,7 @@ const Modal = memo(function Modal({
       }`}
     >
       <div
-        className={`flex flex-col items-center absolute top-8 bg-white w-80 rounded-md ${
+        className={`fixed inset-0 m-auto flex flex-col items-center bg-white w-80 h-[460px] rounded-md ${
           visible ? 'transition-all duration-200 scale-110' : 'scale-0'
         }`}
       >
