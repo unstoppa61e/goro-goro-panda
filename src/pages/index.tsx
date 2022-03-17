@@ -58,7 +58,7 @@ const Home: NextPage<Props> = ({
               }
             />
           </div>
-          <ul className="flex flex-col items-center">
+          <ul className="flex flex-col items-center gap-y-6">
             {panelNumbers.map((panelNumber: string, index: number) => (
               <li key={index} className="flex justify-center items-center h-28">
                 <StageSelectPanel

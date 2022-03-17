@@ -11,7 +11,7 @@ function StageSelectTile({ tileNumber, isLocked, firstTile }: Props) {
     return `/wordplays/${tileNumber}.png`;
   }, []);
 
-  const piStartIndicator = <div className="absolute -ml-3">3.</div>;
+  const piStartIndicator = <div className="absolute -ml-2">3.</div>;
 
   const questionImage = (
     <div className="absolute z-10">
@@ -53,7 +53,7 @@ function StageSelectTile({ tileNumber, isLocked, firstTile }: Props) {
   );
 
   const number = (
-    <div className="text-center text-white text-2xl font-varela-round -mt-2">
+    <div className="text-center text-white text-xl font-varela-round -mt-2">
       {firstTile ? piStartIndicator : null}
       {tileNumber}
     </div>
