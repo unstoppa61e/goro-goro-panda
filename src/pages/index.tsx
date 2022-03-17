@@ -47,8 +47,8 @@ const Home: NextPage<Props> = ({
             <Image
               src="/logo_4x.png"
               alt="site logo"
-              width={320}
-              height={230}
+              width={280}
+              height={200}
               objectFit="contain"
               onContextMenu={(e: React.MouseEvent<HTMLImageElement>) =>
                 e.preventDefault()
@@ -58,7 +58,7 @@ const Home: NextPage<Props> = ({
               }
             />
           </div>
-          <ul className="flex flex-col items-center gap-y-6">
+          <ul className="mt-5 flex flex-col items-center gap-y-9">
             {panelNumbers.map((panelNumber: string, index: number) => (
               <li key={index} className="flex justify-center items-center h-28">
                 <StageSelectPanel
