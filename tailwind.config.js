@@ -25,6 +25,9 @@ module.exports = withAnimations({
       blur: {
         xs: '2px',
       },
+      borderRadius: {
+        '50%': '50%',
+      },
       borderWidth: {
         6: '6px',
         10: '10px',
@@ -59,6 +62,9 @@ module.exports = withAnimations({
       fontFamily: {
         'kosugi-maru': ['Kosugi Maru'],
         'varela-round': ['Varela Round'],
+      },
+      opacity: {
+        15: '.15',
       },
       width: {
         6.5: '26px',
