@@ -89,9 +89,33 @@ const Instruction = ({
     }
   }, []);
 
+  let shadowLeft;
+  switch (condition) {
+    case CONDITION.Normal:
+      shadowLeft = 'left-[17px]';
+      break;
+    case CONDITION.Success:
+      shadowLeft = 'left-[16px]';
+      break;
+    case CONDITION.Failure:
+      shadowLeft = 'left-[15px]';
+      break;
+    case CONDITION.LeveledUp:
+      shadowLeft = 'left-[16px]';
+      break;
+    default:
+      shadowLeft = 'left-0';
+  }
+
+  const shadow = (
+    <span
+      className={`absolute bottom-0.5 ${shadowLeft} w-11 h-3.5 bg-black opacity-15 rounded-50%`}
+    />
+  );
+
   const imageOnCondition = useCallback(() => {
     return (
-      <div className="pointer-events-none w-20">
+      <div className="pointer-events-none w-20 z-10 relative">
         <Image
           src={imgSrc(condition)}
           objectFit="contain"
@@ -105,6 +129,7 @@ const Instruction = ({
             e.preventDefault()
           }
         />
+        {shadow}
       </div>
     );
   }, [condition, imgSrc]);
