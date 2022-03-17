@@ -191,7 +191,7 @@ const Modal = memo(function Modal({
       }`}
     >
       <div
-        className={`flex flex-col items-center absolute top-8 bg-white w-80 rounded-md ${
+        className={`lex flex-col items-center absolute top-8 bg-white w-80 rounded-md ${
           visible ? 'transition-all duration-200 scale-110' : 'scale-0'
         }`}
       >
@@ -199,7 +199,7 @@ const Modal = memo(function Modal({
           {frame}
           <div className="flex flex-col items-center absolute top-0 left-0 w-full">
             <h1 className="mt-12 mb-2 text-base font-bold">
-              🎉クリア、おめでとう！🎉
+              🎉 クリア おめでとう！ 🎉
             </h1>
             <div className="flex w-full ml-28">
               {pandaImage}
