@@ -8,14 +8,13 @@ import FacebookButton from '../components/sns/FacebookButton';
 import TwitterButton from '../components/sns/TwitterButton';
 import { GetStaticProps } from 'next';
 import { Site } from '../lib/site';
-import ReviewStagePanel from '../components/stageSelect/ReviewStagePanel';
+import { STAGE } from '../types';
 
 export const piNumber =
   '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679';
 
 type Props = {
   clearedStageValues: string[];
-  clearedReviewValues: string[];
   clearCountValues: string[];
 };
 
@@ -31,7 +30,6 @@ export const getStaticProps: GetStaticProps = () => {
 
 const Home: NextPage<Props> = ({
   clearedStageValues,
-  clearedReviewValues,
   clearCountValues: clearCountValues,
 }: Props) => {
   const panelNumbers = piNumber.match(/.{10}/g)!;
@@ -66,18 +64,22 @@ const Home: NextPage<Props> = ({
                   stage={index + 1}
                   clearedStageValues={clearedStageValues}
                   clearCountValues={clearCountValues}
+                  stageType={STAGE.Normal}
                 />
               </li>
             ))}
+            <li
+              key={`review-stage-panel`}
+              className="flex justify-center items-center h-28"
+            >
+              <StageSelectPanel
+                stage={1}
+                clearedStageValues={clearedStageValues}
+                clearCountValues={clearCountValues}
+                stageType={STAGE.Review}
+              />
+            </li>
           </ul>
-          <div className="flex justify-center items-center h-28">
-            <ReviewStagePanel
-              reviewNumber={1}
-              clearedStageValues={clearedStageValues}
-              clearedReviewValues={clearedReviewValues}
-              clearCountValues={clearCountValues}
-            />
-          </div>
           <div className="mt-8 mb-2 flex gap-x-8">
             <FacebookButton text={shareButtonText} size={shareButtonSize} />
             <TwitterButton text={shareButtonText} size={shareButtonSize} />
