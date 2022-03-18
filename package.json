@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "animated-tailwindcss": "^3.2.7",
+    "cypress-localstorage-commands": "^1.7.0",
     "lottie-web": "^5.8.1",
     "next": "^12.1.0",
     "next-seo": "^5.1.0",
