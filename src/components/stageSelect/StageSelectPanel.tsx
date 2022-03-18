@@ -34,6 +34,25 @@ export const backGroundColor = (stage: number): string => {
   return colors[stage];
 };
 
+const borderColor = (stage: number, stageType: StageType): string => {
+  if (stageType === STAGE.Review) return 'border-focused';
+  // Tailwindはクライアントサイドでのランタイムを考慮しないため、クラス名は静的である必要がある。
+  const colors: { [key: number]: string } = {
+    1: 'border-stage-1-dark',
+    2: 'border-stage-2-dark',
+    3: 'border-stage-3-dark',
+    4: 'border-stage-4-dark',
+    5: 'border-stage-5-dark',
+    6: 'border-stage-6-dark',
+    7: 'border-stage-7-dark',
+    8: 'border-stage-8-dark',
+    9: 'border-stage-9-dark',
+    10: 'border-stage-10-dark',
+  };
+
+  return colors[stage];
+};
+
 const reviewPanelColor =
   'bg-gradient-to-r from-blue-300 via-green-200 to-yellow-300';
 
@@ -67,7 +86,10 @@ function StageSelectPanel({
   if (isLocked) {
     return (
       <div
-        className={`${panelStyling} bg-locked cursor-not-allowed`}
+        className={`${panelStyling} bg-black bg-opacity-20 relative cursor-not-allowed border-2 ${borderColor(
+          stage,
+          stageType,
+        )}`}
         data-testid={panelTestId(stage)}
       >
         <StageSelectPanelContent

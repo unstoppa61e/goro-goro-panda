@@ -20,20 +20,18 @@ const StageSelectPanelContent = ({
 }: Props) => {
   const tileNumbers = panelNumber.match(/.{2}/g)!;
 
-  const circleColor = isLocked
-    ? 'bg-locked-dark'
-    : {
-        1: 'bg-stage-1-dark',
-        2: 'bg-stage-2-dark',
-        3: 'bg-stage-3-dark',
-        4: 'bg-stage-4-dark',
-        5: 'bg-stage-5-dark',
-        6: 'bg-stage-6-dark',
-        7: 'bg-stage-7-dark',
-        8: 'bg-stage-8-dark',
-        9: 'bg-stage-9-dark',
-        10: 'bg-stage-10-dark',
-      }[stage];
+  const circleColor = {
+    1: 'bg-stage-1-dark',
+    2: 'bg-stage-2-dark',
+    3: 'bg-stage-3-dark',
+    4: 'bg-stage-4-dark',
+    5: 'bg-stage-5-dark',
+    6: 'bg-stage-6-dark',
+    7: 'bg-stage-7-dark',
+    8: 'bg-stage-8-dark',
+    9: 'bg-stage-9-dark',
+    10: 'bg-stage-10-dark',
+  }[stage];
 
   const stageIndicator = (
     <div className="flex items-center gap-x-1 text-white">
@@ -55,7 +53,7 @@ const StageSelectPanelContent = ({
   const image = (
     <div
       className={`${
-        isLocked ? 'brightness-0 invert blur-xs' : ''
+        isLocked ? 'brightness-0 invert-0 opacity-50' : ''
       } flex justify-center items-center mr-2.5 pointer-events-none h-[78px]`}
     >
       <Image

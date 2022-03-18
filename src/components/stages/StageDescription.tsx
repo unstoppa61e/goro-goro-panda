@@ -10,7 +10,7 @@ type Props = {
 const StageDescription = ({ stageNumber, stageType }: Props) => {
   const displayStage = useCallback(
     (stageNumber: string) => {
-      const stageName = stageType === STAGE.Normal ? 'ステージ' : 'まとめ';
+      const stageName = stageType === STAGE.Normal ? 'ステージ' : 'スペシャル';
 
       return (
         <div className="absolute h-9 left-2 top-0 w-14 px-3 text-center bg-ribbon flex-col justify-center items-center z-10 after:absolute after:left-0 after:top-full after:h-0 after:w-0 after:border-l-ribbon after:border-r-ribbon after:border-l-28 after:border-r-28 after:border-b-8 after:border-b-transparent ">
