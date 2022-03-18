@@ -57,8 +57,6 @@ module.exports = withAnimations({
         'stage-10-dark': '#0056b2',
         description: '#43bbe8',
         focused: '#fff000',
-        locked: '#b7d6e8',
-        'locked-dark': '#2c688a',
         mistaken: '#ffb5f0',
         ribbon: '#135acb',
         ok: '#46d2aa',

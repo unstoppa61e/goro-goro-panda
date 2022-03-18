@@ -578,10 +578,10 @@ const Review = ({
   return (
     <>
       <NextSeo
-        title={`${Site.title} | まとめ`}
+        title={`${Site.title} | スペシャル`}
         openGraph={{
           url: `${Site.origin}${router.asPath}`,
-          title: `${Site.title} | まとめ`,
+          title: `${Site.title} | スペシャル`,
           description: Site.description,
           images: [
             {

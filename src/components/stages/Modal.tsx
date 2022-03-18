@@ -121,7 +121,7 @@ const Modal = memo(function Modal({
   const snsText = useCallback((): string => {
     const heading = `【${Site.title}】`;
     const stageName =
-      stageType === STAGE.Normal ? 'ステージ' : 'まとめステージ';
+      stageType === STAGE.Normal ? 'ステージ' : 'スペシャルステージ';
     if (clearCount < 1) {
       return `${heading}${stageName}${
         stageType === STAGE.Normal ? stageNumber : ''

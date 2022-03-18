@@ -15,7 +15,7 @@ function StageSelectTile({ tileNumber, isLocked, firstTile }: Props) {
 
   const image = (
     <div className="pointer-events-none">
-      <div className={`${isLocked ? 'brightness-0 invert blur-xs' : ''}`}>
+      <div className={`${isLocked ? 'brightness-0 invert-0 opacity-50' : ''}`}>
         <Image
           src={srcPath(tileNumber)}
           width={50}
