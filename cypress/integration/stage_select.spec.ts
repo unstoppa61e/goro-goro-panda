@@ -11,6 +11,7 @@ describe('Stage select', () => {
     context('if stage 1 is not cleared yet', () => {
       it('remains home', () => {
         cy.visit('/')
+        cy.wait(500)
         cy.findByTestId('stage-select-panel-2').click()
         cy.url().should('eq', Cypress.config().baseUrl + '/')
       })
@@ -20,6 +21,7 @@ describe('Stage select', () => {
       it('moves to stage 2', () => {
         cy.setLocalStorage('gorogoropanda.com/clearedStage', 'gjj');
         cy.visit('/')
+        cy.wait(500)
         cy.findByTestId('stage-select-panel-2').click()
         cy.url().should('eq', Cypress.config().baseUrl + '/stages/2')
       })
@@ -31,6 +33,7 @@ describe('Stage select', () => {
       it('remains home', () => {
         cy.setLocalStorage('gorogoropanda.com/clearedStage', 'u51');
         cy.visit('/')
+        cy.wait(500)
         cy.findByTestId('review-panel-1').click()
         cy.url().should('eq', Cypress.config().baseUrl + '/')
       })
@@ -40,6 +43,7 @@ describe('Stage select', () => {
       it('moves to review 1', () => {
         cy.setLocalStorage('gorogoropanda.com/clearedStage', 'ttw');
         cy.visit('/')
+        cy.wait(500)
         cy.findByTestId('review-panel-1').click()
         cy.url().should('eq', Cypress.config().baseUrl + '/reviews/1')
       })
