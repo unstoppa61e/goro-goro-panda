@@ -14,20 +14,22 @@ const StageDescription = ({ stageNumber, stageType }: Props) => {
 
       return (
         <div className="absolute h-9 left-2 top-0 w-14 px-3 text-center bg-ribbon flex-col justify-center items-center z-10 after:absolute after:left-0 after:top-full after:h-0 after:w-0 after:border-l-ribbon after:border-r-ribbon after:border-l-28 after:border-r-28 after:border-b-8 after:border-b-transparent ">
-          <div
-            className={`w-14 -ml-3 text-sm scale-75 ${
-              stageType === STAGE.Review ? 'mt-2.5' : ''
-            }`}
-          >
-            {stageName}
-          </div>
-          {stageType === STAGE.Normal ? (
-            <div className="-mt-1.5 flex justify-center font-bold">
-              {stageNumber}
+          <div className="flex flex-col justify-center items-center w-16 h-10 -ml-4">
+            <div
+              className={`${
+                stageType === STAGE.Normal ? 'text-sm' : 'text-xs'
+              } scale-75`}
+            >
+              {stageName}
             </div>
-          ) : (
-            ''
-          )}
+            {stageType === STAGE.Normal ? (
+              <div className="-mt-1.5 flex justify-center font-bold">
+                {stageNumber}
+              </div>
+            ) : (
+              ''
+            )}
+          </div>
         </div>
       );
     },
