@@ -36,7 +36,7 @@ function StageSelectTile({ tileNumber, isLocked, firstTile }: Props) {
   const number = (
     <div className="text-center text-white text-xl font-varela-round -mt-2">
       {firstTile ? piStartIndicator : null}
-      {tileNumber}
+      {isLocked ? '?' : tileNumber}
     </div>
   );
 
