@@ -1,6 +1,9 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { STAGE, StageType } from '../../types';
 import { rangeEnds } from '../../lib/rangeEnds';
+import { IconContext } from 'react-icons';
+import { IoArrowBackCircle } from 'react-icons/io5';
+import Link from 'next/link';
 
 type Props = {
   stageNumber: string;
@@ -41,7 +44,7 @@ const StageDescription = ({ stageNumber, stageType }: Props) => {
       const [startDigit, endDigit] = rangeEnds(stageNumber, stageType);
 
       return (
-        <div className="w-64 flex justify-center">
+        <div className="w-[216px] flex justify-center">
           小数第{startDigit}
           <span className="font-mono">~</span>
           {endDigit}位を覚えよう
@@ -55,7 +58,19 @@ const StageDescription = ({ stageNumber, stageType }: Props) => {
     <h1 className="flex items-center font-kosugi-maru border-2 w-full bg-description rounded-lg border-white relative h-12">
       {displayStage(stageNumber)}
       <span className="ml-14" />
-      {displayDigitsRange(stageNumber)}
+      <div className="ml-2 flex justify-between items-center">
+        {displayDigitsRange(stageNumber)}
+        <div className="flex flex-col items-center">
+          <p className="text-xs scale-75">もどる</p>
+          <Link href="/">
+            <a className="flex justify-center items-center -mt-1">
+              <IconContext.Provider value={{ size: '30px' }}>
+                <IoArrowBackCircle />
+              </IconContext.Provider>
+            </a>
+          </Link>
+        </div>
+      </div>
     </h1>
   );
 };
