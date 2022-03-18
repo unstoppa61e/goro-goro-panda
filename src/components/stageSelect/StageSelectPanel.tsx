@@ -76,7 +76,10 @@ function StageSelectPanel({
       : stage > clearedStage / 10;
 
   const panelTestId = useCallback(
-    (stage: number): string => `stage-select-panel-${stage}`,
+    (stage: number): string =>
+      stageType === STAGE.Normal
+        ? `stage-select-panel-${stage}`
+        : `review-panel-${stage}`,
     [],
   );
 
