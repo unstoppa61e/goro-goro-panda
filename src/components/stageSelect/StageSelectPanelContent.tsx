@@ -3,6 +3,7 @@ import { STAGE, StageType } from '../../types';
 import ClearCount from './ClearCount';
 import Image from 'next/image';
 import React from 'react';
+import { borderColor } from './StageSelectPanel';
 
 type Props = {
   panelNumber: string;
@@ -20,22 +21,39 @@ const StageSelectPanelContent = ({
 }: Props) => {
   const tileNumbers = panelNumber.match(/.{2}/g)!;
 
-  const circleColor = {
-    1: 'bg-stage-1-dark',
-    2: 'bg-stage-2-dark',
-    3: 'bg-stage-3-dark',
-    4: 'bg-stage-4-dark',
-    5: 'bg-stage-5-dark',
-    6: 'bg-stage-6-dark',
-    7: 'bg-stage-7-dark',
-    8: 'bg-stage-8-dark',
-    9: 'bg-stage-9-dark',
-    10: 'bg-stage-10-dark',
-  }[stage];
+  const circleColor = isLocked
+    ? {
+        1: 'bg-stage-1-dark',
+        2: 'bg-stage-2-dark',
+        3: 'bg-stage-3-dark',
+        4: 'bg-stage-4-dark',
+        5: 'bg-stage-5-dark',
+        6: 'bg-stage-6-dark',
+        7: 'bg-stage-7-dark',
+        8: 'bg-stage-8-dark',
+        9: 'bg-stage-9-dark',
+        10: 'bg-stage-10-dark',
+      }[stage]
+    : {
+        1: 'bg-stage-1',
+        2: 'bg-stage-2',
+        3: 'bg-stage-3',
+        4: 'bg-stage-4',
+        5: 'bg-stage-5',
+        6: 'bg-stage-6',
+        7: 'bg-stage-7',
+        8: 'bg-stage-8',
+        9: 'bg-stage-9',
+        10: 'bg-stage-10',
+      }[stage];
 
   const stageIndicator = (
-    <div className="flex items-center gap-x-1 text-white">
-      <p className="text-sm font-mono font-bold">ステージ</p>
+    <div
+      className={`flex items-center gap-x-1 ${
+        isLocked ? 'text-white' : 'text-black'
+      }`}
+    >
+      <p className="text-sm font-mono">ステージ</p>
       <div
         className={`h-6 w-6 flex justify-center items-center text-sm font-varela-round ${
           circleColor ? circleColor : ''
@@ -47,7 +65,7 @@ const StageSelectPanelContent = ({
   );
 
   const reviewIndicator = (
-    <p className="text-white text-sm font-mono font-bold">スペシャルステージ</p>
+    <p className="font-bold text-white text-sm font-mono">スペシャルステージ</p>
   );
 
   const image = (
@@ -81,6 +99,8 @@ const StageSelectPanelContent = ({
               tileNumber={tileNumber}
               isLocked={isLocked}
               firstTile={stage === 1 && index === 0}
+              stage={stage}
+              stageType={stageType}
             />
           </li>
         ))}
@@ -97,7 +117,13 @@ const StageSelectPanelContent = ({
           stageType={stageType}
         />
       </div>
-      <hr className="border-dashed mt-1 mb-2" />
+      <hr
+        className={`${borderColor(
+          stage,
+          stageType,
+          isLocked,
+        )} border-dashed mt-1 mb-2`}
+      />
       {stageType === STAGE.Normal ? tiles : image}
     </div>
   );

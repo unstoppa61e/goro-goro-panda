@@ -16,28 +16,29 @@ type Props = {
   stageType: StageType;
 };
 
-export const stageColor = (stage: number): string => {
+export const borderColor = (
+  stage: number,
+  stageType: StageType,
+  isLocked: boolean,
+): string => {
+  if (stageType === STAGE.Review) {
+    return isLocked ? 'border-focused' : 'border-white';
+  }
   // Tailwindはクライアントサイドでのランタイムを考慮しないため、クラス名は静的である必要がある。
   const colors: { [key: number]: string } = {
-    1: 'bg-stage-1',
-    2: 'bg-stage-2',
-    3: 'bg-stage-3',
-    4: 'bg-stage-4',
-    5: 'bg-stage-5',
-    6: 'bg-stage-6',
-    7: 'bg-stage-7',
-    8: 'bg-stage-8',
-    9: 'bg-stage-9',
-    10: 'bg-stage-10',
+    1: 'border-stage-1',
+    2: 'border-stage-2',
+    3: 'border-stage-3',
+    4: 'border-stage-4',
+    5: 'border-stage-5',
+    6: 'border-stage-6',
+    7: 'border-stage-7',
+    8: 'border-stage-8',
+    9: 'border-stage-9',
+    10: 'border-stage-10',
   };
 
-  return colors[stage];
-};
-
-const stageColorDark = (stage: number, stageType: StageType): string => {
-  if (stageType === STAGE.Review) return 'border-focused';
-  // Tailwindはクライアントサイドでのランタイムを考慮しないため、クラス名は静的である必要がある。
-  const colors: { [key: number]: string } = {
+  const darkColors: { [key: number]: string } = {
     1: 'border-stage-1-dark',
     2: 'border-stage-2-dark',
     3: 'border-stage-3-dark',
@@ -50,7 +51,7 @@ const stageColorDark = (stage: number, stageType: StageType): string => {
     10: 'border-stage-10-dark',
   };
 
-  return colors[stage];
+  return isLocked ? darkColors[stage] : colors[stage];
 };
 
 const reviewPanelColor =
@@ -83,16 +84,17 @@ function StageSelectPanel({
     [],
   );
 
-  const panelStyling = 'pt-1.5 pb-1 flex rounded-xl w-80 box-content';
+  const panelStyling = `pt-1.5 pb-1 flex rounded-xl w-80 box-content border-4 ${borderColor(
+    stage,
+    stageType,
+    isLocked,
+  )}`;
 
   // Linkタグにhrefを指定しないとWarningが出るため、冗長ではあるが２パターンに書き分けている
   if (isLocked) {
     return (
       <div
-        className={`${panelStyling} bg-black bg-opacity-20 relative cursor-not-allowed border-2 ${stageColorDark(
-          stage,
-          stageType,
-        )}`}
+        className={`${panelStyling} bg-black bg-opacity-20 relative cursor-not-allowed`}
         data-testid={panelTestId(stage)}
       >
         <StageSelectPanelContent
@@ -108,8 +110,8 @@ function StageSelectPanel({
     return (
       <Link href={stageType === STAGE.Normal ? stagePath(stage) : '/reviews/1'}>
         <a
-          className={`${panelStyling} sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused ${
-            stageType === STAGE.Normal ? stageColor(stage) : reviewPanelColor
+          className={`${panelStyling} sm:hover:border-focused active:border-focused ${
+            stageType === STAGE.Normal ? 'bg-panel-white' : reviewPanelColor
           } animate-pulse animate-infinite relative`}
           data-testid={panelTestId(stage)}
         >

@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import NumberTile from './NumberTile';
 
-import { MODE, Mode, numberTileNumber, wordplayTile } from '../../types';
-import { stageColor } from '../stageSelect/StageSelectPanel';
+import { MODE, Mode, numberTileNumber, STAGE, wordplayTile } from '../../types';
 import React, { useCallback } from 'react';
+import { stageColor } from './StageDescription';
 
 type Props = {
   mode: Mode;
@@ -58,6 +58,7 @@ const WordplayTile = ({ mode, tile, stageNumber, typeModeCount }: Props) => {
         <div
           className={`flex justify-center items-center h-14 ${stageColor(
             parseInt(stageNumber),
+            STAGE.Normal,
           )} rounded relative pointer-events-none`}
         >
           <div
