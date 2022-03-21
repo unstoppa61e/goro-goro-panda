@@ -35,7 +35,7 @@ const Home: NextPage<Props> = ({
   const panelNumbers = piNumber.match(/.{10}/g)!;
 
   const shareButtonText = `【${Site.title}】で語呂合わせのゲームをプレイ中！`;
-  const shareButtonSize = 60;
+  const shareButtonSize = 48;
 
   return (
     <div>
