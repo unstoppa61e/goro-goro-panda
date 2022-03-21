@@ -2,6 +2,7 @@ describe('Stage select', () => {
   context('when the user clicks stage 1 panel', () => {
     it('moves to stage 1', () => {
       cy.visit('/')
+      cy.wait(500)
       cy.findByTestId('stage-select-panel-1').click()
       cy.url().should('eq', Cypress.config().baseUrl + '/stages/1')
     })
