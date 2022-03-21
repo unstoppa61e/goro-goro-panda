@@ -53,7 +53,7 @@ const StageSelectPanelContent = ({
         isLocked ? 'text-white' : 'text-black'
       }`}
     >
-      <p className="text-sm font-mono">ステージ</p>
+      <p className="font-bold text-sm font-mono">ステージ</p>
       <div
         className={`h-6 w-6 flex justify-center items-center text-sm font-varela-round ${
           circleColor ? circleColor : ''
@@ -92,7 +92,7 @@ const StageSelectPanelContent = ({
 
   const tiles =
     stageType === STAGE.Review ? null : (
-      <ul className="w-full flex justify-between px-4">
+      <ul className="w-full flex justify-between px-3">
         {tileNumbers.map((tileNumber: string, index: number) => (
           <li key={index}>
             <StageSelectTile
@@ -109,7 +109,7 @@ const StageSelectPanelContent = ({
 
   return (
     <div className="w-full flex flex-col">
-      <div className="flex justify-between items-center ml-3.5 mr-2.5">
+      <div className="flex justify-between items-center px-3">
         {stageType === STAGE.Normal ? stageIndicator : reviewIndicator}
         <ClearCount
           stage={stage}
