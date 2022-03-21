@@ -2,7 +2,7 @@ import Image from 'next/image';
 import NumberTile from './NumberTile';
 
 import { MODE, Mode, numberTileNumber, wordplayTile } from '../../types';
-import { backGroundColor } from '../stageSelect/StageSelectPanel';
+import { stageColor } from '../stageSelect/StageSelectPanel';
 import React, { useCallback } from 'react';
 
 type Props = {
@@ -56,7 +56,7 @@ const WordplayTile = ({ mode, tile, stageNumber, typeModeCount }: Props) => {
     >
       <div className="h-full w-14 flex flex-col justify-between">
         <div
-          className={`flex justify-center items-center h-14 ${backGroundColor(
+          className={`flex justify-center items-center h-14 ${stageColor(
             parseInt(stageNumber),
           )} rounded relative pointer-events-none`}
         >

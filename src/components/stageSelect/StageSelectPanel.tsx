@@ -16,7 +16,7 @@ type Props = {
   stageType: StageType;
 };
 
-export const backGroundColor = (stage: number): string => {
+export const stageColor = (stage: number): string => {
   // Tailwindはクライアントサイドでのランタイムを考慮しないため、クラス名は静的である必要がある。
   const colors: { [key: number]: string } = {
     1: 'bg-stage-1',
@@ -34,7 +34,7 @@ export const backGroundColor = (stage: number): string => {
   return colors[stage];
 };
 
-const borderColor = (stage: number, stageType: StageType): string => {
+const stageColorDark = (stage: number, stageType: StageType): string => {
   if (stageType === STAGE.Review) return 'border-focused';
   // Tailwindはクライアントサイドでのランタイムを考慮しないため、クラス名は静的である必要がある。
   const colors: { [key: number]: string } = {
@@ -89,7 +89,7 @@ function StageSelectPanel({
   if (isLocked) {
     return (
       <div
-        className={`${panelStyling} bg-black bg-opacity-20 relative cursor-not-allowed border-2 ${borderColor(
+        className={`${panelStyling} bg-black bg-opacity-20 relative cursor-not-allowed border-2 ${stageColorDark(
           stage,
           stageType,
         )}`}
@@ -109,9 +109,7 @@ function StageSelectPanel({
       <Link href={stageType === STAGE.Normal ? stagePath(stage) : '/reviews/1'}>
         <a
           className={`${panelStyling} sm:hover:border-6 sm:hover:border-focused active:border-6 active:border-focused ${
-            stageType === STAGE.Normal
-              ? backGroundColor(stage)
-              : reviewPanelColor
+            stageType === STAGE.Normal ? stageColor(stage) : reviewPanelColor
           } animate-pulse animate-infinite relative`}
           data-testid={panelTestId(stage)}
         >
