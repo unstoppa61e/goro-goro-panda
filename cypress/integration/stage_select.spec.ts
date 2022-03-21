@@ -3,7 +3,7 @@ describe('Stage select', () => {
     it('moves to stage 1', () => {
       cy.visit('/')
       cy.wait(500)
-      cy.findByTestId('stage-select-panel-1').click()
+      cy.findByTestId('stage-panel-1').click()
       cy.url().should('eq', Cypress.config().baseUrl + '/stages/1')
     })
   })
@@ -13,7 +13,7 @@ describe('Stage select', () => {
       it('remains home', () => {
         cy.visit('/')
         cy.wait(500)
-        cy.findByTestId('stage-select-panel-2').click()
+        cy.findByTestId('stage-panel-2').click()
         cy.url().should('eq', Cypress.config().baseUrl + '/')
       })
     })
@@ -23,7 +23,7 @@ describe('Stage select', () => {
         cy.setLocalStorage('gorogoropanda.com/clearedStage', 'gjj');
         cy.visit('/')
         cy.wait(500)
-        cy.findByTestId('stage-select-panel-2').click()
+        cy.findByTestId('stage-panel-2').click()
         cy.url().should('eq', Cypress.config().baseUrl + '/stages/2')
       })
     })
