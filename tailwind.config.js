@@ -66,6 +66,7 @@ module.exports = withAnimations({
         'navy-lightest': '#2fdeee',
         'ok-dark': '#04bc88',
         'ok-light': '#59e7bf',
+        'panel-white': '#ddf1ff',
       },
       fontFamily: {
         'kosugi-maru': ['Kosugi Maru'],

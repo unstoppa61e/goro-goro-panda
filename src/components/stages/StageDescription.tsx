@@ -10,7 +10,7 @@ type Props = {
   stageType: StageType;
 };
 
-const stageColor = (stage: number, stageType: StageType): string => {
+export const stageColor = (stage: number, stageType: StageType): string => {
   if (stageType === STAGE.Review) {
     return 'bg-navy-lightest';
   }
@@ -78,7 +78,7 @@ const StageDescription = ({ stageNumber, stageType }: Props) => {
 
       return (
         <div
-          className={`absolute h-9 left-2 top-0 w-14 px-3 text-center ${stageColorDark(
+          className={`absolute h-[34px] left-2 top-0 w-14 px-3 text-center ${stageColorDark(
             parseInt(stageNumber),
             stageType,
           )} flex-col justify-center items-center z-10 after:absolute after:left-0 after:top-full after:h-0 after:w-0 ${ribbonColor(
@@ -86,7 +86,7 @@ const StageDescription = ({ stageNumber, stageType }: Props) => {
             stageType,
           )} after:border-l-28 after:border-r-28 after:border-b-8 after:border-b-transparent`}
         >
-          <div className="flex flex-col justify-center items-center w-16 h-10 -ml-4">
+          <div className="flex flex-col justify-center items-center w-16 h-10 -ml-4 -mt-1">
             <div
               className={`${
                 stageType === STAGE.Normal ? 'text-sm' : 'text-xs'
@@ -95,7 +95,7 @@ const StageDescription = ({ stageNumber, stageType }: Props) => {
               {stageName}
             </div>
             {stageType === STAGE.Normal ? (
-              <div className="-mt-1.5 flex justify-center font-bold">
+              <div className="-mt-2 flex justify-center font-bold">
                 {stageNumber}
               </div>
             ) : (
@@ -113,7 +113,7 @@ const StageDescription = ({ stageNumber, stageType }: Props) => {
       const [startDigit, endDigit] = rangeEnds(stageNumber, stageType);
 
       return (
-        <div className="w-[216px] flex justify-center">
+        <div className="w-[214px] flex justify-center">
           小数第{startDigit}
           <span className="font-mono">~</span>
           {endDigit}位を覚えよう
@@ -125,10 +125,10 @@ const StageDescription = ({ stageNumber, stageType }: Props) => {
 
   return (
     <h1
-      className={`flex items-center font-kosugi-maru border-2 w-full ${stageColor(
+      className={`flex items-center font-kosugi-maru border-[3px] border-white w-full ${stageColor(
         parseInt(stageNumber),
         stageType,
-      )} rounded-lg border-white relative h-12`}
+      )} rounded-lg relative h-12`}
     >
       {displayStage(stageNumber)}
       <span className="ml-14" />
