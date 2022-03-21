@@ -5,7 +5,6 @@ import {
   clearedStageDefaultValue,
   useClearedStage,
 } from '../../hooks/useClearedStage';
-import { useCallback } from 'react';
 import { STAGE, StageType } from '../../types';
 
 type Props = {
@@ -76,13 +75,10 @@ function StageSelectPanel({
       ? stage > clearedStage + 1
       : stage > clearedStage / 10;
 
-  const panelTestId = useCallback(
-    (stage: number): string =>
-      stageType === STAGE.Normal
-        ? `stage-select-panel-${stage}`
-        : `review-panel-${stage}`,
-    [],
-  );
+  const panelTestId =
+    stageType === STAGE.Normal
+      ? `stage-panel-${stage}`
+      : `review-panel-${stage}`;
 
   const panelStyling = `pt-1.5 pb-1 flex rounded-xl w-80 box-content border-4 ${borderColor(
     stage,
@@ -95,7 +91,7 @@ function StageSelectPanel({
     return (
       <div
         className={`${panelStyling} bg-black bg-opacity-20 relative cursor-not-allowed`}
-        data-testid={panelTestId(stage)}
+        data-testid={panelTestId}
       >
         <StageSelectPanelContent
           panelNumber={panelNumber}
@@ -113,7 +109,7 @@ function StageSelectPanel({
           className={`${panelStyling} sm:hover:border-focused active:border-focused ${
             stageType === STAGE.Normal ? 'bg-panel-white' : reviewPanelColor
           } animate-pulse animate-infinite relative`}
-          data-testid={panelTestId(stage)}
+          data-testid={panelTestId}
         >
           <StageSelectPanelContent
             panelNumber={panelNumber}
