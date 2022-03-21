@@ -58,7 +58,6 @@ module.exports = withAnimations({
         description: '#43bbe8',
         focused: '#fff000',
         mistaken: '#ffb5f0',
-        ribbon: '#135acb',
         ok: '#46d2aa',
         ng: '#ff3978',
         'navy-darkest': '#47b4c6',
