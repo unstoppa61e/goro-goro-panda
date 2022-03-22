@@ -152,6 +152,7 @@ const Modal = memo(function Modal({
     <Link href="/">
       <a
         className={`${linkButtonClass} bg-gradient-to-b from-navy-darkest to-navy-darker sm:hover:bg-gray-500 active:bg-gray-500`}
+        data-testid="move-to-stage-select-button"
       >
         {buttonLight}
         ステージをえらぶ
@@ -171,6 +172,7 @@ const Modal = memo(function Modal({
     <Link href={nextStagePath()}>
       <a
         className={`${linkButtonClass} bg-gradient-to-b from-ok-dark to-ok-light sm:hover:bg-green-500 active:bg-green-500`}
+        data-testid="move-to-next-stage-button"
       >
         {buttonLight}
         次に進む
