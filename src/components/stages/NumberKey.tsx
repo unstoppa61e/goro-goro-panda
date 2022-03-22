@@ -23,6 +23,7 @@ const NumberKey = ({
     <button
       className="w-16 h-16 flex justify-center items-center no-tap-highlighting cursor-default"
       onClick={onClick}
+      data-testid={`number-key-${keyNumber}`}
     >
       <p
         className={`w-14 h-14 rounded-2xl border-4 border-black ${
