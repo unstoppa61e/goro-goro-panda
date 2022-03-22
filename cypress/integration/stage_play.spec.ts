@@ -37,4 +37,16 @@ describe('Stage play', () => {
       cy.findByTestId('start-answering').should('be.visible')
     })
   })
+  
+  context('when the user clears five wordplays continuously', () => {
+    it('levels up', () => {
+      cy.visit('/stages/1')
+      cy.wait(500)
+      for (let i = 0; i < 5; i++) {
+        cy.findByTestId('start-answering').click()
+        clearWordplayByClicking();
+      }
+      cy.get('.text-ok').contains('レベルアップ')
+    })
+  })
 })
