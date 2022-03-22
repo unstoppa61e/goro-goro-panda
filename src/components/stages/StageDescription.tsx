@@ -90,7 +90,7 @@ const StageDescription = ({ stageNumber, stageType }: Props) => {
             <div
               className={`${
                 stageType === STAGE.Normal ? 'text-sm' : 'text-xs'
-              } scale-75`}
+              } scale-75 mt-1`}
             >
               {stageName}
             </div>
