@@ -189,6 +189,7 @@ const Modal = memo(function Modal({
       className={`flex justify-center fixed w-full h-full bg-black bg-opacity-40 z-20 font-kosugi-maru ${
         visible ? '' : 'invisible'
       }`}
+      data-testid="modal"
     >
       <div
         className={`fixed inset-0 m-auto flex flex-col items-center bg-white w-80 h-[460px] rounded-md ${
