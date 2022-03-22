@@ -28,7 +28,11 @@ const Keyboard = ({ handleInputNumber, mode, numberKeysMistaken }: Props) => {
     );
   }
 
-  return <div className="w-full">{keyRows}</div>;
+  return (
+    <div className="w-full" data-testid="keyboard">
+      {keyRows}
+    </div>
+  );
 };
 
 export default Keyboard;
