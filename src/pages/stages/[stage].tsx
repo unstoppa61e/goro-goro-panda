@@ -28,6 +28,8 @@ import {
   STAGE,
   wordplayTile,
 } from '../../types';
+// eslint-disable-next-line
+import ModalToggleButton from '../../components/stages/ModalToggleButton';
 
 const Modal = dynamic(() => import('../../components/stages/Modal'), {
   ssr: false,
@@ -558,15 +560,16 @@ const Stage = ({
     );
   }, [handleInputNumber, handleReviewButtonClick, mode, numberKeysMistaken]);
 
-  // const toggleModal = useCallback(() => {
-  //   setMode((prevMode) => {
-  //     if (prevMode === MODE.Clear) {
-  //       return MODE.Remember;
-  //     } else {
-  //       return MODE.Clear;
-  //     }
-  //   });
-  // }, []);
+  // eslint-disable-next-line
+  const toggleModal = useCallback(() => {
+    setMode((prevMode) => {
+      if (prevMode === MODE.Clear) {
+        return MODE.Remember;
+      } else {
+        return MODE.Clear;
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -627,9 +630,7 @@ const Stage = ({
           ) : (
             typingModeTools()
           )}
-          {/*<button onClick={toggleModal} className="mt-8 border-2 p-2 text-xl" data-testid="debug">*/}
-          {/*  toggle modal for debug*/}
-          {/*</button>*/}
+          {/*<ModalToggleButton toggleModal={toggleModal} />*/}
         </div>
       </div>
     </>

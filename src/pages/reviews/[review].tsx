@@ -33,6 +33,8 @@ import {
   clearedStageLocalStorageExists,
   useClearedStage,
 } from '../../hooks/useClearedStage';
+// eslint-disable-next-line
+import ModalToggleButton from '../../components/stages/ModalToggleButton';
 
 const Modal = dynamic(() => import('../../components/stages/Modal'), {
   ssr: false,
@@ -565,15 +567,16 @@ const Review = ({
     );
   }, [handleInputNumber, handleReviewButtonClick, mode, numberKeysMistaken]);
 
-  // const toggleModal = useCallback(() => {
-  //   setMode((prevMode) => {
-  //     if (prevMode === MODE.Clear) {
-  //       return MODE.Remember;
-  //     } else {
-  //       return MODE.Clear;
-  //     }
-  //   });
-  // }, []);
+  // eslint-disable-next-line
+  const toggleModal = useCallback(() => {
+    setMode((prevMode) => {
+      if (prevMode === MODE.Clear) {
+        return MODE.Remember;
+      } else {
+        return MODE.Clear;
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -635,9 +638,7 @@ const Review = ({
           ) : (
             typingModeTools()
           )}
-          {/*<button onClick={toggleModal} className="mt-8 border-2 p-2 text-xl"  data-testid="debug">*/}
-          {/*  toggle modal for debug*/}
-          {/*</button>*/}
+          {/*<ModalToggleButton toggleModal={toggleModal} />*/}
         </div>
       </div>
     </>
