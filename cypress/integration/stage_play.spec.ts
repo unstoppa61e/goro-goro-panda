@@ -49,4 +49,22 @@ describe('Stage play', () => {
       cy.get('.text-ok').contains('レベルアップ')
     })
   })
+  
+  context('when the user clears fifteen sets', () => {
+    it('shows the modal', () => {
+      cy.visit('/stages/1')
+      cy.wait(500)
+      let level = 0;
+      for (const number of [5, 3, 3, 3, 1]) {
+        level++;
+        for (let i = 0; i < number; i++) {
+          cy.findByTestId('start-answering').click()
+          for (let j = 0; j < level; j++) {
+            clearWordplayByClicking();
+          }
+        }
+      }
+      cy.findByTestId('modal').should('be.visible')
+    })
+  })
 })
