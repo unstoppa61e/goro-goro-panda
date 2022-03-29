@@ -56,9 +56,9 @@ export const getStaticProps: GetStaticProps = (
   return {
     props: {
       stageNumber,
-      clearCountValues: process.env.CLEAR_COUNT!.split(','),
-      clearedStageValues: process.env.CLEARED_STAGE!.split(','),
-      clearedReviewValues: process.env.CLEARED_STAGE!.split(','),
+      clearCountValues: '123456789abcdefghijklmnopqlstuvwxyz'.split(''),
+      clearedStageValues: '123456789abcdefghijklmnopqlstuvwxyz'.split(''),
+      clearedReviewValues: '123456789abcdefghijklmnopqlstuvwxyz'.split(''),
     },
   };
 };

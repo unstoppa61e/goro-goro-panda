@@ -27,8 +27,8 @@ type Props = {
 export const getStaticProps: GetStaticProps = () => {
   return {
     props: {
-      clearedStageValues: process.env.CLEARED_STAGE!.split(','),
-      clearedReviewValues: process.env.CLEARED_REVIEW!.split(','),
+      clearedStageValues: '123456789abcdefghijklmnopqlstuvwxyz'.split(''),
+      clearedReviewValues: '123456789abcdefghijklmnopqlstuvwxyz'.split(''),
     },
   };
 };
