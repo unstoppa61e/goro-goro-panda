@@ -6,11 +6,14 @@ import { Site } from '../../lib/site';
 
 const Footer = () => {
   const iconSize = 16;
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="flex justify-center items-center text-white py-3">
       <div className="flex items-center gap-x-2.5">
-        <p className="text-xs">&copy; 2022 {Site.developer}</p>
+        <p className="text-xs">
+          &copy; {currentYear} {Site.developer}
+        </p>
         <div className="flex items-center">
           <a
             href={Site.note}
