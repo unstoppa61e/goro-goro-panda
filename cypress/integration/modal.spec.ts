@@ -50,11 +50,11 @@ describe('Modal', () => {
     context('when the user clicks "move to next stage" button', () => {
       it('moves to stage 2', () => {
         cy.visit('/stages/1')
-        cy.wait(750)
+        cy.wait(2000)
         clearStage()
-        cy.wait(750)
+        cy.wait(2000)
         cy.findByTestId('move-to-next-stage-button').click()
-        cy.wait(750)
+        cy.wait(2000)
         cy.url().should('eq', Cypress.config().baseUrl + '/stages/2')
       })
     })
@@ -65,11 +65,11 @@ describe('Modal', () => {
       it('moves to review 1', () => {
         cy.setLocalStorage('gorogoropanda.com/clearedStage', 'u51');
         cy.visit('/stages/10')
-        cy.wait(750)
+        cy.wait(2000)
         clearStage()
-        cy.wait(750)
+        cy.wait(2000)
         cy.findByTestId('move-to-next-stage-button').click()
-        cy.wait(750)
+        cy.wait(2000)
         cy.url().should('eq', Cypress.config().baseUrl + '/reviews/1')
       })
     })
@@ -80,11 +80,11 @@ describe('Modal', () => {
       it('moves to the finale page', () => {
         cy.setLocalStorage('gorogoropanda.com/clearedStage', 'ttw');
         cy.visit('/reviews/1')
-        cy.wait(2000)
+        cy.wait(6000)
         clearReview()
-        cy.wait(2000)
+        cy.wait(6000)
         cy.findByTestId('move-to-next-stage-button').click()
-        cy.wait(2000)
+        cy.wait(6000)
         cy.url().should('eq', Cypress.config().baseUrl + '/thank-you-for-playing')
       })
     })
