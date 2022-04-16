@@ -30,7 +30,7 @@ describe('URL access', () => {
     context('if no stages are cleared yet', () => {
       it('gets redirected home', () => {
         cy.visit('/reviews/1')
-        cy.wait(20000)
+        cy.wait(25000)
         cy.url().should('eq', Cypress.config().baseUrl + '/')
       })
     })
@@ -39,7 +39,7 @@ describe('URL access', () => {
       it('gets redirected home', () => {
         cy.setLocalStorage('gorogoropanda.com/clearedStage', 'u51');
         cy.visit('/reviews/1')
-        cy.wait(20000)
+        cy.wait(25000)
         cy.url().should('eq', Cypress.config().baseUrl + '/')
       })
     })
