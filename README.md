@@ -31,3 +31,8 @@
     - 子どもが馴染みやすい語呂合わせを心掛けました。
     - イラストによる視覚的な補助を施しました。<br><br>
 - 子どもの注意を逸らせてしまわないよう、ページ中の情報量を絞りました。広告もありません。
+
+## 技術スタック
+![screencapture-fbc-stack-vercel-app-posts-goro-goro-pand-2022-12-27-22_36_21](https://user-images.githubusercontent.com/46347198/209674738-56e62226-c0f3-4b11-af8d-edb61e551308.png)
+
+（[FBC-Stack](https://fbc-stack.vercel.app) より抜粋）
